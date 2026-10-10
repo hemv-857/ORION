@@ -18,7 +18,7 @@
  * needed).
  *
  * The endpoint using this MUST be an internal-only route — no Pro check,
- * no IP rate-limit (Railway crons hit from a single NAT IP and would
+ * no IP rate-limit (Render crons hit from a single NAT IP and would
  * saturate).
  */
 

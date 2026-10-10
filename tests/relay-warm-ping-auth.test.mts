@@ -1,6 +1,6 @@
 // Relay warm-ping internal-auth — behavioral + wiring regression tests.
 //
-// The Railway relay warm-pings cacheable, non-premium RPC endpoints
+// The Render relay warm-pings cacheable, non-premium RPC endpoints
 // (service-statuses, get-risk-scores, get-chokepoint-status, get-cable-health)
 // to keep their compute caches hot. These require a session token or API key in
 // normal traffic, and the #3541 hardening removed Origin-trust — so relay

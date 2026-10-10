@@ -50,7 +50,7 @@ const TTL_SECONDS = 30 * 24 * 60 * 60; // 30 days
 export const REPLAY_LOG_MAX_ENTRIES_PER_DAY = 100_000;
 
 /**
- * Env-read at call time so Railway can flip the flag without a redeploy.
+ * Env-read at call time so Render can flip the flag without a redeploy.
  * Anything other than literal '1' (including unset, '0', 'yes', 'true',
  * mis-cased 'True') is treated as OFF — fail-closed so a typo can't
  * silently turn the log on in prod. '1' is the single intentional value.

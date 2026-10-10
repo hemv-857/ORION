@@ -216,7 +216,7 @@ const STANDALONE_KEYS = {
   // PR 1 v2 energy-construct seeds. STRICT SEED_META (not ON_DEMAND):
   // plan 2026-04-24-001 removed these from ON_DEMAND_KEYS so /api/health
   // reports CRIT (not WARN) when they are absent. This is the intended
-  // alarm on the Railway bundle-not-provisioned state. See the ON_DEMAND_KEYS
+  // alarm on the Render bundle-not-provisioned state. See the ON_DEMAND_KEYS
   // comment block below for the full rationale.
   lowCarbonGeneration:      'resilience:low-carbon-generation:v1',
   fossilElectricityShare:   'resilience:fossil-electricity-share:v1',
@@ -269,7 +269,7 @@ const SEED_META = {
   macroSignals:     { key: 'seed-meta:economic:macro-signals',    maxStaleMin: 150 }, // seed-economy cron; primary key energy-prices has same 150min threshold
   bisPolicy:        { key: 'seed-meta:economic:bis',              maxStaleMin: 10080 }, // runSeed('economic','bis',...) writes seed-meta:economic:bis
   // seed-bis-extended.mjs is a child-process section spawned by
-  // scripts/seed-bundle-macro.mjs. The bundle's Railway cron fires more
+  // scripts/seed-bundle-macro.mjs. The bundle's Render cron fires more
   // often than the per-section `intervalMs: 12 * HOUR` gate (production
   // logs 2026-04-26T08:00:45 show "BIS-Extended Skipped, last seeded
   // 175min ago, interval: 720min" — gate actively load-bearing on every
@@ -315,7 +315,7 @@ const SEED_META = {
   techEvents:       { key: 'seed-meta:research:tech-events',       maxStaleMin: 480 },
   gdeltIntel:       { key: 'seed-meta:intelligence:gdelt-intel',   maxStaleMin: 720 }, // 6h cron; 12h staleness = 2× cadence = 1 missed tick + cron jitter, alerts at 2 missed ticks. Bumped from 420 (1.16× cadence, virtually zero margin) on 2026-05-12 after the same Railway-deploy-preempted-tick pattern that hit resilienceIntervals on 2026-05-10 (PR #3652): seedAgeMin=467 vs maxStale=420 → ~1min UptimeRobot WARNING flip when a deploy preempted the 15:00 UTC tick. CACHE_TTL is 24h so per-topic merge always has a prior snapshot even at the upper end of the new budget.
   telegramFeed:     { key: 'seed-meta:intelligence:telegram-feed:v1', maxStaleMin: 10 }, // 60s poll interval; 10min grace catches poll failures before they go stale in the panel
-  digestNotifications: { key: 'seed-meta:digest:last-run',          maxStaleMin: 90 }, // Railway digest-notifications cron runs every 30min; 90 = 3x cadence and detects a dead cron before daily digests are missed.
+  digestNotifications: { key: 'seed-meta:digest:last-run',          maxStaleMin: 90 }, // Render digest-notifications cron runs every 30min; 90 = 3x cadence and detects a dead cron before daily digests are missed.
   forecasts:        { key: 'seed-meta:forecast:predictions',       maxStaleMin: 90 },
   sectors:          { key: 'seed-meta:market:sectors',             maxStaleMin: 30 },
   techReadiness:    { key: 'seed-meta:economic:worldbank-techreadiness:v1', maxStaleMin: 10080 },
@@ -442,7 +442,7 @@ const SEED_META = {
   recoverySovereignWealth: { key: 'seed-meta:resilience:recovery:sovereign-wealth', maxStaleMin: 86400 }, // monthly cron; 86400min = 60d = 2x interval
   // PR 1 v2 energy seeds — weekly cron (8d * 1440 = 11520min = 2x interval).
   // STRICT SEED_META (not ON_DEMAND): plan 2026-04-24-001 made /api/health
-  // CRIT on absent/stale so operators see the Railway-bundle gap before
+  // CRIT on absent/stale so operators see the Render-bundle gap before
   // the flag flips. See the ON_DEMAND_KEYS "do not add back" note below.
   lowCarbonGeneration:     { key: 'seed-meta:resilience:low-carbon-generation',     maxStaleMin: 11520 },
   fossilElectricityShare:  { key: 'seed-meta:resilience:fossil-electricity-share',  maxStaleMin: 11520 },
@@ -502,11 +502,11 @@ const ON_DEMAND_KEYS = new Set([
            // fire a CRIT health alarm. Remove from this set after ~7 days of clean
            // production cron runs (verify via `seed-meta:economic:fx-yoy.fetchedAt`).
   'hyperliquidFlow', // TRANSITIONAL: seed-hyperliquid-flow runs inside seed-bundle-market-backup on
-                     // Railway; gate as on-demand so initial deploy-order race or first cold-start
+                     // Render; gate as on-demand so initial deploy-order race or first cold-start
                      // snapshot doesn't CRIT. Remove after ~7 days of clean production cron runs.
   'chokepointFlowsRelayHeartbeat', // TRANSITIONAL (PR #3133): ais-relay.cjs writes this on the
                                    // first successful child exit after a deploy. Vercel deploys
-                                   // api/health.js instantly, but Railway rebuild + 6h initial
+                                   // api/health.js instantly, but Render rebuild + 6h initial
                                    // loop interval means the key is absent for up to ~6h post-merge.
                                    // Gate as on-demand so the deploy window doesn't CRIT. Remove
                                    // after ~7 days of clean production runs (verify via
@@ -516,17 +516,17 @@ const ON_DEMAND_KEYS = new Set([
                                    // Remove after ~7 days alongside the chokepoint-flows entry.
   'digestNotifications',           // TRANSITIONAL (PR #4253): seed-digest-notifications.mjs writes
                                    // `digest:last-run` on the first cron run after deploy. Vercel
-                                   // can publish this health registry before Railway's 30min cron
+                                   // can publish this health registry before Render's 30min cron
                                    // ticks, so gate only the first absent-key window as WARN. Remove
                                    // after ~7 days of clean `seed-meta:digest:last-run` writes.
   'eiaPetroleum',                  // TRANSITIONAL: gold-standard migration of /api/eia/petroleum
                                    // from live Vercel fetch to Redis-reader (seed-bundle-energy-sources
                                    // daily cron). SEED_META entry above enforces 72h staleness — this
                                    // ON_DEMAND gate only softens the absent-on-deploy case (Vercel
-                                   // deploys instantly; Railway EIA_API_KEY + first daily tick ~24h
+                                   // deploys instantly; Render EIA_API_KEY + first daily tick ~24h
                                    // behind). STALE_SEED still fires if data goes stale after first seed.
                                    // Remove from this set after ~7 days of clean cron runs so
-                                   // never-provisioned Railway promotes EMPTY_ON_DEMAND → EMPTY (CRIT).
+                                   // never-provisioned Render promotes EMPTY_ON_DEMAND → EMPTY (CRIT).
 ]);
 
 // Legacy broad empty-data exemptions. classifyKey uses this set in both the

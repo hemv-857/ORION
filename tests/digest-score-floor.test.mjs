@@ -24,7 +24,7 @@ const src = readFileSync(
 
 describe('DIGEST_SCORE_MIN env floor', () => {
   it('reads DIGEST_SCORE_MIN from process.env at call time', () => {
-    // Function-based read — not a module-level constant — so Railway
+    // Function-based read — not a module-level constant — so Render
     // env flips take effect on the next cron tick without a redeploy.
     assert.match(src, /function\s+getDigestScoreMin\s*\(\)\s*\{/);
     assert.match(src, /process\.env\.DIGEST_SCORE_MIN/);

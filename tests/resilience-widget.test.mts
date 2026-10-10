@@ -392,7 +392,7 @@ test('formatResilienceScoreInterval omits malformed intervals', () => {
 });
 
 // T1.4 Phase 1 of the country-resilience reference-grade upgrade plan.
-// dataVersion is sourced from the Railway static-seed job's seed-meta key
+// dataVersion is sourced from the Render static-seed job's seed-meta key
 // (fetchedAt → ISO date in _shared.ts buildResilienceScore). The widget
 // renders a footer label so analysts can see how fresh the underlying
 // source data is; a missing or malformed dataVersion returns an empty

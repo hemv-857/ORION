@@ -3,7 +3,7 @@
  * AIS WebSocket Relay Server
  * Proxies aisstream.io data to browsers via WebSocket
  *
- * Deploy on Railway with:
+ * Deploy on Render with:
  *   AISSTREAM_API_KEY=your_key
  *
  * Local: node scripts/ais-relay.cjs
@@ -99,7 +99,7 @@ const RELAY_RSS_RATE_LIMIT_MAX = Number.isFinite(Number(process.env.RELAY_RSS_RA
 const RELAY_LOG_THROTTLE_MS = Math.max(1000, Number(process.env.RELAY_LOG_THROTTLE_MS || 10000));
 const ALLOW_VERCEL_PREVIEW_ORIGINS = process.env.ALLOW_VERCEL_PREVIEW_ORIGINS === 'true';
 
-// OpenSky proxy — routes through residential proxy to avoid Railway IP blocks
+// OpenSky proxy — routes through residential proxy to avoid Render IP blocks
 const OPENSKY_PROXY_AUTH = process.env.OPENSKY_PROXY_AUTH || process.env.PROXY_URL || '';
 const OPENSKY_PROXY_ENABLED = !!OPENSKY_PROXY_AUTH;
 
@@ -415,7 +415,7 @@ function upstashSetNx(key, value, ttlSeconds) {
 // Boot-seed freshness guard
 //
 // ais-relay is a long-running HTTP service on proxy.orion.app that
-// Railway recycles frequently (deploys, crashes, OOM). Every seed loop fires an
+// Render recycles frequently (deploys, crashes, OOM). Every seed loop fires an
 // IMMEDIATE seed on boot and then schedules a setInterval at its real cadence —
 // but the process is usually recycled long before that interval elapses, so the
 // boot seed, not the interval, is the de-facto scheduler. During a reboot storm
@@ -732,7 +732,7 @@ function sendPreGzipped(req, res, statusCode, headers, rawBody, gzippedBody, bro
 
 // ─────────────────────────────────────────────────────────────
 // Telegram OSINT ingestion (public channels) → Early Signals
-// Web-first: runs on this Railway relay process, serves /telegram/feed
+// Web-first: runs on this Render relay process, serves /telegram/feed
 // Requires env:
 // - TELEGRAM_API_ID
 // - TELEGRAM_API_HASH
@@ -1084,7 +1084,7 @@ function orefDateToUTC(dateStr) {
 
 function orefCurlFetch(proxyAuth, url, { toFile } = {}) {
   // Use curl via child_process — Node.js TLS fingerprint (JA3) gets blocked by Akamai,
-  // but curl's fingerprint passes. curl is available on Railway (Linux) and macOS.
+  // but curl's fingerprint passes. curl is available on Render (Linux) and macOS.
   // execFileSync avoids shell interpolation — safe with special chars in proxy credentials.
   const { execFileSync } = require('child_process');
   const proxyUrl = `http://${proxyAuth}`;
@@ -1434,7 +1434,7 @@ function orefSaveLocalHistory() {
 }
 
 async function orefBootstrapHistoryWithRetry() {
-  // Phase 0: local file (Railway volume — instant, no network)
+  // Phase 0: local file (Render volume — instant, no network)
   if (OREF_LOCAL_FILE) {
     const local = orefLoadLocalHistory();
     if (local && local.length > 0) {
@@ -1852,7 +1852,7 @@ async function startSatelliteSeedLoop() {
 }
 
 // ─────────────────────────────────────────────────────────────
-// Market Data Seed — Railway fetches Yahoo/Finnhub → writes to Redis
+// Market Data Seed — Render fetches Yahoo/Finnhub → writes to Redis
 // so Vercel handlers serve from cache (avoids Yahoo 429 from Vercel IPs)
 // ─────────────────────────────────────────────────────────────
 const FINNHUB_API_KEY = process.env.FINNHUB_API_KEY || '';
@@ -2708,12 +2708,12 @@ async function startMarketDataSeedLoop() {
 }
 
 // ─────────────────────────────────────────────────────────────
-// Aviation Seed — Railway fetches AviationStack → writes to Redis
+// Aviation Seed — Render fetches AviationStack → writes to Redis
 // so Vercel handler serves from cache (avoids 114 API calls per miss)
 // ─────────────────────────────────────────────────────────────
 // AviationStack API key — used only by the /aviationstack live proxy below.
 // The aviation + NOTAM background seeds that used to live here were
-// consolidated into scripts/seed-aviation.mjs (standalone Railway cron).
+// consolidated into scripts/seed-aviation.mjs (standalone Render cron).
 const AVIATIONSTACK_API_KEY = process.env.AVIATIONSTACK_API || '';
 
 // In-process dedup sets for non-aviation seed notifications (cyber + UCDP).
@@ -2725,7 +2725,7 @@ const cyberPrevAlertedIds = new Set();
 const ucdpPrevAlertedIds = new Set();
 
 // ─────────────────────────────────────────────────────────────
-// Cyber Threat Intelligence Seed — Railway fetches IOC feeds → writes to Redis
+// Cyber Threat Intelligence Seed — Render fetches IOC feeds → writes to Redis
 // so Vercel handler (list-cyber-threats) serves from cache instead of live fetches
 // ─────────────────────────────────────────────────────────────
 const URLHAUS_AUTH_KEY = process.env.URLHAUS_AUTH_KEY || '';
@@ -2740,7 +2740,7 @@ const CYBER_MAX_CACHED = 2000;
 const CYBER_GEO_MAX = 200;
 const CYBER_GEO_CONCURRENCY = 12;
 const CYBER_GEO_TIMEOUT_MS = 20_000;
-const CYBER_SOURCE_TIMEOUT_MS = 15_000; // longer than Vercel edge budget — OK on Railway
+const CYBER_SOURCE_TIMEOUT_MS = 15_000; // longer than Vercel edge budget — OK on Render
 
 const CYBER_COUNTRY_CENTROIDS = {
   US:[39.8,-98.6],CA:[56.1,-106.3],MX:[23.6,-102.6],BR:[-14.2,-51.9],AR:[-38.4,-63.6],
@@ -3098,7 +3098,7 @@ async function startCyberThreatsSeedLoop() {
 }
 
 // ─────────────────────────────────────────────────────────────
-// Positive Events Seed — Railway fetches GDELT GEO API → writes to Redis
+// Positive Events Seed — Render fetches GDELT GEO API → writes to Redis
 // so Vercel handler serves from cache (avoids 25s edge timeout on slow GDELT)
 // ─────────────────────────────────────────────────────────────
 const POSITIVE_EVENTS_INTERVAL_MS = 900_000; // 15 min
@@ -4466,12 +4466,12 @@ function startTheaterPostureSeedLoop() {
 // unlocks only a cache-warm on these free endpoints, nothing else).
 //
 // Required env var, SAME value on BOTH sides:
-//   Railway ais-relay service  : ORION_RELAY_KEY=<dedicated secret>
+//   Render ais-relay service  : ORION_RELAY_KEY=<dedicated secret>
 //   Vercel api project (gateway): ORION_RELAY_KEY=<same dedicated secret>
 // ─────────────────────────────────────────────────────────────
 const RELAY_API_KEY = process.env.ORION_RELAY_KEY || '';
 // Surface the auth-mode at boot so misconfig (env var on wrong service,
-// typo'd name, missing on a fresh Railway deploy) is visible in the first
+// typo'd name, missing on a fresh Render deploy) is visible in the first
 // log lines instead of waiting for the first 401. PR #3565 review P2.
 if (!RELAY_API_KEY) {
   console.warn('[Relay] ORION_RELAY_KEY not set — warm-pings will 401 (no Origin-trust fallback since #3541). Set the same value on the Railway relay and the Vercel api project.');
@@ -4933,7 +4933,7 @@ async function startGscpiSeedLoop() {
 // Tech Events seed — Techmeme ICS + dev.events RSS → Redis
 // Curated major conferences as fallback for events that may
 // fall off limited RSS feeds. Vercel edge can't reach these
-// sources reliably (IP blocking), so Railway fetches them.
+// sources reliably (IP blocking), so Render fetches them.
 // ─────────────────────────────────────────────────────────────
 
 const TECH_EVENTS_SEED_INTERVAL_MS = 6 * 60 * 60 * 1000; // 6h
@@ -5555,7 +5555,7 @@ async function seedUsniFleet() {
   console.log('[USNI] Fetching fleet tracker...');
   const t0 = Date.now();
   try {
-    // USNI (WordPress): try direct fetch first (Railway Virginia should work),
+    // USNI (WordPress): try direct fetch first (Render Virginia should work),
     // fall back to proxy if Cloudflare blocks the datacenter IP.
     let wpData;
     let fetched = false;
@@ -6385,7 +6385,7 @@ function startChokepointFlowsSeedLoop() {
 
 // ─────────────────────────────────────────────────────────────
 // PizzINT Seed — Pentagon Pizza Index + GDELT tensions → Redis
-// Fetches from pizzint.watch on Railway (datacenter IPs blocked
+// Fetches from pizzint.watch on Render (datacenter IPs blocked
 // from Vercel Edge). Vercel handler reads from seed key only.
 // ─────────────────────────────────────────────────────────────
 const PIZZINT_SEED_INTERVAL_MS = 10 * 60 * 1000; // 10 min
@@ -7523,7 +7523,7 @@ setTimeout(() => {
   startBootSeedLoop('Transit', 'seed-meta:supply_chain:chokepoint_transits', CHOKEPOINT_TRANSIT_INTERVAL_MS, seedChokepointTransits, err => console.error('[Transit] Initial seed error:', err.message), err => console.error('[Transit] Seed error:', err.message));
 }, 30_000);
 
-// --- Pre-assembled Transit Summaries (Railway advantage: avoids large Redis reads on Vercel) ---
+// --- Pre-assembled Transit Summaries (Render advantage: avoids large Redis reads on Vercel) ---
 // Split storage: compact summary (no history, ~30KB) + per-id history keys (~35KB each).
 // The compact summary is read on every /api/supply-chain/v1/get-chokepoint-status call.
 // History keys are read only on card expand via /get-chokepoint-history. Before this
@@ -7676,12 +7676,12 @@ setTimeout(() => {
   startBootSeedLoop('TransitSummary', 'seed-meta:supply_chain:transit-summaries', TRANSIT_SUMMARY_INTERVAL_MS, seedTransitSummaries, e => console.warn('[TransitSummary] Initial seed error:', e?.message || e), e => console.warn('[TransitSummary] Seed error:', e?.message || e));
 }, 35_000);
 
-// UCDP GED Events cache (persistent in-memory — Railway advantage). This relay
+// UCDP GED Events cache (persistent in-memory — Render advantage). This relay
 // reader can fetch more pages than the Redis seed writer, but it intentionally
 // shares the same 365-day UCDP_TRAILING_WINDOW_MS filter.
 const UCDP_CACHE_TTL_MS = 6 * 60 * 60 * 1000; // 6 hours
 const UCDP_RELAY_MAX_PAGES = 12;
-const UCDP_FETCH_TIMEOUT = 30000; // 30s per page (no Railway limit)
+const UCDP_FETCH_TIMEOUT = 30000; // 30s per page (no Render limit)
 
 let ucdpCache = { data: null, timestamp: 0 };
 let ucdpFetchInProgress = false;
@@ -8760,7 +8760,7 @@ function handlePolymarketRequest(req, res) {
       'Cache-Control': 'public, max-age=600',
       'CDN-Cache-Control': 'public, max-age=600',
       'X-Cache': 'HIT',
-      'X-Polymarket-Source': 'railway-cache',
+      'X-Polymarket-Source': 'render-cache',
     }, sliceToLimit(cached.data));
   }
 
@@ -8772,7 +8772,7 @@ function handlePolymarketRequest(req, res) {
         'Cache-Control': 'no-store',
         'X-Cache': 'STALE',
         'X-Circuit': 'OPEN',
-        'X-Polymarket-Source': 'railway-stale',
+        'X-Polymarket-Source': 'render-stale',
       }, cached.data);
     }
     return safeEnd(res, 200, { 'Content-Type': 'application/json', 'X-Circuit': 'OPEN' }, JSON.stringify([]));
@@ -8793,7 +8793,7 @@ function handlePolymarketRequest(req, res) {
         'Cache-Control': 'public, max-age=600',
         'CDN-Cache-Control': 'public, max-age=600',
         'X-Cache': 'MISS',
-        'X-Polymarket-Source': 'railway',
+        'X-Polymarket-Source': 'render',
       }, sliceToLimit(data));
     } else if (cached) {
       sendCompressed(req, res, 200, {
@@ -8801,7 +8801,7 @@ function handlePolymarketRequest(req, res) {
         'Cache-Control': 'no-store',
         'CDN-Cache-Control': 'no-store',
         'X-Cache': 'STALE',
-        'X-Polymarket-Source': 'railway-stale',
+        'X-Polymarket-Source': 'render-stale',
       }, sliceToLimit(cached.data));
     } else {
       safeEnd(res, 200, { 'Content-Type': 'application/json' }, JSON.stringify([]));
@@ -8935,7 +8935,7 @@ function handleYahooChartRequest(req, res) {
 }
 
 // ── AviationStack Proxy ─────────────────────────────────────────────
-// Vercel handlers proxy flight queries through Railway to keep the API key
+// Vercel handlers proxy flight queries through Render to keep the API key
 // off Vercel edge and consolidate external calls on one egress IP.
 const aviationStackCache = new Map();
 const AVIATIONSTACK_CACHE_TTL_MS = 120_000; // 2 min
@@ -9599,7 +9599,7 @@ const server = http.createServer(async (req, res) => {
       }
       if (!RSS_ALLOWED_DOMAINS.has(parsed.hostname)) {
         res.writeHead(403, { 'Content-Type': 'application/json' });
-        return res.end(JSON.stringify({ error: 'Domain not allowed on Railway proxy' }));
+        return res.end(JSON.stringify({ error: 'Domain not allowed on Render proxy' }));
       }
 
       // Backoff guard: if feed is in exponential backoff, don't hit upstream
@@ -10940,7 +10940,7 @@ async function handleWidgetAgentRequest(req, res) {
     if (!cancelled) {
       sendWidgetSSE(res, 'error', { message: classifyWidgetAgentError(err, model) });
     }
-    // Verbose structured log so Railway operators can diagnose without
+    // Verbose structured log so Render operators can diagnose without
     // server-side reproduction. Includes status + type + request shape;
     // omits headers/body to avoid leaking the prompt or auth headers.
     try {
@@ -11294,10 +11294,10 @@ server.listen(PORT, () => {
   startOrefPollLoop();
   startUcdpSeedLoop();
   startMarketDataSeedLoop();
-  // Aviation + NOTAM seeds — standalone Railway cron — scripts/seed-aviation.mjs
+  // Aviation + NOTAM seeds — standalone Render cron — scripts/seed-aviation.mjs
   // Writes aviation:delays:intl:v3, aviation:delays:faa:v1, aviation:notam:closures:v2,
   // aviation:news::24:v1 and publishes aviation_closure/notam_closure events.
-  // Energy spine seed — standalone Railway cron (0 6 * * *) — seed-energy-spine.mjs
+  // Energy spine seed — standalone Render cron (0 6 * * *) — seed-energy-spine.mjs
   // Assembles per-country canonical energy keys from 6 domain sources daily.
   // Cyber seed disabled — standalone cron seed-cyber-threats.mjs handles this
   // (avoids burning 12 extra AbuseIPDB calls/day from duplicate relay loop)
@@ -11375,7 +11375,7 @@ setInterval(() => {
 }, 60 * 1000).unref?.();
 
 // Graceful shutdown — disconnect Telegram BEFORE container dies.
-// Railway sends SIGTERM during deploys; without this, the old container keeps
+// Render sends SIGTERM during deploys; without this, the old container keeps
 // the Telegram session alive while the new container connects → AUTH_KEY_DUPLICATED.
 async function gracefulShutdown(signal) {
   console.log(`[Relay] ${signal} received — shutting down`);

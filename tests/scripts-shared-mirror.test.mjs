@@ -7,11 +7,11 @@ import { fileURLToPath } from 'node:url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(__dirname, '..');
 
-// The Railway "derived-signals" seed bundle deploys with rootDirectory=scripts,
+// The Render "derived-signals" seed bundle deploys with rootDirectory=scripts,
 // which means the repo-root `shared/` folder is NOT present in the container.
 // Scripts that need shared/* assets at runtime must import them from
 // `scripts/shared/*` instead. `scripts/shared/*` is a byte-for-byte mirror
-// of the subset of `shared/*` used by the Railway seeders.
+// of the subset of `shared/*` used by the Render seeders.
 //
 // This test locks the mirror so a drift between `shared/X` and
 // `scripts/shared/X` cannot slip through code review. When adding new
@@ -41,16 +41,16 @@ describe('scripts/shared/ mirrors shared/', () => {
   it('scripts/shared has a package.json marking it as ESM', () => {
     // Required because scripts/package.json does NOT set "type": "module",
     // so scripts/shared/geography.js (ESM syntax) would otherwise be parsed
-    // ambiguously when Railway loads it from rootDirectory=scripts.
+    // ambiguously when Render loads it from rootDirectory=scripts.
     const pkg = JSON.parse(readFileSync(join(repoRoot, 'scripts/shared/package.json'), 'utf-8'));
     assert.equal(pkg.type, 'module');
   });
 });
 
 describe('regional snapshot seed scripts use scripts/shared/ (not repo-root shared/)', () => {
-  // Guards the Railway rootDirectory=scripts runtime: an import whose
+  // Guards the Render rootDirectory=scripts runtime: an import whose
   // resolved absolute path falls OUTSIDE scripts/shared/ (e.g. repo-root
-  // shared/) will ERR_MODULE_NOT_FOUND at runtime on Railway because the
+  // shared/) will ERR_MODULE_NOT_FOUND at runtime on Render because the
   // shared/ dir is not copied into the deploy root.
   const FILES_THAT_MUST_USE_MIRROR = [
     'scripts/seed-regional-snapshots.mjs',
@@ -89,7 +89,7 @@ describe('regional snapshot seed scripts use scripts/shared/ (not repo-root shar
         offending.length,
         0,
         `${rel} has runtime import(s) that escape scripts/shared/:\n${offending.join('\n')}\n` +
-          `Railway service rootDirectory=scripts means these paths escape the deploy root. ` +
+          `Render service rootDirectory=scripts means these paths escape the deploy root. ` +
           `Mirror the needed file into scripts/shared/ and update the import.`,
       );
     });

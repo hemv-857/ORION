@@ -1,6 +1,6 @@
 /**
- * RPC: ListGulfQuotes -- reads seeded GCC market data from Railway seed cache.
- * All external Yahoo Finance calls happen in ais-relay.cjs on Railway.
+ * RPC: ListGulfQuotes -- reads seeded GCC market data from Render seed cache.
+ * All external Yahoo Finance calls happen in ais-relay.cjs on Render.
  */
 
 import type {

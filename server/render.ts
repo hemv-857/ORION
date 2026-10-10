@@ -1,12 +1,12 @@
 /**
- * Railway deployment entry point.
+ * Render deployment entry point.
  *
  * Runs the ORION API as a long-lived Node service. Set
  * ORION_SERVE_FRONTEND=true only for the legacy combined deployment.
  * Uses Node.js 18+ native fetch / Request / Response — no Express needed.
  *
  * Usage:
- *   npx tsx server/railway.ts
+ *   npx tsx server/render.ts
  */
 
 import { createServer, type IncomingMessage, type ServerResponse } from 'http';
@@ -75,7 +75,7 @@ interface PrefixRoute {
 type Route = ExactRoute | PrefixRoute;
 
 // Legacy JavaScript handlers have no declaration files. Keeping their module
-// specifiers dynamic confines that untyped boundary to the Railway adapter.
+// specifiers dynamic confines that untyped boundary to the Render adapter.
 function loadJavaScriptRoute(path: string): Promise<{ default?: GatewayFn }> {
   return import(path) as Promise<{ default?: GatewayFn }>;
 }
@@ -206,10 +206,10 @@ async function resolveHandler(route: Route): Promise<GatewayFn | null> {
     const mod = await route.load();
     const handler = mod.default ?? null;
     handlerCache.set(key, handler);
-    console.log(`[railway] loaded handler: ${key}`);
+    console.log(`[render] loaded handler: ${key}`);
     return handler;
   } catch (err) {
-    console.error(`[railway] FAILED to load handler: ${key}`, err);
+    console.error(`[render] FAILED to load handler: ${key}`, err);
     handlerCache.set(key, null);
     return null;
   }
@@ -371,7 +371,7 @@ async function handleRequest(nodeReq: IncomingMessage, nodeRes: ServerResponse):
     nodeRes.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
     nodeRes.end(indexContent);
   } catch (err) {
-    console.error(`[railway] Error handling ${pathname}:`, err);
+    console.error(`[render] Error handling ${pathname}:`, err);
     if (!nodeRes.headersSent) {
       nodeRes.writeHead(500, { 'Content-Type': 'application/json' });
     }
@@ -384,16 +384,16 @@ async function handleRequest(nodeReq: IncomingMessage, nodeRes: ServerResponse):
 // ---------------------------------------------------------------------------
 
 async function main(): Promise<void> {
-  console.log(`[railway] ORION server starting...`);
-  console.log(`[railway] NODE_ENV=${process.env.NODE_ENV || 'unset'}`);
-  console.log(`[railway] DIST_DIR=${DIST_DIR}`);
+  console.log(`[render] ORION server starting...`);
+  console.log(`[render] NODE_ENV=${process.env.NODE_ENV || 'unset'}`);
+  console.log(`[render] DIST_DIR=${DIST_DIR}`);
 
   if (SERVE_FRONTEND) {
     try {
       await stat(DIST_DIR);
-      console.log(`[railway] dist/ found`);
+      console.log(`[render] dist/ found`);
     } catch {
-      console.error(`[railway] ERROR: dist/ not found at ${DIST_DIR}. Run "npm run build" first.`);
+      console.error(`[render] ERROR: dist/ not found at ${DIST_DIR}. Run "npm run build" first.`);
       process.exit(1);
     }
   }
@@ -411,12 +411,12 @@ async function main(): Promise<void> {
 
   const server = createServer(handleRequest);
   server.listen(PORT, () => {
-    console.log(`[railway] ✅ ORION running at http://localhost:${PORT}`);
-    console.log(`[railway] ${ROUTES.length} API routes registered`);
+    console.log(`[render] ✅ ORION running at http://localhost:${PORT}`);
+    console.log(`[render] ${ROUTES.length} API routes registered`);
   });
 }
 
 main().catch((err) => {
-  console.error('[railway] Fatal startup error:', err);
+  console.error('[render] Fatal startup error:', err);
   process.exit(1);
 });

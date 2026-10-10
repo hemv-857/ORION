@@ -44,9 +44,9 @@ const VALID_MODES = Object.freeze(new Set(['shadow', 'off']));
  * else → 'shadow' with `invalidRaw` populated for the caller to warn.
  *
  * Case-folded to lowercase so `Shadow`, `OFF`, `Off` all behave as
- * expected (Railway env values frequently come from operators typing
+ * expected (Render env values frequently come from operators typing
  * mixed case during incident response). Empty string after .trim() is
- * also treated as unset — Railway sometimes round-trips through a
+ * also treated as unset — Render sometimes round-trips through a
  * dashboard widget that surfaces empty strings instead of unset values.
  *
  * @param {Record<string, string | undefined>} [env]

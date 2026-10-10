@@ -76,7 +76,7 @@ async function fetchAll() {
 
   const existing = await readExistingHistory();
   const history = existing?.history ?? [];
-  // ET trading day: Railway cron fires at 9 PM ET which is 01:00-02:00 UTC on
+  // ET trading day: Render cron fires at 9 PM ET which is 01:00-02:00 UTC on
   // the NEXT calendar day, so UTC date would stamp today's session with
   // tomorrow's date. en-CA locale returns ISO YYYY-MM-DD; America/New_York
   // handles DST automatically.

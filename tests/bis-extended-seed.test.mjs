@@ -272,7 +272,7 @@ describe('BIS-Extended health-check maxStaleMin co-pinned to section gate (load-
   // production logs 2026-04-26T08:00:45 show "BIS-Extended Skipped, last
   // seeded 175min ago, interval: 720min", confirming the bundle cron fires
   // more often than the 12h gate. So the EFFECTIVE write cadence for BIS
-  // sections is governed by the 12h gate, not the bundle's Railway cron
+  // sections is governed by the 12h gate, not the bundle's Render cron
   // schedule. (The runbook's `0 8 * * *` daily schedule appears to be
   // incomplete or stale — production runs more frequently, possibly via
   // multiple cron entries or watch-paths-driven re-runs.)

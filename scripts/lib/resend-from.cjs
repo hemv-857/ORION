@@ -8,7 +8,7 @@
  * shows up as "alerts" in the inbox, which reads like an incident
  * alarm when the mail is actually a curated editorial brief.
  *
- * We coerce (rather than fail-closed) so a misconfigured Railway env
+ * We coerce (rather than fail-closed) so a misconfigured Render env
  * does NOT take the cron down; the coercion emits a loud warning so
  * operators can see and fix the misconfiguration in logs.
  *

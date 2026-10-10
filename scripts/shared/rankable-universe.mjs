@@ -6,11 +6,11 @@
 // standalone SARs: HK, MO, TW).
 //
 // **Why scripts/shared/ and NOT server/.../cohorts/ or registries/:**
-// the seed-bundle-resilience Railway service runs with rootDirectory=scripts/
+// the seed-bundle-resilience Render service runs with rootDirectory=scripts/
 // and ONLY ships files under scripts/ into the container (memory:
 // `orion-scripts-package-json-install-scope`). PR #3435 originally
 // put the JSON under `server/.../registries/` — that resolved fine
-// locally and on Vercel but ENOENT'd at Railway runtime, taking the
+// locally and on Vercel but ENOENT'd at Render runtime, taking the
 // resilience cron down. `scripts/shared/` is the canonical location
 // for shared JSON consumed by both seeders and server-side code
 // (alongside iso2-to-iso3.json, country-names.json etc.).

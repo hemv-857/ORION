@@ -12,18 +12,18 @@ import { extractCountryCode } from './shared/geo-extract.mjs';
 import { unwrapEnvelope } from './_seed-envelope-source.mjs';
 import { pickBriefCluster, briefSystemPrompt, briefUserPrompt } from './_insights-brief.mjs';
 // Import from the scripts mirror (`scripts/shared/`) — NOT the repo-root
-// `shared/`. Railway services with nixpacks `rootDirectory=scripts` only
+// `shared/`. Render services with `rootDir: scripts` only
 // package files under scripts/; a `../shared/` import resolves to
 // `/shared/...` at runtime which is absent in the container and crashes
 // the seeder on startup. The local pattern is the `./shared/geo-extract.mjs`
 // line above. PR #3836 review caught this. See skill
-// railway-deploy-gotchas/reference/nixpacks-root-dir-scripts-cross-dir-import-escape.
+// render-deploy-gotchas/reference/root-dir-scripts-cross-dir-import-escape.
 import { validateNoHallucinatedProperNouns } from './shared/brief-llm-core.js';
 
 // Hallucination validator rollout mode (PR-2 of brief-content-quality
 // regressions). `shadow` = log violations to Sentry but ship the LLM
 // output unchanged (default, safe). `enforce` = on violation, replace
-// the LLM summary with the source headline. Flip via Railway env after
+// the LLM summary with the source headline. Flip via Render env after
 // the 7-day shadow window confirms <5% violation rate.
 const BRIEF_VALIDATOR_MODE =
   process.env.BRIEF_VALIDATOR_MODE === 'enforce' ? 'enforce' : 'shadow';
@@ -39,7 +39,7 @@ const CANONICAL_KEY = 'news:insights:v1';
 const DIGEST_KEY = 'news:digest:v1:full:en';
 
 // Defense-in-depth auth — see seed-infra.mjs for the same pattern + rationale.
-// Set ORION_RELAY_KEY on the Railway service (must match a value in
+// Set ORION_RELAY_KEY on the Render service (must match a value in
 // Vercel's ORION_VALID_KEYS). Origin alone is no longer reliable
 // because CF/Vercel intermediaries may strip it and CF can cache the 401.
 const RELAY_API_KEY = process.env.ORION_RELAY_KEY || '';

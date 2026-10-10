@@ -35,7 +35,7 @@
 //
 // Pre-PR-#3395 behaviour to AVOID regressing into:
 //   - Direct fetch was tried first and failed UND_ERR_CONNECT_TIMEOUT
-//     on every Railway tick (0% success). Re-introducing a "soft"
+//     on every Render tick (0% success). Re-introducing a "soft"
 //     direct fallback would just add latency and log noise.
 
 import { test } from 'node:test';

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Local FRED data seeder — replaces Railway's seed-economy.mjs for local dev.
+ * Local FRED data seeder — replaces Render's seed-economy.mjs for local dev.
  * Fetches FRED series directly (no proxy) and computes the Economic Stress Index.
  * Run: node scripts/seed-fred-local.mjs
  */

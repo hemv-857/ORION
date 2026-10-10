@@ -1,6 +1,6 @@
 /**
- * RPC: getBisCredit -- reads BIS credit-to-GDP data from Railway seed cache.
- * All external BIS SDMX API calls happen in seed-bis-data.mjs on Railway.
+ * RPC: getBisCredit -- reads BIS credit-to-GDP data from Render seed cache.
+ * All external BIS SDMX API calls happen in seed-bis-data.mjs on Render.
  */
 
 import type {

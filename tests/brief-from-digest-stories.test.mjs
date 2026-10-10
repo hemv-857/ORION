@@ -689,7 +689,7 @@ describe('composeBriefFromDigestStories — continued', () => {
     // 0.916 → 0.716 at the active 0.45 threshold (positions 13-16
     // are mostly singletons or "should-separate" members at this
     // threshold, so they dilute without helping adjacency). The
-    // constant is env-tunable so a Railway flip can experiment with
+    // constant is env-tunable so a Render flip can experiment with
     // cap values once new sweep evidence justifies them.
     // Vary sources so U5's source-topic cap (default 2 per source+category)
     // doesn't dominate the maxStories cap we're testing here.

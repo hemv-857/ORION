@@ -1,6 +1,6 @@
 /**
- * RPC: getTradeRestrictions -- reads seeded WTO MFN baseline overview data from Railway seed cache.
- * All external WTO API calls happen in seed-supply-chain-trade.mjs on Railway.
+ * RPC: getTradeRestrictions -- reads seeded WTO MFN baseline overview data from Render seed cache.
+ * All external WTO API calls happen in seed-supply-chain-trade.mjs on Render.
  */
 import type {
   ServerContext,

@@ -1,6 +1,6 @@
 /**
- * RPC: listArxivPapers -- reads seeded arXiv data from Railway seed cache.
- * All external arXiv API calls happen in seed-research.mjs on Railway.
+ * RPC: listArxivPapers -- reads seeded arXiv data from Render seed cache.
+ * All external arXiv API calls happen in seed-research.mjs on Render.
  */
 
 import type {

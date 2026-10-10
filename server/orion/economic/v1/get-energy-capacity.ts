@@ -1,6 +1,6 @@
 /**
- * RPC: getEnergyCapacity -- reads seeded energy capacity data from Railway seed cache.
- * All external EIA API calls happen in seed-economy.mjs on Railway.
+ * RPC: getEnergyCapacity -- reads seeded energy capacity data from Render seed cache.
+ * All external EIA API calls happen in seed-economy.mjs on Render.
  */
 
 import type {

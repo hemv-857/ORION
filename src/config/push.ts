@@ -6,13 +6,13 @@
 //   - A committed fallback means two sources of truth (code vs env)
 //     which causes "did the rotation actually ship?" confusion.
 //   - The public key is public, but rotating the keypair should be a
-//     pure env-var operation (update Vercel + Railway env → redeploy),
+//     pure env-var operation (update Vercel + Render env → redeploy),
 //     not a code change.
 //   - If the env var is missing at build time we WANT the push
 //     subscribe path to fail loudly at runtime rather than silently
 //     register against a stale key.
 //
-// Partner private key lives in Railway (`VAPID_PRIVATE_KEY`) and
+// Partner private key lives in Render (`VAPID_PRIVATE_KEY`) and
 // signs the JWT attached to every push delivery. NEVER paste it in
 // PR descriptions, commit messages, issue comments, or chat — a
 // leaked VAPID private key grants send-to-any-subscriber capability

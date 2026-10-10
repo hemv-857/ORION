@@ -1,6 +1,0 @@
-# Shared Nixpacks settings for the root Railway API deployment.
-# Build and start commands live in railway.json so Railway executes each
-# install step only once against its managed dependency cache.
-
-[variables]
-NODE_OPTIONS = "--dns-result-order=ipv4first"

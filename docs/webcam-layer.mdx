@@ -53,7 +53,7 @@ The webcam layer requires a `WINDY_API_KEY` environment variable. Get a free key
 | Environment | Where to set | Used by |
 |-------------|-------------|---------|
 | **Vercel** (production) | Project Settings > Environment Variables | `get-webcam-image.ts` (on-demand image/player URL fetches) |
-| **Railway** (cron seeder) | Service Variables | `seed-webcams.mjs` (bulk metadata fetch) |
+| **Render** (cron seeder) | Service Variables | `seed-webcams.mjs` (bulk metadata fetch) |
 | **Native client** | Keychain via Settings > API Keys | On-demand image fetches via sidecar |
 | **Local dev** | `.env` file | Both seeder and dev server |
 
@@ -113,7 +113,7 @@ The seeder writes geo and metadata keys to Redis with a 24-hour TTL, but nothing
 Current ways to re-seed:
 - Run `scripts/seed-webcams.mjs` from the host
 - Run `scripts/run-seeders.sh` (runs all seeders including webcams)
-- **Railway cron** (recommended): schedule `seed-webcams.mjs` as a Railway cron service every 12-18 hours to stay ahead of the 24-hour TTL expiry
+- **Render cron** (recommended): schedule `seed-webcams.mjs` as a Render cron service every 12-18 hours to stay ahead of the 24-hour TTL expiry
 
 ## Pinned Webcams Panel
 

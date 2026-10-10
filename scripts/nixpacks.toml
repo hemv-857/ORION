@@ -1,7 +1,0 @@
-[phases.setup]
-# The relay uses curl for upstream fetches. Keep this workaround local to the
-# relay service because the root ORION web deployment does not need apt packages.
-cmds = ["sudo apt-get update -o Acquire::AllowInsecureRepositories=false || true", "sudo apt-get install -y --no-install-recommends --fix-missing curl || echo 'apt curl install failed; curl may already be present'"]
-
-[variables]
-NODE_OPTIONS = "--dns-result-order=ipv4first"

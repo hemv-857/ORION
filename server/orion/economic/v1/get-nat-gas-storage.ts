@@ -1,6 +1,6 @@
 /**
  * RPC: getNatGasStorage -- reads seeded EIA NW2_EPG0_SWO_R48_BCF natural gas storage data.
- * All external EIA API calls happen in seed-economy.mjs on Railway.
+ * All external EIA API calls happen in seed-economy.mjs on Render.
  */
 
 import type {

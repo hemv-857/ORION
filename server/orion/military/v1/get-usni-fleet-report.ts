@@ -15,7 +15,7 @@ export function buildUSNIFleetReportForceRefreshResponse(): GetUSNIFleetReportRe
     report: undefined,
     cached: false,
     stale: false,
-    error: 'forceRefresh is no longer supported (data is seeded by Railway relay)',
+    error: 'forceRefresh is no longer supported (data is seeded by Render relay)',
   };
 }
 
@@ -40,7 +40,7 @@ export function buildUSNIFleetReportCacheResponse(
 }
 
 // ========================================================================
-// RPC handler (Redis-read-only — Railway relay seeds the data)
+// RPC handler (Redis-read-only — Render relay seeds the data)
 // ========================================================================
 
 export async function getUSNIFleetReport(

@@ -308,7 +308,7 @@ Most MCP tools wrap one or more REST/RPC endpoints from the [API Reference](/api
 
 A handful of tools have no entry above because they don't map 1:1 to a public OpenAPI operation. They still return live data via `tools/call`; they fall into three categories:
 
-- **Cache-backed bootstrap aggregates** — read Redis keys seeded directly by Railway crons (e.g. `get_aviation_status`, `get_cyber_threats`, `get_country_macro`, the three EU Eurostat tools).
+- **Cache-backed bootstrap aggregates** — read Redis keys seeded directly by Render crons (e.g. `get_aviation_status`, `get_cyber_threats`, `get_country_macro`, the three EU Eurostat tools).
 - **Static in-memory registries** — filter a constant bundled with the MCP server's edge binary, no upstream call at all (e.g. `get_commodity_geo`).
 - **Live tools without a public OpenAPI row** — runtime proxies an HTTP call whose method drifts from the public spec, where a sibling tool already covers the spec-declared method (e.g. `generate_forecasts` POSTs `/api/forecast/v1/get-forecasts` while `get_forecast_predictions` owns the GET).
 
@@ -397,7 +397,7 @@ For cache tools, the JSON payload includes `cached_at` (ISO timestamp of the old
 
 ## Data freshness
 
-All cache tools read from Redis keys written by Railway cron seeders. Typical freshness:
+All cache tools read from Redis keys written by Render cron seeders. Typical freshness:
 
 | Domain | Typical freshness |
 |--------|-------------------|

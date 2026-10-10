@@ -231,7 +231,7 @@ describe('generateWhyMatters', () => {
   });
 
   it('sanitizes story fields before interpolating into the fallback prompt (injection guard)', async () => {
-    // Regression guard: the Railway fallback path must apply sanitizeForPrompt
+    // Regression guard: the Render fallback path must apply sanitizeForPrompt
     // before buildWhyMattersPrompt. Without it, hostile headlines / sources
     // reach the LLM verbatim. Assertions here match what sanitizeForPrompt
     // actually strips (see server/_shared/llm-sanitize.js INJECTION_PATTERNS):

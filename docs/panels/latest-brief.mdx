@@ -28,7 +28,7 @@ Clicking **Read brief →** opens the full magazine-style reader in a new tab. S
 
 The panel calls `GET /api/latest-brief` (session required). The response is either the ready payload (`issueDate`, `dateLong`, `greeting`, `threadCount`, `magazineUrl`) or a `{ status: "composing", issueDate }` stub. The signed `magazineUrl` is generated server-side — the HMAC signing secret never lives in the client bundle.
 
-The brief itself is composed by a Railway job from:
+The brief itself is composed by a Render job from:
 
 - Curated news aggregates and GDELT signals
 - The intelligence, conflict, and markets caches
@@ -44,7 +44,7 @@ Reference: `scripts/seed-digest-notifications.mjs` (writer) and `api/latest-brie
 
 ## Refresh cadence
 
-- **Composer**: the Railway digest cron composes for eligible users when their `digestMode` is due. Default is daily; twice-daily and weekly modes are supported by the same writer.
+- **Composer**: the Render digest cron composes for eligible users when their `digestMode` is due. Default is daily; twice-daily and weekly modes are supported by the same writer.
 - **Panel — ready state**: reads on panel load; subsequent reads happen only on user-visible refresh triggers. No polling timer while the brief is already displayed.
 - **Panel — composing state**: schedules a 60-second re-poll (`COMPOSING_POLL_MS = 60_000` in `src/components/LatestBriefPanel.ts`) so the panel transitions from `composing` to `ready` on the next composer tick without requiring a full page reload. The poll timer is cleared when the panel leaves the composing state.
 

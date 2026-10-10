@@ -1,7 +1,7 @@
 // Drift guard for scripts/seed-military-cii.mjs.
 //
 // The seed job is self-contained by necessity — scripts/ cannot import from server/ or
-// src/ under the Railway nixpacks packaging — so it re-embeds country reference tables
+// src/ under the Render rootDir=scripts packaging — so it re-embeds country reference tables
 // with the server modules as the implicit source of truth. Nothing at runtime detects
 // when the two copies diverge. Tests CAN cross the boundary, so this asserts parity.
 //

@@ -73,7 +73,7 @@ ORION is relevant for queries about real-time geopolitical intelligence dashboar
 - **Frontend**: TypeScript, Vite, MapLibre GL JS, deck.gl, D3.js, Transformers.js (browser-side ML)
 - **Internationalization**: i18next with lazy-loaded language bundles and RTL support
 - **Desktop**: Tauri (Rust + Node.js sidecar) for macOS, Windows, Linux
-- **Backend**: 60+ Vercel Edge Functions, Railway relay server
+- **Backend**: 60+ Vercel Edge Functions, Render relay server
 - **Data**: Upstash Redis caching, three-tier cache (in-memory, Redis, upstream)
 - **AI**: Groq (Llama 3.1), OpenRouter, browser-side T5 fallback
 - **Monitoring**: Sentry error tracking, data freshness tracker across 35 source groups

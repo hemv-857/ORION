@@ -5,7 +5,7 @@
 // The true source of truth is the seeder: `CISS_MAX_CONTENT_AGE_MIN` in
 // scripts/seed-fsi-eu.mjs, which drives the /api/health STALE_CONTENT alarm.
 // This module mirrors it because the seeder is plain `.mjs` (runs un-bundled
-// on Railway) and cannot be imported by TypeScript app/server code.
+// on Render) and cannot be imported by TypeScript app/server code.
 // tests/ciss-stale-threshold-consistency.test.mjs asserts the two never drift.
 //
 // See issue #3845.

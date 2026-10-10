@@ -210,7 +210,7 @@ async function fetchAcledProtests() {
 
 // ---------- GDELT Fetch ----------
 
-// Direct fetch from Railway has 0% success — every attempt errors with
+// Direct fetch from Render has 0% success — every attempt errors with
 // UND_ERR_CONNECT_TIMEOUT or ECONNRESET. Path is always proxy-only here.
 // Decodo→Cloudflare→GDELT occasionally returns 522 or RSTs the TLS handshake
 // (~80% per single attempt in production); retry-with-jitter recovers most of
@@ -261,7 +261,7 @@ export async function fetchGdeltEvents(opts = {}) {
   if (!proxyAuth) {
     // Direct fetch hasn't worked from Railway since PR #3256; this seeder
     // hard-requires a CONNECT proxy. Surface the env var ops needs to set.
-    throw new Error('GDELT requires CONNECT proxy: PROXY_URL env var is not set on this Railway service');
+    throw new Error('GDELT requires CONNECT proxy: PROXY_URL env var is not set on this Render service');
   }
 
   // One shared locationMap across all theme calls so a hotspot mentioned

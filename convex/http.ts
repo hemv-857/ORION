@@ -656,7 +656,7 @@ http.route({
   }),
 });
 
-// Service-to-service: Railway digest cron fetches due rules (no user JWT required).
+// Service-to-service: Render digest cron fetches due rules (no user JWT required).
 http.route({
   path: "/relay/digest-rules",
   method: "GET",

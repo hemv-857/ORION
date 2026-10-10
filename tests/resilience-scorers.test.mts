@@ -119,7 +119,7 @@ describe('resilience scorer contracts', () => {
     // importConcentration=88, stateContinuity=65, fuelStockDays=50
     // (retired, same shape), liquidReserveAdequacy=18 (US has ~1 month
     // of reserves via WB FI.RES.TOTL.MO normalized 1..12 → 18), and
-    // sovereignFiscalBuffer=50 (IMPUTE fallback until Railway cron
+    // sovereignFiscalBuffer=50 (IMPUTE fallback until Render cron
     // populates the SWF seed; US has no manifest entry). Sum 390 / 8
     // = 48.75. Coverage-weighted domain aggregation (used by the real
     // scoring pipeline) is separately verified below.

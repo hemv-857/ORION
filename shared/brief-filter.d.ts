@@ -3,7 +3,7 @@
 //
 // Split into its own module so Phase 3a (stubbed digest text) and
 // Phase 3b (LLM-generated digest) can share the same filter + shape
-// logic. Also importable from tests without pulling in Railway
+// logic. Also importable from tests without pulling in Render
 // runtime deps.
 
 import type {

@@ -43,7 +43,7 @@
 │         │  ┌─────────────────────────────────────────────────────────────┐      │
 │         │  │               Backend Services                              │      │
 │         │  │  ┌──────────┐ ┌───────────┐ ┌──────────┐ ┌──────────────┐  │      │
-│         │  │  │ Convex   │ │ Railway   │ │ Upstash  │ │ Auth         │  │      │
+│         │  │  │ Convex   │ │ Render   │ │ Upstash  │ │ Auth         │  │      │
 │         │  │  │ Realtime │ │ 21 Cron   │ │ Redis    │ │ (Clerk)      │  │      │
 │         │  │  │ Database │ │ Seed Jobs │ │ Cache    │ │              │  │      │
 │         │  │  └──────────┘ └───────────┘ └──────────┘ └──────────────┘  │      │
@@ -69,7 +69,7 @@
   ┌──────────────────────────────────────────────────────────────────────┐
   │                         DATA FLOW PIPELINE                          │
   │                                                                     │
-  │  External APIs ──→ Railway Seed Jobs ──→ Upstash Redis Cache        │
+  │  External APIs ──→ Render Seed Jobs ──→ Upstash Redis Cache        │
   │       │                                    │                        │
   │       │                                    ├──→ Bootstrap Hydration  │
   │       │                                    │    (38 keys, 2 tiers)  │
@@ -103,7 +103,7 @@
   → Saves 2-4 seconds first-meaningful-paint
 ```
 
-### Railway Seed Pipeline (21 Cron Jobs)
+### Render Seed Pipeline (21 Cron Jobs)
 
 ```
   ┌────────────────────┬─────────────────────┬───────────────┐
@@ -407,7 +407,7 @@
   │                    Deployment Topology                        │
   │                                                              │
   │  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐   │
-  │  │   Vercel      │    │   Railway    │    │   Convex     │   │
+  │  │   Vercel      │    │   Render    │    │   Convex     │   │
   │  │              │    │              │    │              │   │
   │  │ • SPA (CDN)  │    │ • 21 Cron    │    │ • Realtime   │   │
   │  │ • Edge Funcs │    │   seed jobs  │    │   Database   │   │

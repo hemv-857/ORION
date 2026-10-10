@@ -30,7 +30,7 @@ describe('readCooldownConfig — default + valid modes', () => {
     assert.equal(cfg.invalidRaw, null);
   });
 
-  it('empty string → mode=shadow (Railway dashboard widget produces empty for "no operator opinion")', () => {
+  it('empty string → mode=shadow (Render dashboard widget produces empty for "no operator opinion")', () => {
     const cfg = readCooldownConfig({ DIGEST_COOLDOWN_MODE: '' });
     assert.equal(cfg.mode, 'shadow');
     assert.equal(cfg.invalidRaw, null);
@@ -62,7 +62,7 @@ describe('readCooldownConfig — case-folding (operator typing)', () => {
     assert.equal(cfg.invalidRaw, null);
   });
 
-  it('"OFF" → mode=off (uppercase is a common Railway dashboard pattern)', () => {
+  it('"OFF" → mode=off (uppercase is a common Render dashboard pattern)', () => {
     const cfg = readCooldownConfig({ DIGEST_COOLDOWN_MODE: 'OFF' });
     assert.equal(cfg.mode, 'off');
     assert.equal(cfg.invalidRaw, null);

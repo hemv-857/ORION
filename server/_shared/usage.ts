@@ -47,7 +47,7 @@ export type CacheTier =
 
 export type CacheStatus = 'miss' | 'fresh' | 'stale-while-revalidate' | 'neg-sentinel';
 
-export type ExecutionPlane = 'vercel-edge' | 'vercel-node' | 'railway-relay';
+export type ExecutionPlane = 'vercel-edge' | 'vercel-node' | 'render-relay';
 
 export type OriginKind =
   | 'browser-same-origin'

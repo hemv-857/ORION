@@ -12,7 +12,7 @@
 // Deliberately has NO top-level side effects: no env guards, no
 // process.exit, no main(). Import anywhere.
 //
-// History: this file used to include a stand-alone Railway cron
+// History: this file used to include a stand-alone Render cron
 // (`seed-brief-composer.mjs`). That path was retired in the
 // consolidation PR — the digest cron now owns the compose+send
 // pipeline so there is exactly one cron writing brief:{userId}:
@@ -169,7 +169,7 @@ export function userDisplayNameFromId(userId) {
 //
 // Env-tunable via DIGEST_MAX_STORIES_PER_USER so future sweep evidence
 // (different threshold, different label set, different pool composition)
-// can be acted on with a Railway env flip without a redeploy. Any
+// can be acted on with a Render env flip without a redeploy. Any
 // invalid / non-positive value falls back to the 12 default.
 //
 // "Are we getting better" signal: re-run scripts/sweep-topic-thresholds.mjs

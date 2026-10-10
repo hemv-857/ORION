@@ -116,7 +116,7 @@ export const HS2_SECTORS: readonly HS2Sector[] = [
   { hs2: '83', label: 'Miscellaneous Base Metal Articles', category: 'metals', shockModelSupported: false, typicalCargoType: 'container' },
   { hs2: '84', label: 'Nuclear Reactors, Boilers & Machinery', category: 'machinery', shockModelSupported: false, typicalCargoType: 'container' },
   { hs2: '85', label: 'Electrical Machinery & Electronics', category: 'electronics', shockModelSupported: false, typicalCargoType: 'container' },
-  { hs2: '86', label: 'Railway & Tramway Equipment', category: 'machinery', shockModelSupported: false, typicalCargoType: 'roro' },
+  { hs2: '86', label: 'Render & Tramway Equipment', category: 'machinery', shockModelSupported: false, typicalCargoType: 'roro' },
   { hs2: '87', label: 'Vehicles (Automotive)', category: 'automotive', shockModelSupported: false, typicalCargoType: 'roro' },
   { hs2: '88', label: 'Aircraft & Spacecraft', category: 'machinery', shockModelSupported: false, typicalCargoType: 'roro' },
   { hs2: '89', label: 'Ships & Boats', category: 'machinery', shockModelSupported: false, typicalCargoType: 'bulk' },

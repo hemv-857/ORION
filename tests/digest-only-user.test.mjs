@@ -22,7 +22,7 @@ import {
 } from '../scripts/lib/digest-only-user.mjs';
 
 // Fixed "now" for deterministic tests. 2026-04-21 18:00Z is a realistic
-// Railway-set clock during a test session.
+// Render-set clock during a test session.
 const NOW = Date.parse('2026-04-21T18:00:00Z');
 
 describe('parseDigestOnlyUser — kind:unset', () => {
@@ -140,7 +140,7 @@ describe('parseDigestOnlyUser — kind:active (valid path)', () => {
 
   it('accepts all three ISO8601 flavors the spec permits', () => {
     const expires = NOW + 60 * 60_000; // +1h
-    // Node's Date.parse is lenient; cover the Railway-friendly variants
+    // Node's Date.parse is lenient; cover the Render-friendly variants
     // operators are likely to type.
     const variants = [
       new Date(expires).toISOString(),                 // 2026-04-21T19:00:00.000Z

@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 // @ts-check
 /**
- * Scenario Engine Worker — always-on Railway service
+ * Scenario Engine Worker — always-on Render service
  *
  * Atomically dequeues scenario jobs from Redis using BLMOVE (Redis 6.2 / Upstash),
  * runs computeScenario(), and writes results back to Redis with a 24-hour TTL.
  *
- * Railway config:
+ * Render config:
  *   rootDirectory: scripts
  *   startCommand:  node scenario-worker.mjs
  *   vCPUs: 1 / memoryGB: 1

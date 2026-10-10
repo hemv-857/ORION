@@ -1,6 +1,6 @@
 /**
- * RPC: getMacroSignals -- reads seeded macro signal data from Railway seed cache.
- * All external Yahoo Finance/Alternative.me/Mempool calls happen in seed-economy.mjs on Railway.
+ * RPC: getMacroSignals -- reads seeded macro signal data from Render seed cache.
+ * All external Yahoo Finance/Alternative.me/Mempool calls happen in seed-economy.mjs on Render.
  */
 
 import type {

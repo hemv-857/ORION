@@ -55,7 +55,7 @@ export default async function handler(req: Request): Promise<Response> {
     return jsonResponse({ error: 'eventType required (string, max 64 chars)' }, 400, cors);
   }
 
-  // Reject internal relay control events. These are dispatched by Railway
+  // Reject internal relay control events. These are dispatched by Render
   // cron scripts (seed-digest-notifications, quiet-hours) and must never be
   // user-submittable. flush_quiet_held would let a Pro user force-drain their
   // held queue on demand, bypassing batch_on_wake behaviour.

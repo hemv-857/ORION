@@ -62,7 +62,7 @@ async function fetchWithProxyFallback(url, { timeoutMs = 20_000, accept = 'text/
 }
 
 // Proxy-first: try proxy, fall back to direct. Use for sources known to block
-// datacenter IPs (NZ MBIE via Cloudflare, gov.br TLS failures from Railway,
+// datacenter IPs (NZ MBIE via Cloudflare, gov.br TLS failures from Render,
 // MX CRE with intermittent IPv4 routing). Saves a failed direct call every run.
 async function fetchWithProxyPreferred(url, { timeoutMs = 20_000, accept = 'text/csv,text/plain,*/*' } = {}) {
   if (_proxyAuth) {
@@ -469,7 +469,7 @@ async function fetchBrazil() {
     console.log(`  [BR] gas CSV: ${GAS_URL}`);
     console.log(`  [BR] dsl CSV: ${DSL_URL}`);
     // Use allSettled so a 429 on the diesel CSV doesn't discard gasoline data.
-    // gov.br returns generic undici "fetch failed" from Railway IPs — proxy-preferred + retry
+    // gov.br returns generic undici "fetch failed" from Render IPs — proxy-preferred + retry
     // is the only path that consistently works from datacenter networks.
     const [gasResult, dslResult] = await Promise.allSettled([
       withFuelRetry('BR-gas', () => fetchWithProxyPreferred(GAS_URL, { timeoutMs: 30000 }))
@@ -502,7 +502,7 @@ async function fetchNewZealand() {
   const url = 'https://www.mbie.govt.nz/assets/Data-Files/Energy/Weekly-fuel-price-monitoring/weekly-table.csv';
   try {
     console.log(`  [NZ] CSV: ${url}`);
-    // MBIE's CDN 403s Railway datacenter IPs (Cloudflare IP reputation). Proxy-preferred + retry.
+    // MBIE's CDN 403s Render datacenter IPs (Cloudflare IP reputation). Proxy-preferred + retry.
     const resp = await withFuelRetry('NZ', () => fetchWithProxyPreferred(url, { timeoutMs: 30000 }));
     const text = await resp.text();
     const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
@@ -609,10 +609,10 @@ export function parseCREStationPrices(xml) {
 }
 
 // Sources whose failure must not gate publish. Brazil ANP (gov.br) is
-// unreachable from Railway IPs both ways: Decodo proxy 403s all .gov.br
+// unreachable from Render IPs both ways: Decodo proxy 403s all .gov.br
 // CONNECTs by policy, and direct fetch fails undici TLS handshake. Until a
 // working route is found, gating publish on Brazil's freshness means every
-// run exits 1 → Railway "Deployment crashed" banner + STALE_SEED flip.
+// run exits 1 → Render "Deployment crashed" banner + STALE_SEED flip.
 //
 // New Zealand (MBIE) joined this set 2026-06-01: mbie.govt.nz moved its ENTIRE
 // domain (apex, data page, and the weekly-table.csv asset) behind an Incapsula

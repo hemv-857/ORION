@@ -6,7 +6,7 @@
 // Why this script exists: the recovery bundle runs weekly with a 30d
 // freshness gate (`scripts/_bundle-runner.mjs:240` skips when elapsed
 // < intervalMs * 0.8). After PR #3427 merges, the new seeder code
-// will not RUN on Railway until either (a) the canonical envelope
+// will not RUN on Render until either (a) the canonical envelope
 // ages past 24 days, OR (b) the canonical key is deleted, OR (c) the
 // seeder runs out-of-band. This script is option (c) — invokes both
 // seeders directly, bypassing the bundle runner and its freshness gate.

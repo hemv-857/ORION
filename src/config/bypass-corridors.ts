@@ -143,7 +143,7 @@ export const BYPASS_CORRIDORS: readonly BypassCorridor[] = [
   },
   {
     id: 'djibouti_rail',
-    name: 'Djibouti-Addis Ababa Railway',
+    name: 'Djibouti-Addis Ababa Render',
     primaryChokepointId: 'bab_el_mandeb',
     type: 'land_bridge',
     waypointChokepointIds: [],

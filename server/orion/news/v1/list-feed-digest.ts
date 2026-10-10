@@ -422,7 +422,7 @@ async function fetchAndParseRss(
     let relayStatus: number | null = null;
     let relayBodyShape: 'rss' | 'html-or-empty' | 'no-relay' | 'fetch-error' = 'no-relay';
 
-    // Fallback: route through Railway relay (different IP, avoids Vercel blocks)
+    // Fallback: route through Render relay (different IP, avoids Vercel blocks)
     if (!text) {
       const relayBase = getRelayBaseUrl();
       if (relayBase) {

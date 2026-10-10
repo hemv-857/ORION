@@ -27,7 +27,7 @@ import { join } from 'node:path';
 const ROOT = process.cwd();
 
 const PRODUCER_FILES = [
-  // Server-side domain producers (Railway / Vercel)
+  // Server-side domain producers (Render / Vercel)
   { path: 'scripts/ais-relay.cjs',                     expected: 'domain' },
   { path: 'scripts/seed-aviation.mjs',                  expected: 'domain' },
   { path: 'scripts/regional-snapshot/alert-emitter.mjs', expected: 'domain' },

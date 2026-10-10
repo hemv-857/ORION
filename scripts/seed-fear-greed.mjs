@@ -360,7 +360,7 @@ async function fetchAll() {
   const aaii = aaiiResult.status === 'fulfilled' ? aaiiResult.value : null;
   const macro = macroSignals.status === 'fulfilled' ? macroSignals.value : null;
 
-  // Source status summary — visible in Railway container logs
+  // Source status summary — visible in Render container logs
   const yahooCount = Object.values(yahoo).filter(Boolean).length;
   console.log(`  Sources: Yahoo=${yahooCount}/${YAHOO_SYMBOLS.length} | putCall=${cboe.totalPc ?? 'null'} | CNN=${cnn ? cnn.score : 'null'} | AAII bull=${aaii ? aaii.bull : 'null'} | Barchart=$S5TH=${barchartResult.status === 'fulfilled' ? (barchartResult.value ?? 'null') : 'err'} | proxy=${_proxyAuth ? 'yes' : 'no'}`);
 

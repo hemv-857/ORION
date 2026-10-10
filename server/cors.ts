@@ -13,8 +13,8 @@ const PRODUCTION_PATTERNS: RegExp[] = [
   // Tight on purpose: never a bare *.vercel.app (this is a security allowlist).
   /^https:\/\/orion-[a-z0-9-]+-nishant-fots-projects\.vercel\.app$/,
   /^https:\/\/orion-eight-beta\.vercel\.app$/,
-  // Railway deployments — *.railway.app
-  /^https:\/\/[a-z0-9-]+\.railway\.app$/,
+  // Render deployments — *.onrender.com
+  /^https:\/\/[a-z0-9-]+\.onrender\.com$/,
   /^tauri:\/\/localhost$/,
   /^asset:\/\/localhost$/,
   /^http:\/\/(?:app\.)?tauri\.localhost$/,

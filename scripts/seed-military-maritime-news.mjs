@@ -6,7 +6,7 @@
  * These handlers have complex parsers (USNI HTML parsing with vessel/CSG extraction,
  * NGA warning parsing with coordinate extraction) that are impractical to replicate
  * in a standalone script without risking data shape mismatches. Instead, we call the
- * Vercel RPC endpoints from Railway to warm-populate the Redis cache.
+ * Vercel RPC endpoints from Render to warm-populate the Redis cache.
  *
  * Seeded via warm-ping:
  * - getUSNIFleetReport: USNI WordPress scrape + complex HTML parsing
@@ -28,7 +28,7 @@ const API_BASE = 'https://api.orion.app';
 const TIMEOUT = 30_000;
 
 // Defense-in-depth auth — see seed-infra.mjs for the same pattern + rationale.
-// Set ORION_RELAY_KEY on the Railway service to a value already
+// Set ORION_RELAY_KEY on the Render service to a value already
 // present in Vercel's ORION_VALID_KEYS.
 const RELAY_API_KEY = process.env.ORION_RELAY_KEY || '';
 

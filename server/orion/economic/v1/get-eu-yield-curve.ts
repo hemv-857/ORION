@@ -1,6 +1,6 @@
 /**
  * RPC: getEuYieldCurve -- reads seeded ECB Euro Area AAA sovereign yield curve from Redis.
- * All external ECB API calls happen in scripts/seed-yield-curve-eu.mjs on Railway.
+ * All external ECB API calls happen in scripts/seed-yield-curve-eu.mjs on Render.
  */
 
 import type {

@@ -87,8 +87,8 @@ The platform monitors global events — conflicts, natural disasters, market mov
 | **PWA** | vite-plugin-pwa, Workbox |
 | **Testing** | Vitest, Playwright, custom test harness |
 | **Linting** | Biome |
-| **CI/CD** | GitHub Actions, Railway (cron jobs) |
-| **Deployment** | Vercel (primary), Cloudflare Pages, Railway |
+| **CI/CD** | GitHub Actions, Render (cron jobs) |
+| **Deployment** | Vercel (primary), Cloudflare Pages, Render |
 
 ---
 
@@ -270,9 +270,12 @@ npx wrangler pages deploy dist
 
 3. Set environment variables in the Cloudflare dashboard
 
-### Railway
+### Render
 
-The project includes `nixpacks.toml` for Railway deployment. Connect your repo and deploy.
+The project includes `render.yaml` (a Render Blueprint) for the backend: the
+`orion-api` service and the `orion-relay` worker. In the Render dashboard
+choose "New +" → "Blueprint", connect the repo, and set the secrets listed in
+`render.yaml` (`sync: false` entries) from `.env.example`.
 
 ---
 

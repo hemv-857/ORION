@@ -50,7 +50,7 @@ describe('Customs revenue seed', () => {
     assert.match(seedSrc, /\.reverse\(\)/);
   });
 
-  it('retries the Treasury fetch with backoff to survive transient Railway-egress failures', () => {
+  it('retries the Treasury fetch with backoff to survive transient Render-egress failures', () => {
     // Single-attempt fetch left the customs branch failing for 30+ hours
     // after a one-off transient blip — by the next 6h cron tick the data
     // had TTL'd out (24h) and the panel went empty. Three attempts with

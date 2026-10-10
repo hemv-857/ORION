@@ -550,7 +550,7 @@ describe('INDICATOR_REGISTRY seed-meta coverage (T1.5 P1 regression lock)', () =
     // PR 2 §3.4: seed-sovereign-wealth.mjs writes this via runSeed. Not
     // yet registered in api/health.js SEED_META — per project memory
     // feedback_health_required_key_needs_railway_cron_first.md, new
-    // seed keys go through ON_DEMAND_KEYS for ~7 days of clean Railway
+    // seed keys go through ON_DEMAND_KEYS for ~7 days of clean Render
     // cron runs before promotion to SEED_META. A follow-up PR wires
     // this once the cron has baked in; until then, allowlist it so
     // the registry consistency check passes.
@@ -560,7 +560,7 @@ describe('INDICATOR_REGISTRY seed-meta coverage (T1.5 P1 regression lock)', () =
     // health probe was removed because reporting STATUS:OK on data
     // nothing reads was actively misleading. The seeder
     // (scripts/seed-recovery-fuel-stocks.mjs) still runs on the
-    // seed-bundle-resilience-recovery Railway cron so a future
+    // seed-bundle-resilience-recovery Render cron so a future
     // replacement dimension has historical timeseries, but no
     // health check tracks the key anymore. Allowlist verified
     // against scripts/seed-recovery-fuel-stocks.mjs line 8

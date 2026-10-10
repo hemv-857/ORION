@@ -6,7 +6,7 @@ import { runBundle, HOUR, WEEK } from './_bundle-runner.mjs';
 // Rationale: per-country EP3 fetches against ArcGIS consistently exceeded
 // the section budget at scale, and the globalised variant (PR #3225)
 // failed intermittently with "Invalid query parameters" plus 42s/page
-// full-table scans. Running it in its own Railway cron with a longer
+// full-table scans. Running it in its own Render cron with a longer
 // wall-time budget decouples its worst-case runtime from the rest of the
 // bundle. The three sections below are small and well-behaved.
 await runBundle('portwatch', [

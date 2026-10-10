@@ -1,5 +1,5 @@
 /**
- * RPC: getTariffTrends -- reads seeded WTO MFN tariff trends from Railway seed cache.
+ * RPC: getTariffTrends -- reads seeded WTO MFN tariff trends from Render seed cache.
  * The seed payload may also include an optional US effective tariff snapshot.
  */
 import type {

@@ -136,7 +136,7 @@ describe('withRetry', () => {
 // ── atomicPublish: transient-failure retry contract (WM 2026-05-10) ────────
 //
 // Pre-fix: a single Upstash REST timeout on the canonical SET would crash
-// the entire seeder run. Railway just waited an hour for the next cron
+// the entire seeder run. Render just waited an hour for the next cron
 // tick. Fix: wrap the publish body in withRetry so transient timeouts /
 // 5xx / undici network errors retry with exponential backoff. Permanent
 // 4xx (auth, payload-too-large) get tagged nonRetryable in redisCommand

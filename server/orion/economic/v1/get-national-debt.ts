@@ -1,6 +1,6 @@
 /**
- * RPC: getNationalDebt -- reads seeded national debt data from Railway seed cache.
- * All external IMF/Treasury calls happen in seed-national-debt.mjs on Railway.
+ * RPC: getNationalDebt -- reads seeded national debt data from Render seed cache.
+ * All external IMF/Treasury calls happen in seed-national-debt.mjs on Render.
  */
 
 import type {

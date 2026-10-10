@@ -5,7 +5,7 @@
  *
  * These handlers have complex logic (30 status page parsers, NGA text analysis)
  * that is impractical to replicate in a standalone script. Instead, we call the
- * Vercel RPC endpoints from Railway to warm-populate the Redis cache.
+ * Vercel RPC endpoints from Render to warm-populate the Redis cache.
  *
  * Seeded via warm-ping:
  * - list-service-statuses: pings 30 status pages, caches result
@@ -28,7 +28,7 @@ const TIMEOUT = 30_000;
 // (CF/Vercel intermediaries can strip Origin and CF can cache the resulting
 // 401 for s-maxage, poisoning a POP). Send X-ORION-Key when configured;
 // fall through to Origin-only when unset to preserve local dev behaviour.
-// Set ORION_RELAY_KEY on the Railway service to a value already
+// Set ORION_RELAY_KEY on the Render service to a value already
 // present in Vercel's ORION_VALID_KEYS. Same pattern as ais-relay.cjs.
 const RELAY_API_KEY = process.env.ORION_RELAY_KEY || '';
 
@@ -89,7 +89,7 @@ async function main() {
   }
   // Best-effort cache warmer: a missed warm-ping is not a failure worth paging on.
   // Upstream timeouts and transient 5xx happen routinely; exiting non-zero turned
-  // every blip into a Railway "Deploy crashed" email. Logs above still surface
+  // every blip into a Render "Deploy crashed" email. Logs above still surface
   // partial failures for investigation.
   process.exit(0);
 }

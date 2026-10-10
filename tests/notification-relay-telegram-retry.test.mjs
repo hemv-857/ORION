@@ -4,7 +4,7 @@
  *
  * Before the fix, the 429 handler called sendTelegram() unconditionally with
  * no retry counter, creating unbounded recursion during sustained rate
- * limiting. This could stack-overflow the Railway relay process.
+ * limiting. This could stack-overflow the Render relay process.
  *
  * The fix adds a `_retryCount` parameter (default 0) and bails after one
  * retry. This test exercises the actual function via a mocked global fetch
@@ -33,7 +33,7 @@ process.env.RELAY_SHARED_SECRET ??= 'stub-secret';
 process.env.TELEGRAM_BOT_TOKEN ??= 'stub-bot-token';
 
 // The relay's runtime deps (`resend`, `convex/browser`) live in
-// scripts/package.json and are only installed in the Railway container, so
+// scripts/package.json and are only installed in the Render container, so
 // they are not on the resolution path when running tests from the repo root.
 // Stub them at the loader level — `sendTelegram` only uses `fetch`, not these
 // modules, so empty shims are sufficient.

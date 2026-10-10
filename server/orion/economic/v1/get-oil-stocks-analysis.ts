@@ -1,5 +1,5 @@
 /**
- * RPC: getOilStocksAnalysis -- reads seeded IEA oil stocks analysis from Railway seed cache.
+ * RPC: getOilStocksAnalysis -- reads seeded IEA oil stocks analysis from Render seed cache.
  * Key written by afterPublish hook in seed-iea-oil-stocks.mjs.
  */
 

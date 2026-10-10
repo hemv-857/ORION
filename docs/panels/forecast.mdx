@@ -46,7 +46,7 @@ Primary RPC: `GET /api/forecast/v1/get-forecasts`. The panel also consumes adjac
 - `GET /api/forecast/v1/get-simulation-outcome` — the most recent simulation result.
 - `POST /api/forecast/v1/trigger-simulation` — starts a fresh simulation run outside the cached cron output.
 
-The forecasting pipeline runs as a Railway cron that pulls recent conflict, intelligence, markets, and supply-chain signals, runs them through the forecasting model, and writes the aggregated result at `forecast:predictions:v2` in Redis. Macro-region classification comes from `shared/forecast-macro-regions.js`.
+The forecasting pipeline runs as a Render cron that pulls recent conflict, intelligence, markets, and supply-chain signals, runs them through the forecasting model, and writes the aggregated result at `forecast:predictions:v2` in Redis. Macro-region classification comes from `shared/forecast-macro-regions.js`.
 
 ## Scoring and calibration
 

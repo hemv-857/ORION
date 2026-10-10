@@ -1,6 +1,6 @@
 /**
  * RPC: getEurostatCountryData -- reads seeded Eurostat per-country economic data.
- * All external Eurostat API calls happen in seed-eurostat-country-data.mjs on Railway.
+ * All external Eurostat API calls happen in seed-eurostat-country-data.mjs on Render.
  */
 
 import type {

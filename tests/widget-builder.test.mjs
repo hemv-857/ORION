@@ -1794,7 +1794,7 @@ describe('widget-agent relay — error classifier', () => {
     // Look for the structured console.error inside the catch.
     assert.ok(
       /console\.error\([^)]*\[widget-agent\][^)]*Error/.test(region),
-      'Catch must log a `[widget-agent] Error:` line for Railway operators to grep',
+      'Catch must log a `[widget-agent] Error:` line for Render operators to grep',
     );
     assert.ok(
       /\bstatus\b/.test(region) && /\btype\b/.test(region) && /\bmodel\b/.test(region),

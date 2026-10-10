@@ -62,12 +62,12 @@ AISStream -> WebSocket Relay -> Browser
 
 The connection automatically reconnects on disconnection with a 30-second backoff. When the Ships layer is disabled, the WebSocket disconnects to conserve resources.
 
-## Railway Relay Architecture
+## Render Relay Architecture
 
-Some APIs block requests from cloud providers (Vercel, AWS, Cloudflare Workers). A Railway relay server provides authenticated access:
+Some APIs block requests from cloud providers (Vercel, AWS, Cloudflare Workers). A Render relay server provides authenticated access:
 
 ```
-Browser -> Railway Relay -> External APIs
+Browser -> Render Relay -> External APIs
            (Node.js)      (AIS, OpenSky, RSS)
 ```
 
@@ -80,13 +80,13 @@ Browser -> Railway Relay -> External APIs
 | `/rss` | Blocked RSS feeds | None (user-agent spoofing) |
 | `/health` | Status check | None |
 
-**Environment Variables** (Railway):
+**Environment Variables** (Render):
 
 - `AISSTREAM_API_KEY` - AIS data access
 - `OPENSKY_CLIENT_ID` - OAuth2 client ID
 - `OPENSKY_CLIENT_SECRET` - OAuth2 client secret
 
-**Why Railway?**
+**Why Render?**
 
 - Residential IP ranges (not blocked like cloud providers)
 - WebSocket support for persistent connections

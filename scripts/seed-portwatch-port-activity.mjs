@@ -87,7 +87,7 @@ const PAGE_SIZE = 2000;
 // laptop on today's failing-country set (SLB, CMR, BHS, KWT, PAK, VIR, SEN,
 // PRT, CHN, JPN, USA, POL) shows ArcGIS responds in 1.8-28.4s direct, with
 // 6 of 12 countries between 16-29s — exceeding the PR #3711 FETCH_TIMEOUT=15s
-// that was sized for "Railway-direct never returns". Upstream behavior has
+// that was sized for "Render-direct never returns". Upstream behavior has
 // shifted from "fully blocked" to "slow but reachable", so the 15s budget
 // now kills ~50% of recoverable direct fetches, forcing them through the
 // degraded proxy where many fail with Decodo CONNECT 522s.
@@ -114,7 +114,7 @@ const PROXY_FETCH_TIMEOUT = 50_000;
 //   At current 30+50=80s split, that'd be 640s — over the 570s bundle
 //   budget BEFORE any useful work. At pre-#3711 45+35=80s same result.
 // Empirically TODAY preflight outStatistics queries return in <1s even
-// from Railway IPs (small response, different upstream behavior than the
+// from Render IPs (small response, different upstream behavior than the
 // paginated data queries), so this protection is preventative not curative.
 // Greptile PR #3711 P1: protects against the day ArcGIS starts throttling
 // outStatistics queries too.
@@ -144,7 +144,7 @@ const PREFLIGHT_FETCH_TIMEOUT = 5_000;
 // proxy leg receive the body directly, and arcgisProxyRetry throws an
 // "ArcGIS error (via proxy after ...)" message that the circuit-breaker
 // matches — so the capture re-fetch is no longer load-bearing. This constant stays at 40s for the day the
-// attempt cap is bumped back > 0 (e.g. non-Railway egress where direct
+// attempt cap is bumped back > 0 (e.g. non-Render egress where direct
 // works), with the proviso that any caller re-enabling capture should
 // re-derive the budget against the FETCH_TIMEOUT in effect at that time.
 const ERROR_BODY_CAPTURE_EXTRA_MS = 40_000;
@@ -324,7 +324,7 @@ async function fetchWithTimeout(url, { signal, timeoutMs = FETCH_TIMEOUT, noProx
     // The gate code stays in place (and the once-per-run semantics) so
     // bumping the attempt cap re-enables the path for any future
     // scenario where direct-fetch lands close enough to a body to be
-    // worth capturing (non-Railway egress, etc.). Net cost when enabled:
+    // worth capturing (non-Render egress, etc.). Net cost when enabled:
     // ≤MAX_BODY_CAPTURE_ATTEMPTS × ERROR_BODY_CAPTURE_EXTRA_MS wall-clock
     // per run, naturally bounded by withPerCountryTimeout's 90s wrap.
     // Best-effort: any failure falls through to proxy retry as before.
@@ -381,8 +381,8 @@ const MAX_BODY_CAPTURE_SUCCESSES = 1;
 // needing a separate diagnostic capture re-fetch. Setting attempts=0
 // keeps the code path intact (and the once-per-run gate code) for any
 // future scenario where direct-fetch DOES land close to a body (e.g. a
-// non-Railway egress where direct works), but skips the 40s overhead
-// during the current Railway-throttled-direct + proxy-works mode.
+// non-Render egress where direct works), but skips the 40s overhead
+// during the current Render-throttled-direct + proxy-works mode.
 const MAX_BODY_CAPTURE_ATTEMPTS = 0;
 
 // Test-only helper: resets the capture counters so unit tests can

@@ -1,6 +1,6 @@
 /**
- * ListInternetDdosAttacks RPC -- reads seeded DDoS summary data from Railway seed cache.
- * All external Cloudflare Radar API calls happen in seed-internet-outages.mjs on Railway.
+ * ListInternetDdosAttacks RPC -- reads seeded DDoS summary data from Render seed cache.
+ * All external Cloudflare Radar API calls happen in seed-internet-outages.mjs on Render.
  */
 
 import type {

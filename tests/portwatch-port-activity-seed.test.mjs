@@ -149,7 +149,7 @@ describe('seed-portwatch-port-activity.mjs exports', () => {
     // fetchWithRetryOnInvalidParams's regex matches. The diagnostic capture
     // path is redundant in this mode, so attempts are set to 0 (path code
     // intact for future scenarios where direct-fetch DOES land close to a
-    // body, e.g. non-Railway egress).
+    // body, e.g. non-Render egress).
     assert.match(src, /MAX_BODY_CAPTURE_SUCCESSES\s*=\s*1/);
     assert.match(src, /MAX_BODY_CAPTURE_ATTEMPTS\s*=\s*0/);
     assert.match(src, /let _bodyCaptureSuccessCount\s*=\s*0/);
@@ -444,7 +444,7 @@ describe('seed-portwatch-port-activity.mjs exports', () => {
   });
 
   it('LOCK_TTL_MS is 60 min', () => {
-    // Bumped from 30 → 60 min when this moved to its own Railway cron with
+    // Bumped from 30 → 60 min when this moved to its own Render cron with
     // a bigger wall-time budget.
     assert.match(src, /LOCK_TTL_MS\s*=\s*60\s*\*\s*60\s*\*\s*1000/);
   });
@@ -676,7 +676,7 @@ describe('ArcGIS 429 proxy fallback', () => {
 
 // ── standalone bundle + Dockerfile assertions ────────────────────────────────
 
-describe('standalone Railway cron split', () => {
+describe('standalone Render cron split', () => {
   it('main portwatch bundle NO LONGER contains PW-Port-Activity', () => {
     assert.doesNotMatch(mainBundleSrc, /label:\s*'PW-Port-Activity'/);
     assert.doesNotMatch(mainBundleSrc, /seed-portwatch-port-activity\.mjs/);

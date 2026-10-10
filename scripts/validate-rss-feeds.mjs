@@ -42,12 +42,12 @@ function extractFeeds() {
   const feeds = [];
   const seen = new Set();
 
-  // Match rss('url') or railwayRss('url') — capture raw URL
-  const rssUrlRe = /(?:rss|railwayRss)\(\s*'([^']+)'\s*\)/g;
+  // Match rss('url') — capture raw URL
+  const rssUrlRe = /rss\(\s*'([^']+)'\s*\)/g;
   // Match name: 'X' or name: "X" — handles escaped apostrophes (L\'Orient-Le Jour)
   const nameRe = /name:\s*(?:'((?:[^'\\]|\\.)*)'|"([^"]+)")/;
   // Match lang key like `en: rss(`, `fr: rss(` — find all on a line with positions
-  const langKeyAllRe = /(?:^|[\s{,])([a-z]{2}):\s*(?:rss|railwayRss)\(/g;
+  const langKeyAllRe = /(?:^|[\s{,])([a-z]{2}):\s*rss\(/g;
 
   const lines = src.split('\n');
   let currentName = null;

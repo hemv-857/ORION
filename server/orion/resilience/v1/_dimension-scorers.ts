@@ -173,7 +173,7 @@ export const IMPUTE = {
   // has not changed.
   recoveryLiquidReserveAdequacy: { score: 50, certaintyCoverage: 0.3, imputationClass: 'unmonitored' },
   // PR 2 §3.4 — used when the sovereign-wealth seed key is absent
-  // entirely (Railway cron has not fired yet on a fresh deploy).
+  // entirely (Render cron has not fired yet on a fresh deploy).
   // Countries NOT in the manifest but payload present are handled
   // separately by the scorer as "no SWF → score 0, coverage 0,
   // imputationClass 'not-applicable'" (dim-not-applicable, plan
@@ -1498,7 +1498,7 @@ export async function scoreTradePolicy(
 //
 // Fail-closed preflight (when flag is ON): all 3 required seed
 // envelopes (component 4 shares the retained economic:bis-lbs CBS seed) MUST be reachable.
-// Missing seed-meta indicates a Railway bundle/cron failure and is
+// Missing seed-meta indicates a Render bundle/cron failure and is
 // surfaced as `source-failure` via
 // `ResilienceConfigurationError(message, missingKeys)` — caught at
 // `scoreAllDimensions` and routed to the imputationClass='source-failure'
@@ -1930,7 +1930,7 @@ export async function scoreEnergy(
   if (missing.length > 0) {
     throw new ResilienceConfigurationError(
       `RESILIENCE_ENERGY_V2_ENABLED=true but required v2 energy seeds are absent: ${missing.join(', ')}. ` +
-        `Provision seed-bundle-resilience-energy-v2 on Railway and confirm seeds populate BEFORE flipping the flag. ` +
+        `Provision seed-bundle-resilience-energy-v2 on Render and confirm seeds populate BEFORE flipping the flag. ` +
         'Or set RESILIENCE_ENERGY_V2_ENABLED=false to revert to the legacy energy construct.',
       missing,
     );
@@ -2437,7 +2437,7 @@ export async function scoreLiquidReserveAdequacy(
 // proportion to their marginal resilience benefit.
 //
 // Three code paths:
-//   1. Seed key absent entirely (Railway cron hasn't fired on fresh
+//   1. Seed key absent entirely (Render cron hasn't fired on fresh
 //      deploy) → IMPUTE fallback, score 50 / coverage 0.3 / unmonitored.
 //   2. Seed key present, country in payload → saturating score. Coverage
 //      is derated by `completeness` so a partial-scrape on a multi-fund

@@ -11,9 +11,9 @@ const REDIS_CACHE_KEY = 'radiation:observations:v1';
 const DEFAULT_MAX_ITEMS = 18;
 const MAX_ITEMS_LIMIT = 25;
 
-// All fetch/parse/scoring logic lives in the Railway seed script
+// All fetch/parse/scoring logic lives in the Render seed script
 // (scripts/seed-radiation-watch.mjs). This handler reads pre-built
-// data from Redis only (gold standard: Vercel reads, Railway writes).
+// data from Redis only (gold standard: Vercel reads, Render writes).
 
 
 function clampMaxItems(value: number): number {

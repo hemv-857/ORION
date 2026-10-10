@@ -33,7 +33,7 @@ export async function getChokepointHistory(
     const payload = await getCachedJson(`${HISTORY_KEY_PREFIX}${id}`, true) as HistoryPayload | null;
     if (!payload || !Array.isArray(payload.history) || payload.history.length === 0) {
       // CRITICAL: do NOT let an empty response get CDN-cached. During the
-      // deploy window (Vercel deploys instantly; Railway ais-relay takes
+      // deploy window (Vercel deploys instantly; Render ais-relay takes
       // ~10 min to redeploy and another 10 min for the first transit-summary
       // cron tick), per-id history keys are absent. If we cached empty
       // responses at the 'slow' tier (30-min CDN), users would see "Transit

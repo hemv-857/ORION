@@ -12,14 +12,14 @@ describe('handler: gold standard compliance', () => {
   it('handler does not import XMLParser (no live OFAC fetch at edge)', () => {
     assert.ok(
       !handlerSrc.includes('XMLParser'),
-      'handler must not import XMLParser: Vercel reads Redis only, Railway makes all external API calls',
+      'handler must not import XMLParser: Vercel reads Redis only, Render makes all external API calls',
     );
   });
 
   it('handler does not define OFAC_SOURCES (no direct OFAC HTTP from edge)', () => {
     assert.ok(
       !handlerSrc.includes('OFAC_SOURCES'),
-      'handler must not define OFAC_SOURCES: all OFAC fetching belongs in the Railway seed script',
+      'handler must not define OFAC_SOURCES: all OFAC fetching belongs in the Render seed script',
     );
   });
 
@@ -72,7 +72,7 @@ describe('handler: _state stripping', () => {
 });
 
 // ---------------------------------------------------------------------------
-// Seed: sequential fetch to avoid OOM on Railway 512MB
+// Seed: sequential fetch to avoid OOM on Render 512MB
 // ---------------------------------------------------------------------------
 describe('seed: memory safety', () => {
   it('seed fetches OFAC sources sequentially (not Promise.all)', () => {

@@ -1,6 +1,6 @@
 /**
  * RPC: getCrudeInventories -- reads seeded EIA WCRSTUS1 crude oil inventory data.
- * All external EIA API calls happen in seed-economy.mjs on Railway.
+ * All external EIA API calls happen in seed-economy.mjs on Render.
  */
 
 import type {

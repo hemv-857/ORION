@@ -53,7 +53,7 @@ import { MAX_STORIES_PER_USER } from './brief-compose.mjs';
  * Sanitize the story fields that flow into buildWhyMattersUserPrompt and
  * buildStoryDescriptionPrompt. Mirrors
  * server/orion/intelligence/v1/brief-why-matters-prompt.ts
- * sanitizeStoryFields — the legacy Railway fallback path must apply the
+ * sanitizeStoryFields — the legacy Render fallback path must apply the
  * same defense as the analyst endpoint, since this is exactly what runs
  * when the endpoint misses / returns null / throws.
  *
@@ -92,7 +92,7 @@ const STORY_DESCRIPTION_TTL_SEC = 24 * 60 * 60;
 const WHY_MATTERS_CONCURRENCY = 5;
 
 // Pin to openrouter (google/gemini-2.5-flash). Ollama isn't deployed
-// in Railway and groq (llama-3.1-8b) produces noticeably less
+// in Render and groq (llama-3.1-8b) produces noticeably less
 // editorial prose than Gemini Flash.
 const BRIEF_LLM_SKIP_PROVIDERS = ['ollama', 'groq'];
 
@@ -174,7 +174,7 @@ export async function generateWhyMatters(story, deps) {
     if (typeof hit === 'string' && hit.length > 0) return hit;
   } catch { /* cache miss is fine */ }
   // Sanitize story fields before interpolating into the prompt. The analyst
-  // endpoint already does this; without it the Railway fallback path was an
+  // endpoint already does this; without it the Render fallback path was an
   // unsanitized injection vector for any future untrusted `source` / `headline`.
   const { system, user } = buildWhyMattersPrompt(sanitizeStoryForPrompt(story));
   let text = null;

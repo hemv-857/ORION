@@ -1,5 +1,5 @@
 /**
- * RPC: ListDefiTokens -- reads seeded DeFi token data from Railway seed cache.
+ * RPC: ListDefiTokens -- reads seeded DeFi token data from Render seed cache.
  */
 
 import type {

@@ -379,7 +379,7 @@ describe('validate — reject null-object masquerading as object', () => {
     assert.equal(validate({ countries: [] }), false);
   });
 
-  it('accepts empty object (during Railway-cron bake-in window)', () => {
+  it('accepts empty object (during Render-cron bake-in window)', () => {
     assert.equal(validate({ countries: {} }), true);
   });
 

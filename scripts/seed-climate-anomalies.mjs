@@ -13,7 +13,7 @@ const CANONICAL_KEY = 'climate:anomalies:v2';
 // Co-pinned to api/health.js's `climateAnomalies.maxStaleMin: 540` so the
 // data key survives at least until the alarm fires — no silent-EMPTY window
 // between TTL_DATA expiry and STALE_SEED trigger. The previous 10800 (3h)
-// equalled cron cadence exactly, so any cron jitter (1-3min normal Railway
+// equalled cron cadence exactly, so any cron jitter (1-3min normal Render
 // variance) meant the data key expired in Redis before the next cron could
 // refresh it — health emitted status=EMPTY (records=0, display-forced)
 // during routine drift, and UptimeRobot's HEALTHY-substring check stayed

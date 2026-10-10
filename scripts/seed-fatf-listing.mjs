@@ -79,7 +79,7 @@ const WAYBACK_TIMEOUT_MS = 25_000;
  * the URL level (e.g. FATF's Cloudflare "Just a moment…" JS challenge —
  * neither browser headers nor residential proxy IPs pass without JS exec).
  *
- * Two-tier per-call: direct fetch → CONNECT proxy fallback. Railway egress
+ * Two-tier per-call: direct fetch → CONNECT proxy fallback. Render egress
  * IPs are routinely soft-rate-limited or slowed by archive.org; routing
  * the same CDX/snapshot request through Decodo's residential proxy pool
  * bypasses that without changing the response shape.
@@ -282,7 +282,7 @@ async function fetchHtml(url) {
     console.warn(`  FATF ${url}: no proxy configured, falling back to Wayback`);
   }
   // Tier 3: Wayback Machine (bypasses Cloudflare JS challenge). Internally
-  // does its own direct → proxy fallback because Railway egress IPs are
+  // does its own direct → proxy fallback because Render egress IPs are
   // routinely soft-rate-limited by archive.org.
   try {
     return await fetchViaWayback(url);

@@ -7,7 +7,7 @@
  *   - server/orion/news/v1/_shared.ts  (+ dedup.mjs + hash.ts)
  *   - server/orion/infrastructure/v1/get-cable-health.ts
  *
- * USNI parsing now happens in the Railway relay seed path; these tests cover
+ * USNI parsing now happens in the Render relay seed path; these tests cover
  * the server handler's pure cache-response helpers without resurrecting the
  * stale in-handler parser path.
  */

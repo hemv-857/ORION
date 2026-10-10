@@ -12,7 +12,7 @@ await runBundle('energy-sources', [
   { label: 'IEA-Crisis-Policies', script: 'seed-energy-crisis-policies.mjs', seedMetaKey: 'energy:crisis-policies', canonicalKey: 'energy:crisis-policies:v1', intervalMs: 7 * DAY, timeoutMs: 120_000 },
   // SPR-Policies: static registry (data lives in scripts/data/spr-policies.json), TTL 400d
   // in api/health.js (maxStaleMin: 576000). Weekly cadence is generous — only needs to run
-  // once after deploys + restarts to populate energy:spr-policies:v1. No prior Railway
+  // once after deploys + restarts to populate energy:spr-policies:v1. No prior Render
   // service exists for it, so health has been EMPTY (seedAgeMin: null) since the seeder
   // was added.
   { label: 'SPR-Policies', script: 'seed-spr-policies.mjs', seedMetaKey: 'energy:spr-policies', canonicalKey: 'energy:spr-policies:v1', intervalMs: 7 * DAY, timeoutMs: 60_000 },

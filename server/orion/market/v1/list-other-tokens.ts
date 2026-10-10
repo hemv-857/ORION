@@ -1,5 +1,5 @@
 /**
- * RPC: ListOtherTokens -- reads seeded other/trending token data from Railway seed cache.
+ * RPC: ListOtherTokens -- reads seeded other/trending token data from Render seed cache.
  */
 
 import type {

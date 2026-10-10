@@ -1,0 +1,85 @@
+# Render blueprint for the ORION backend services.
+# Replaces the former Railway deployment (railway.json + nixpacks.toml).
+#
+# Connect this repo at render.com → "New +" → "Blueprint" and Render will
+# create both services from this file. Set the secrets listed with
+# `sync: false` in each service's Environment tab (values come from
+# .env.example). Attach the custom domain api.orion.app to orion-api, then
+# update the vercel.json rewrites if you serve from the custom domain
+# instead of the default https://orion-api.onrender.com hostname.
+
+services:
+  - type: web
+    name: orion-api
+    runtime: node
+    repo: https://github.com/hemv-857/ORION
+    rootDir: .
+    plan: starter # bump plan if the 80+ route table needs more CPU/RAM
+    buildCommand: npm ci --include=dev && npm run typecheck:api
+    startCommand: npm run start:api
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # Node 18+ native fetch needs IPv4-first DNS on Render's dual-stack network.
+      - key: NODE_OPTIONS
+        value: --dns-result-order=ipv4first
+      # Render injects PORT; keep the documented default for local parity.
+      - key: PORT
+        value: 10000
+      # Server-side secrets — set these in the Render dashboard, never commit.
+      - key: CONVEX_URL
+        sync: false
+      - key: ORION_SESSION_SECRET
+        sync: false
+      - key: ORION_API_KEY
+        sync: false
+      - key: UPSTASH_REDIS_REST_URL
+        sync: false
+      - key: UPSTASH_REDIS_REST_TOKEN
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: RELAY_SHARED_SECRET
+        sync: false
+      - key: SENTRY_DSN
+        sync: false
+
+  - type: web
+    name: orion-relay
+    runtime: node
+    repo: https://github.com/hemv-857/ORION
+    rootDir: scripts
+    plan: starter
+    buildCommand: npm ci
+    startCommand: npm start # ais-relay.cjs — AIS/OpenSky + RSS + Telegram OSINT
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_OPTIONS
+        value: --dns-result-order=ipv4first
+      - key: PORT
+        value: 10000
+      # Must exactly match the orion-api value.
+      - key: RELAY_SHARED_SECRET
+        sync: false
+      - key: AISSTREAM_API_KEY
+        sync: false
+      - key: OPENSKY_CLIENT_ID
+        sync: false
+      - key: OPENSKY_CLIENT_SECRET
+        sync: false
+      - key: UPSTASH_REDIS_REST_URL
+        sync: false
+      - key: UPSTASH_REDIS_REST_TOKEN
+        sync: false
+      - key: CONVEX_URL
+        sync: false
+
+# The 21 seed cron jobs previously scheduled on Railway are not defined here:
+# they were configured in the Railway dashboard, not the repo. Recreate them
+# as Render Cron Jobs (type: cron, rootDir: scripts, command:
+# `node seed-<name>.mjs`) matching the cadence table in ARCHITECTURE.md.

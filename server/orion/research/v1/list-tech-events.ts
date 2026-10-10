@@ -32,7 +32,7 @@ const ICS_URL = 'https://www.techmeme.com/newsy_events.ics';
 const DEV_EVENTS_RSS = 'https://dev.events/rss.xml';
 const FETCH_TIMEOUT_MS = 8000;
 
-// ---------- Relay helpers (Railway proxy for blocked sources) ----------
+// ---------- Relay helpers (Render proxy for blocked sources) ----------
 
 const RSS_ACCEPT = 'application/rss+xml, application/xml, text/xml, text/calendar, */*';
 
@@ -54,7 +54,7 @@ async function fetchTextWithRelay(url: string): Promise<string | null> {
     console.warn(`[tech-events] Direct fetch ${url} failed: ${(e as Error).message}`);
   }
 
-  // Fallback: route through Railway relay (different IP, avoids Vercel edge blocks)
+  // Fallback: route through Render relay (different IP, avoids Vercel edge blocks)
   const relayBase = getRelayBaseUrl();
   if (relayBase) {
     try {
@@ -446,7 +446,7 @@ export async function listTechEvents(
   req: ListTechEventsRequest,
 ): Promise<ListTechEventsResponse> {
   try {
-    // Primary: read from seed-populated Redis key (Railway relay seeds this every 6h)
+    // Primary: read from seed-populated Redis key (Render relay seeds this every 6h)
     const result = await cachedFetchJson<ListTechEventsResponse>(REDIS_CACHE_KEY, REDIS_CACHE_TTL, async () => {
       // Fallback fetcher: only runs on cold start when seed hasn't populated yet
       const fetched = await fetchTechEvents({ ...req, limit: 0 });

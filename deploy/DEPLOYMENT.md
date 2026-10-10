@@ -16,30 +16,34 @@ The root `.vercelignore` excludes `api/`, so Vercel only builds the frontend.
 Set `VITE_WS_RELAY_URL`, `VITE_WS_API_URL`, `VITE_SENTRY_DSN`, and any other
 `VITE_` values needed by the browser in the Vercel project environment.
 
-## 2. API: Railway
+## 2. API: Render
 
 - Project root: repository root
-- Config: `railway.json` and `nixpacks.toml`
+- Config: `render.yaml` (service `orion-api`)
 - Build command: `npm ci --include=dev && npm run typecheck:api`
 - Start command: `npm run start:api`
-- Public domain: `api.orion.app`
+- Health check: `/api/health`
+- Public domain: `api.orion.app` (custom domain) or `https://orion-api.onrender.com`
 
-The Railway API process serves every API route from `server/railway.ts` and does
+The Render API process serves every API route from `server/render.ts` and does
 not require a Vite `dist/` build. Configure the server-side values from
 `.env.example`, including `CONVEX_URL`, `ORION_SESSION_SECRET`,
 `ORION_API_KEY`, provider credentials, and shared relay credentials.
 
-## 3. Relay and scheduled workers: Railway
+## 3. Relay and scheduled workers: Render
 
 - Project root: `scripts`
-- Config: `scripts/nixpacks.toml`
+- Config: `render.yaml` (service `orion-relay`)
 - Start command: `npm start`
+- Health check: `/health`
 - Public domain: assign a dedicated relay hostname only when browser access is
   needed; keep cron-only workers private.
+- Seed crons: the 21 seed jobs are not declared in `render.yaml`; recreate them
+  as Render Cron Jobs using the cadence table in `ARCHITECTURE.md`.
 
 Set `RELAY_SHARED_SECRET`, `AISSTREAM_API_KEY`, provider credentials, Redis or
-Upstash settings, and notification credentials here. The relay secret must
-match the API service value.
+Upstash settings, and notification credentials in the Render dashboard. The
+relay secret must match the API service value.
 
 ## 4. Edge CORS: Cloudflare Worker
 
@@ -49,7 +53,7 @@ match the API service value.
 
 Set `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` outside the repository,
 then deploy with `npm run deploy` from this directory. The Worker sits in front
-of the Railway API domain and owns CORS preflight behavior.
+of the Render API domain and owns CORS preflight behavior.
 
 ## Supporting services
 

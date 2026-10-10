@@ -4,7 +4,6 @@ import { rssProxyUrl } from '@/utils';
 import { mergeCanonicalFeeds } from './feed-resolution';
 
 const rss = rssProxyUrl;
-const railwayRss = rssProxyUrl;
 
 // Source tier system — canonical definition lives in server/_shared/source-tiers.ts
 // so server-side code can import it without pulling in client-only modules.
@@ -352,8 +351,8 @@ const FULL_FEEDS: Record<string, Feed[]> = {
     { name: 'CDC', url: rss('https://news.google.com/rss/search?q=site:cdc.gov+OR+CDC+health&hl=en-US&gl=US&ceid=US:en') },
     { name: 'FEMA', url: rss('https://news.google.com/rss/search?q=site:fema.gov+OR+FEMA+emergency&hl=en-US&gl=US&ceid=US:en') },
     { name: 'DHS', url: rss('https://news.google.com/rss/search?q=site:dhs.gov+OR+"Homeland+Security"&hl=en-US&gl=US&ceid=US:en') },
-    { name: 'UN News', url: railwayRss('https://news.un.org/feed/subscribe/en/news/all/rss.xml') },
-    { name: 'CISA', url: railwayRss('https://www.cisa.gov/cybersecurity-advisories/all.xml') },
+    { name: 'UN News', url: rss('https://news.un.org/feed/subscribe/en/news/all/rss.xml') },
+    { name: 'CISA', url: rss('https://www.cisa.gov/cybersecurity-advisories/all.xml') },
   ],
   crisis: [
     { name: 'CrisisWatch', url: rss('https://www.crisisgroup.org/rss') },
@@ -403,7 +402,7 @@ const FULL_FEEDS: Record<string, Feed[]> = {
     { name: 'Asia News', url: rss('https://news.google.com/rss/search?q=(China+OR+Japan+OR+Korea+OR+India+OR+ASEAN)+when:2d&hl=en-US&gl=US&ceid=US:en') },
     { name: 'BBC Asia', url: rss('https://feeds.bbci.co.uk/news/world/asia/rss.xml') },
     { name: 'The Diplomat', url: rss('https://thediplomat.com/feed/') },
-    { name: 'South China Morning Post', url: railwayRss('https://www.scmp.com/rss/91/feed/') },
+    { name: 'South China Morning Post', url: rss('https://www.scmp.com/rss/91/feed/') },
     { name: 'Reuters Asia', url: rss('https://news.google.com/rss/search?q=site:reuters.com+(China+OR+Japan+OR+Taiwan+OR+Korea)+when:3d&hl=en-US&gl=US&ceid=US:en') },
     { name: 'Xinhua', url: rss('https://news.google.com/rss/search?q=site:xinhuanet.com+OR+Xinhua+when:1d&hl=en-US&gl=US&ceid=US:en') },
     { name: 'Japan Today', url: rss('https://japantoday.com/feed/atom') },
@@ -564,7 +563,7 @@ const FINANCE_FEEDS: Record<string, Feed[]> = {
     { name: 'DeFi News', url: rss('https://news.google.com/rss/search?q=(DeFi+OR+"decentralized+finance"+OR+DEX+OR+"yield+farming")+when:3d&hl=en-US&gl=US&ceid=US:en') },
     { name: 'Decrypt', url: rss('https://decrypt.co/feed') },
     // Blockworks REMOVED (PR #3715 review): blockworks.co/feed is
-    // Cloudflare-blocked from both Vercel edge AND Railway egress, AND Google
+    // Cloudflare-blocked from both Vercel edge AND Render egress, AND Google
     // News returns 0 items for site:blockworks.co at every probed time window
     // (publisher likely blocks Googlebot on the same wholesale tier — so the
     // Google News fallback we tried first is a silent placeholder). The Block
@@ -732,7 +731,7 @@ const COMMODITY_FEEDS: Record<string, Feed[]> = {
     { name: 'Mining Journal', url: rss('https://news.google.com/rss/search?q=site:mining-journal.com+when:2d&hl=en-US&gl=US&ceid=US:en') },
     { name: 'Northern Miner', url: rss('https://www.northernminer.com/feed/') },
     // www.miningweekly.com domain-wide 403s every IP-based fetch (homepage
-    // included), not just Vercel edge — Railway relay likely wouldn't help.
+    // included), not just Vercel edge — Render relay likely wouldn't help.
     // Google News scoped to site:miningweekly.com is the reliable path and
     // matches the pattern used for other wholesale-blocked publishers.
     { name: 'Mining Weekly', url: rss('https://news.google.com/rss/search?q=site:miningweekly.com+when:2d&hl=en-US&gl=US&ceid=US:en') },
@@ -904,7 +903,7 @@ export const INTEL_SOURCES: Feed[] = [
   { name: 'ECFR', url: rss('https://news.google.com/rss/search?q=site:ecfr.eu+when:7d&hl=en-US&gl=US&ceid=US:en'), type: 'intl' },
   { name: 'Foreign Policy', url: rss('https://foreignpolicy.com/feed/'), type: 'intl' },
   { name: 'Foreign Affairs', url: rss('https://www.foreignaffairs.com/rss.xml'), type: 'intl' },
-  { name: 'Atlantic Council', url: railwayRss('https://www.atlanticcouncil.org/feed/'), type: 'intl' },
+  { name: 'Atlantic Council', url: rss('https://www.atlanticcouncil.org/feed/'), type: 'intl' },
   { name: 'Middle East Institute', url: rss('https://news.google.com/rss/search?q=site:mei.edu+when:7d&hl=en-US&gl=US&ceid=US:en'), type: 'intl' },
 
   // Think Tanks & Research (Tier 3)

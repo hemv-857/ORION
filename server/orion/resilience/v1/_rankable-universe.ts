@@ -8,11 +8,11 @@
 // bundler). The two are guaranteed to agree because they read the
 // same source file; the duplication is the read-path, not the data.
 //
-// **Location reason**: the seed-bundle-resilience Railway service
+// **Location reason**: the seed-bundle-resilience Render service
 // runs with rootDirectory=scripts/ and only ships files under
 // scripts/ (memory: `orion-scripts-package-json-install-scope`).
 // PR #3435 originally placed the JSON under server/.../registries/
-// — that resolved fine locally and on Vercel but ENOENT'd at Railway
+// — that resolved fine locally and on Vercel but ENOENT'd at Render
 // runtime, taking the resilience cron down. Hotfix relocated to
 // scripts/shared/.
 //

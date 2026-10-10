@@ -3,15 +3,15 @@
 /**
  * Regional Intelligence seed bundle.
  *
- * Single Railway cron entry point that runs:
+ * Single Render cron entry point that runs:
  *   1. seed-regional-snapshots.mjs  — ALWAYS (6h snapshot compute)
  *   2. seed-regional-briefs.mjs     — WEEKLY (LLM weekly brief, skipped
  *      if the last brief seed-meta is younger than 6.5 days)
  *
- * Railway cron: every 6 hours (cron: 0 [star]/6 [star] [star] [star])
+ * Render cron: every 6 hours (cron: 0 [star]/6 [star] [star] [star])
  * rootDirectory: scripts
  * startCommand: node seed-bundle-regional.mjs
- *   (Railway executes from rootDirectory, so NO scripts/ prefix)
+ *   (Render executes from rootDirectory, so NO scripts/ prefix)
  * watchPaths: scripts/seed-bundle-regional.mjs, scripts/seed-regional-*.mjs,
  *             scripts/regional-snapshot/**, scripts/shared/**
  *
@@ -125,7 +125,7 @@ async function main() {
 
   const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
 
-  // Exit non-zero when any seeder failed so Railway cron monitoring can
+  // Exit non-zero when any seeder failed so Render cron monitoring can
   // detect broken runs. PR #3001 review H1.
   if (snapshotFailed) {
     console.error(`[bundle] Done in ${elapsed}s with ERRORS`);

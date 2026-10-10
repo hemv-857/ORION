@@ -1,6 +1,6 @@
 // Yahoo Finance fetch helper with curl-only Decodo proxy fallback.
 //
-// Yahoo Finance throttles Railway egress IPs aggressively (429s). Existing
+// Yahoo Finance throttles Render egress IPs aggressively (429s). Existing
 // seeders had identical `fetchYahooWithRetry` blocks duplicated 4 times
 // (seed-commodity-quotes, seed-etf-flows, seed-gulf-quotes,
 // seed-market-quotes) with no proxy fallback. This helper consolidates

@@ -1,6 +1,6 @@
 /**
- * RPC: listBigMacPrices -- reads seeded Big Mac Index data from Railway seed cache.
- * All EXA API calls happen in seed-bigmac.mjs on Railway.
+ * RPC: listBigMacPrices -- reads seeded Big Mac Index data from Render seed cache.
+ * All EXA API calls happen in seed-bigmac.mjs on Render.
  */
 
 import type {

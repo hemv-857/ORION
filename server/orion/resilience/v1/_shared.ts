@@ -73,7 +73,7 @@ export function isPillarCombineEnabled(): boolean {
 // PR 1 of the resilience repair plan (docs/plans/2026-04-22-001-fix-
 // resilience-scorer-structural-bias-plan.md §3.1–§3.3): activation
 // flag for the v2 energy construct. Default is `false` because the
-// repo cannot prove production Railway seed state at build time.
+// repo cannot prove production Render seed state at build time.
 // Activation remains an explicit operator action after
 // seed-bundle-resilience-energy-v2 is provisioned and /api/health is
 // green for seed-meta:resilience:{fossil-electricity-share,low-carbon-

@@ -1674,7 +1674,7 @@ export default defineConfig(({ mode }) => {
         ],
       },
       proxy: {
-        // Widget agent — forward to Railway relay for SSE streaming
+        // Widget agent — forward to Render relay for SSE streaming
         '/widget-agent': {
           target: 'https://proxy.orion.app',
           changeOrigin: true,

@@ -5,7 +5,7 @@
  *
  * Reads the latest snapshot + regime history per region, calls the LLM to
  * synthesize a weekly brief, and writes to Redis. Designed to run on a
- * weekly Railway cron (e.g. Sunday 00:00 UTC) or manually via:
+ * weekly Render cron (e.g. Sunday 00:00 UTC) or manually via:
  *
  *   node scripts/seed-regional-briefs.mjs
  *

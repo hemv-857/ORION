@@ -3,7 +3,7 @@
 // SAX streaming parser: response.body is piped chunk-by-chunk into the parser.
 // The full XML string is never held in memory, which avoids the OOM crash that
 // occurred when fast-xml-parser tried to build a ~300MB object tree from a
-// 120MB XML download against Railway's 512MB container limit.
+// 120MB XML download against Render's 512MB container limit.
 import sax from 'sax';
 
 import { CHROME_UA, loadEnvFile, runSeed, verifySeedKey, writeExtraKeyWithMeta } from './_seed-utils.mjs';

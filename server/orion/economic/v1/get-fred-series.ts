@@ -1,6 +1,6 @@
 /**
- * RPC: getFredSeries -- reads seeded FRED time series data from Railway seed cache.
- * All external FRED API calls happen in seed-economy.mjs on Railway.
+ * RPC: getFredSeries -- reads seeded FRED time series data from Render seed cache.
+ * All external FRED API calls happen in seed-economy.mjs on Render.
  */
 
 import type {
