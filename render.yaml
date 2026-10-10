@@ -6,7 +6,7 @@
 # `sync: false` in each service's Environment tab (values come from
 # .env.example). Attach the custom domain api.orion.app to orion-api, then
 # update the vercel.json rewrites if you serve from the custom domain
-# instead of the default https://orion-api.onrender.com hostname.
+# instead of the default https://orion-api-jk2t.onrender.com hostname.
 
 services:
   - type: web

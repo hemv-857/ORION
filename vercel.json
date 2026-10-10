@@ -25,11 +25,11 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://orion-api.onrender.com/api/:path*"
+      "destination": "https://orion-api-jk2t.onrender.com/api/:path*"
     },
     {
       "source": "/mcp",
-      "destination": "https://orion-api.onrender.com/api/mcp"
+      "destination": "https://orion-api-jk2t.onrender.com/api/mcp"
     },
     {
       "source": "/docs/:match*",
@@ -47,19 +47,19 @@
     },
     {
       "source": "/oauth/token",
-      "destination": "https://orion-api.onrender.com/api/oauth/token"
+      "destination": "https://orion-api-jk2t.onrender.com/api/oauth/token"
     },
     {
       "source": "/oauth/register",
-      "destination": "https://orion-api.onrender.com/api/oauth/register"
+      "destination": "https://orion-api-jk2t.onrender.com/api/oauth/register"
     },
     {
       "source": "/oauth/authorize",
-      "destination": "https://orion-api.onrender.com/api/oauth/authorize"
+      "destination": "https://orion-api-jk2t.onrender.com/api/oauth/authorize"
     },
     {
       "source": "/.well-known/oauth-protected-resource",
-      "destination": "https://orion-api.onrender.com/api/oauth-protected-resource"
+      "destination": "https://orion-api-jk2t.onrender.com/api/oauth-protected-resource"
     },
     {
       "source": "/embed",
