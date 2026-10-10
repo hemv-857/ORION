@@ -132,7 +132,7 @@ and cached in Redis. The live cache is versioned by the current
 `methodology_version` (`v8`), with a stale-cache key used as a fallback during
 upstream outages.
 
-The Railway relay process also runs an active CII warm-ping loop every 8
+The Render relay process also runs an active CII warm-ping loop every 8
 minutes against the same RPC. That keeps the server-side risk-score cache warm
 for bootstrap and health monitoring while preserving the RPC handler as the
 scoring source of truth.

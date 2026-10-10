@@ -68,7 +68,7 @@ async function fetchFromCoinPaprika() {
 async function fetchCryptoQuotes() {
   // CoinPaprika is the PRIMARY source — CoinGecko's free tier 429s frequently
   // and its 5-step retry budget (10+20+30+40+50=150s) overruns the bundle's
-  // 120s timeout, killing the section before the fallback can fire (Railway
+  // 120s timeout, killing the section before the fallback can fire (Render
   // bundle log 2026-04-14 07:17 UTC). CoinGecko is retained as fallback for
   // its sparkline_in_7d data, which CoinPaprika does not provide.
   let data;

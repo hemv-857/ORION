@@ -24,9 +24,9 @@ const LOCK_TTL_MS = 30 * 60 * 1000; // 30 min
 
 // Freshness gate: skip the run if seed-meta says we re-seeded recently.
 // Mirrors _bundle-runner.mjs:240's `elapsed < intervalMs * 0.8` pattern so
-// the gate lives in code regardless of the Railway cron cadence or any
+// the gate lives in code regardless of the Render cron cadence or any
 // future Watch-Paths filter changes. Set to 24d (0.8 × 30d) to match the
-// new monthly Railway cron with one tick of slack against missed runs.
+// new monthly Render cron with one tick of slack against missed runs.
 // Belt-and-suspenders against the UN Comtrade Free APIs 500 calls/month
 // quota (~396 calls per run with a single COMTRADE_API_KEYS entry).
 // Override for force-reseed scenarios: FORCE_RESEED=true bypasses the gate.

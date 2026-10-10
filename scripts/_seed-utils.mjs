@@ -362,7 +362,7 @@ export async function atomicPublish(canonicalKey, data, validateFn, ttlSeconds, 
 
   // Retry the entire 3-call publish unit on transient Upstash failures.
   // Pre-fix: a single timeout on the canonical SET would crash the whole
-  // seeder run and Railway just waited for the next cron tick (1h for
+  // seeder run and Render just waited for the next cron tick (1h for
   // seed-forecasts). On 2026-05-10 this exact failure mode produced a
   // ~3h gap on forecasts + marketImplications. Wrapping the body means
   // a transient 5xx/timeout retries automatically with exponential
@@ -717,7 +717,7 @@ export function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
-// ─── Proxy helpers for sources that block Railway container IPs ───
+// ─── Proxy helpers for sources that block Render container IPs ───
 const { resolveProxyString, resolveProxyStringConnect } = createRequire(import.meta.url)('./_proxy-utils.cjs');
 
 export function resolveProxy() {
@@ -730,7 +730,7 @@ export function resolveProxyForConnect() {
 }
 
 // curl-based fetch; throws on non-2xx. Returns response body as string.
-// NOTE: requires curl binary — available in Dockerfile.relay (apk add curl) and Railway.
+// NOTE: requires curl binary — available in Dockerfile.relay (apk add curl) and Render.
 // Prefer httpsProxyFetchJson (pure Node.js) when possible; use curlFetch when curl-specific
 // features are needed (e.g. --compressed, -L redirect following with proxy).
 export function curlFetch(url, proxyAuth, headers = {}) {
@@ -780,7 +780,7 @@ export function isTransientProxyError(message) {
 }
 
 // Fetch JSON from a FRED URL, routing through proxy when available.
-// Proxy-first: FRED consistently blocks/throttles Railway datacenter IPs,
+// Proxy-first: FRED consistently blocks/throttles Render datacenter IPs,
 // so try proxy first to avoid 20s timeout on every direct attempt.
 export async function fredFetchJson(url, proxyAuth) {
   if (proxyAuth) {
@@ -815,7 +815,7 @@ export async function fredFetchJson(url, proxyAuth) {
 }
 
 // Fetch JSON from an IMF DataMapper URL, direct-first with proxy fallback.
-// Direct timeout is short (10s) since IMF blocks Railway IPs with 403 quickly.
+// Direct timeout is short (10s) since IMF blocks Render IPs with 403 quickly.
 export async function imfFetchJson(url, proxyAuth) {
   try {
     const r = await fetch(url, {

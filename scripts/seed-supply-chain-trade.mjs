@@ -632,7 +632,7 @@ async function fetchCustomsRevenue() {
   const fields = 'record_date,current_month_rcpt_outly_amt,current_fytd_rcpt_outly_amt,record_fiscal_year,record_calendar_year,record_calendar_month';
   const url = `${TREASURY_MTS_URL}?fields=${fields}&filter=classification_desc:eq:Customs%20Duties,record_date:gte:${threeYearsAgo}&sort=-record_date&page[size]=50`;
 
-  // Treasury MTS occasionally trips up on Railway egress (transient connect /
+  // Treasury MTS occasionally trips up on Render egress (transient connect /
   // 5xx / TLS resets). 30+ hour stale windows traced back to a single rejected
   // fetch followed by no retry until the next 6h cron tick — by which point
   // the 24h data TTL had expired and the panel went empty. Three attempts

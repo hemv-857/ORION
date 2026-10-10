@@ -1,6 +1,6 @@
 /**
- * RPC: getFaoFoodPriceIndex -- reads seeded FAO FFPI data from Railway seed cache.
- * All data fetching happens in seed-fao-food-price-index.mjs on Railway.
+ * RPC: getFaoFoodPriceIndex -- reads seeded FAO FFPI data from Render seed cache.
+ * All data fetching happens in seed-fao-food-price-index.mjs on Render.
  */
 
 import type {

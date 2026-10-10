@@ -2,7 +2,7 @@
 //
 // IMF WEO extended bundle — sequences the four WEO seeders that share the
 // IMF SDMX 3.0 API. Run on the same monthly cadence as seed-imf-macro
-// (wrapped via Railway cron). Spacing them within one bundle keeps API
+// (wrapped via Render cron). Spacing them within one bundle keeps API
 // bursts low and shares the seed-bundle observability surface.
 //
 // Per ORION #3027.

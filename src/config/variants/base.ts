@@ -52,7 +52,7 @@ export const REFRESH_INTERVALS = {
   wsbTickers: 10 * 60 * 1000,
   crossSourceSignals: 15 * 60 * 1000,
   hormuzTracker: 60 * 60 * 1000, // 1h — data updates daily
-  hyperliquidFlow: 5 * 60 * 1000, // 5min — matches Railway seed cadence
+  hyperliquidFlow: 5 * 60 * 1000, // 5min — matches Render seed cadence
   energyCrisis: 6 * 60 * 60 * 1000, // 6h — policy data updates infrequently
   pipelineStatus: 24 * 60 * 60 * 1000, // curated registry reseeds weekly; daily poll keeps long-lived sessions fresh
   storageFacilityMap: 24 * 60 * 60 * 1000, // curated registry reseeds weekly; daily poll keeps long-lived sessions fresh

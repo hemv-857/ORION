@@ -77,7 +77,7 @@ describe('ais-relay /health attacker-recon fields removed (#3802)', () => {
     assert.ok(
       !/\brateLimit:\s*\{/.test(body),
       'relay /health must NOT return a `rateLimit: { ... }` block — issue #3802. ' +
-        'Operators read these from env vars / Railway dashboard.',
+        'Operators read these from env vars / Render dashboard.',
     );
   });
 });

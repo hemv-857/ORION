@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Seed labor market time series via FRED (replaces direct BLS API which is blocked
-// from Railway container IPs — api.bls.gov rejects HTTPS CONNECT through proxies).
+// from Render container IPs — api.bls.gov rejects HTTPS CONNECT through proxies).
 // FRED mirrors the national BLS series with identical data and no IP restrictions.
 // Metro-area unemployment rates (LAUMT*) are dropped; no FRED equivalent exists.
 

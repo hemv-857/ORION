@@ -1,6 +1,6 @@
 /**
- * ListFireDetections RPC -- reads seeded wildfire data from Railway seed cache.
- * All external NASA FIRMS API calls happen in seed-wildfires.mjs on Railway.
+ * ListFireDetections RPC -- reads seeded wildfire data from Render seed cache.
+ * All external NASA FIRMS API calls happen in seed-wildfires.mjs on Render.
  */
 
 import type {

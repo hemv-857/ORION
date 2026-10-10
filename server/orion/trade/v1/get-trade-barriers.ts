@@ -1,6 +1,6 @@
 /**
- * RPC: getTradeBarriers -- reads seeded WTO tariff barrier data from Railway seed cache.
- * All external WTO API calls happen in seed-supply-chain-trade.mjs on Railway.
+ * RPC: getTradeBarriers -- reads seeded WTO tariff barrier data from Render seed cache.
+ * All external WTO API calls happen in seed-supply-chain-trade.mjs on Render.
  */
 import type {
   ServerContext,

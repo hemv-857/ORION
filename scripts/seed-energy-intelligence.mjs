@@ -12,7 +12,7 @@ const RSS_MAX_BYTES = 500_000;
 const AGE_LIMIT_MS = 30 * 24 * 3600 * 1000; // 30 days
 
 // Note: IEA removed public RSS feeds (https://www.iea.org/rss/*.xml returns 404).
-// OPEC RSS is Cloudflare-protected — direct fetch from Railway gets 403; proxy fallback required.
+// OPEC RSS is Cloudflare-protected — direct fetch from Render gets 403; proxy fallback required.
 // OilPrice.com provides reliable energy intelligence coverage as primary source.
 const FEEDS = [
   { url: 'https://oilprice.com/rss/main',        source: 'OilPrice', label: 'oilprice-main'  },

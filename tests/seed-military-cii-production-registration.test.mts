@@ -7,17 +7,17 @@ import { fileURLToPath } from 'node:url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(__dirname, '..');
 
-interface RailwayServiceEntry {
+interface RenderServiceEntry {
   entry: string;
-  deployMode: 'nixpacks-root-scripts' | 'dockerfile';
+  deployMode: 'render-root-scripts' | 'dockerfile';
   dockerfile?: string;
   service: string;
   documentedAt: string;
 }
 
 const registry = JSON.parse(
-  readFileSync(resolve(repoRoot, 'scripts/railway-services.json'), 'utf8'),
-) as RailwayServiceEntry[];
+  readFileSync(resolve(repoRoot, 'scripts/render-services.json'), 'utf8'),
+) as RenderServiceEntry[];
 
 const seedSrc = readFileSync(resolve(repoRoot, 'scripts/seed-military-cii.mjs'), 'utf8');
 const healthSrc = readFileSync(resolve(repoRoot, 'api/health.js'), 'utf8');
@@ -48,7 +48,7 @@ function extractHealthMilitaryCiiDataKey(): string {
 
 function extractCronSchedule(): string {
   const match = /Cron schedule:\s*"([^"]+)"/.exec(seedSrc);
-  assert.ok(match, 'scripts/seed-military-cii.mjs must document its Railway cron schedule');
+  assert.ok(match, 'scripts/seed-military-cii.mjs must document its Render cron schedule');
   return match[1]!;
 }
 
@@ -59,17 +59,17 @@ function cronIntervalMin(schedule: string): number {
 }
 
 describe('seed-military-cii production registration', () => {
-  it('is registered as a standalone Railway nixpacks service', () => {
+  it('is registered as a standalone Render rootDir=scripts service', () => {
     const entries = registry.filter((entry) => entry.entry === 'scripts/seed-military-cii.mjs');
-    assert.equal(entries.length, 1, 'scripts/seed-military-cii.mjs must have exactly one Railway registry entry');
+    assert.equal(entries.length, 1, 'scripts/seed-military-cii.mjs must have exactly one Render registry entry');
 
     const entry = entries[0]!;
-    assert.equal(entry.deployMode, 'nixpacks-root-scripts');
+    assert.equal(entry.deployMode, 'render-root-scripts');
     assert.equal(entry.service, 'seed-military-cii');
     assert.match(entry.documentedAt, /scripts\/seed-military-cii\.mjs/);
   });
 
-  it('documents the Railway cron config that matches the health freshness budget', () => {
+  it('documents the Render cron config that matches the health freshness budget', () => {
     assert.match(seedSrc, /Service name:\s*seed-military-cii/);
     assert.match(seedSrc, /rootDirectory:\s*scripts/);
     assert.match(seedSrc, /startCommand:\s*node seed-military-cii\.mjs/);
@@ -77,7 +77,7 @@ describe('seed-military-cii production registration', () => {
     const intervalMin = cronIntervalMin(extractCronSchedule());
     const { maxStaleMin } = extractHealthMilitaryCiiSeedMeta();
 
-    assert.equal(intervalMin, 10, 'seed-military-cii Railway cron must stay at the documented 10min cadence');
+    assert.equal(intervalMin, 10, 'seed-military-cii Render cron must stay at the documented 10min cadence');
     assert.equal(maxStaleMin, 45, 'api/health.js militaryCii maxStaleMin is the production alarm budget');
     assert.ok(
       maxStaleMin >= intervalMin * 3,

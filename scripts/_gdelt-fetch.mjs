@@ -1,7 +1,7 @@
 // GDELT API fetch helper with curl-only Decodo proxy fallback + multi-retry.
 //
 // GDELT (api.gdeltproject.org) is a public free API with strict per-IP
-// throttling (HTTP 429). Railway egress IPs share a small pool and hit
+// throttling (HTTP 429). Render egress IPs share a small pool and hit
 // 429 storms. seed-gdelt-intel currently has no proxy fallback.
 //
 // PROXY STRATEGY — CURL-ONLY WITH MULTI-RETRY
@@ -21,7 +21,7 @@
 // CONNECT path is omitted for now: not yet probed cleanly against GDELT,
 // and adding an unverified leg costs time on each call. If Yahoo's
 // pattern holds (CONNECT → 404 from blocked egress IPs), CONNECT for
-// GDELT may behave the same. Add only after a clean Railway probe.
+// GDELT may behave the same. Add only after a clean Render probe.
 //
 // Direct retry uses LONGER backoff than Yahoo's 5s base — GDELT's
 // per-IP throttle window is wider, so quick retries usually re-hit the

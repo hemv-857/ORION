@@ -172,7 +172,7 @@ English (en), French (fr), Spanish (es), German (de), Italian (it), Polish (pl),
 - **Frontend**: TypeScript, Vite, MapLibre GL JS, deck.gl (WebGL), D3.js, Supercluster (marker clustering), Transformers.js (browser-side ML)
 - **Internationalization**: i18next with lazy-loaded language bundles, RTL support for Arabic/Hebrew
 - **Desktop**: Tauri 2.x (Rust core + Node.js sidecar), OS keychain integration (macOS Keychain, Windows Credential Manager), token-authenticated local API
-- **Backend**: 60+ Vercel Edge Functions, Railway relay server for blocked RSS feeds
+- **Backend**: 60+ Vercel Edge Functions, Render relay server for blocked RSS feeds
 - **Data Store**: Upstash Redis (caching, Welford baselines, LLM dedup), IndexedDB (historical playback), localStorage (preferences, panel state)
 - **AI Pipeline**: Groq (Llama 3.1 8B), OpenRouter (fallback), Transformers.js (browser fallback for NER, sentiment, summarization)
 - **Monitoring**: Sentry error tracking, data freshness tracker across 35 source groups with intelligence gap reporting

@@ -10,10 +10,10 @@
  *   import { runBundle } from './_bundle-runner.mjs';
  *   await runBundle('ecb-eu', [ { label, script, seedMetaKey, intervalMs, timeoutMs } ]);
  *
- * Budget (opt-in): Railway cron services SIGKILL the container at 10min. If
+ * Budget (opt-in): Render cron services SIGKILL the container at 10min. If
  * the sum of timeoutMs for sections that happen to be due exceeds ~9min, we
  * risk losing the in-flight section's logs AND marking the job as crashed.
- * Callers on Railway cron can pass `{ maxBundleMs }` to enforce a wall-time
+ * Callers on Render cron can pass `{ maxBundleMs }` to enforce a wall-time
  * budget — sections whose worst-case timeout wouldn't fit in the remaining
  * budget are deferred to the next tick. Default is Infinity (no budget) so
  * existing bundles whose individual sections already exceed 9min (e.g.
@@ -147,7 +147,7 @@ function spawnSeed(scriptPath, { timeoutMs, label, bundleStartedAtMs }) {
     // Fire the terminal "Failed ... timeout" log the moment we decide to kill,
     // BEFORE the SIGTERM→SIGKILL grace window. This guarantees the reason
     // reaches the log stream even if the container itself is killed during
-    // the grace period (Railway's ~10min cap can land inside the grace for
+    // the grace period (Render's ~10min cap can land inside the grace for
     // sections whose timeoutMs is close to 10min).
     const softKill = setTimeout(() => {
       timedOut = true;

@@ -636,7 +636,7 @@ describe('climate-anomalies CACHE_TTL + maxStaleMin co-pinned to 3h cron cadence
   // Regression-locks the fix for the 2026-04-27 silent-EMPTY-window incident.
   // climate-anomalies is bundled into seed-bundle-climate (cron `0 */3 * * *`,
   // every 3h, runbook Bundle 6). The previous CACHE_TTL=10800s (3h) equalled
-  // the cron cadence exactly — any cron jitter (1-3min normal Railway
+  // the cron cadence exactly — any cron jitter (1-3min normal Render
   // variance) caused the data key to expire BEFORE the next cron could
   // refresh it, with health emitting status=EMPTY records=0 because
   // seedAgeMin (~3h+drift) was still < maxStaleMin (4h). Production logs

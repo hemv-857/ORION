@@ -7,7 +7,7 @@
 // D3, D4, D5, D7.
 //
 // IMPORT PATH NOTE: the shim lives in scripts/ — see the header of
-// scripts/_simulation-queue-constants.mjs for the Railway packaging reason.
+// scripts/_simulation-queue-constants.mjs for the Render packaging reason.
 // esbuild bundles the shim's contents inline at Vercel build time, so the
 // cross-directory import is fine on the server side.
 

@@ -1,5 +1,5 @@
 /**
- * RPC: ListCryptoSectors -- reads seeded crypto sector data from Railway seed cache.
+ * RPC: ListCryptoSectors -- reads seeded crypto sector data from Render seed cache.
  */
 
 import type {

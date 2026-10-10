@@ -54,7 +54,7 @@
 45. [Scripts & Tooling](#45-scripts--tooling)
 46. [Static Assets & Public Directory](#46-static-assets--public-directory)
 47. [Consumer Prices Core Module](#47-consumer-prices-core-module)
-48. [Railway Relay System](#48-railway-relay-system)
+48. [Render Relay System](#48-railway-relay-system)
 49. [Cloudflare Worker](#49-cloudflare-worker)
 50. [Linting & Code Quality](#50-linting--code-quality)
 51. [Version Management & Changelog](#51-version-management--changelog)
@@ -80,7 +80,7 @@
 - **34 service domains** with proto-first RPC contracts
 - **30+ external data sources** (ACLED, USGS, Yahoo Finance, CoinGecko, NASA FIRMS, etc.)
 - **24 supported languages** with RTL support
-- **21 cron seed jobs** running on Railway
+- **21 cron seed jobs** running on Render
 - **60+ Vercel Edge Functions**
 
 ---
@@ -118,7 +118,7 @@
 | **Vercel Edge Functions** | Serverless API endpoints (60+) |
 | **Convex** (v1.32+) | Realtime database, serverless functions, cron jobs |
 | **Upstash Redis** | Distributed caching, rate limiting |
-| **Railway** | Cron seed jobs, AIS WebSocket relay, RSS relay |
+| **Render** | Cron seed jobs, AIS WebSocket relay, RSS relay |
 | **Cloudflare Workers** | CORS preflight at `api.orion.app` |
 | **Protocol Buffers** | API contract definitions (34 domains) |
 | **sebuf** (v0.11+) | Proto → TypeScript code generator |
@@ -163,7 +163,7 @@ ORION/
 │   ├── _crypto.js              # Cryptographic utilities
 │   ├── _sentry-edge.js         # Sentry error capture
 │   ├── _upstash-json.js        # Redis pipeline helper
-│   ├── _relay.js               # Railway relay client
+│   ├── _relay.js               # Render relay client
 │   ├── _oauth-token.js         # OAuth token resolution
 │   ├── _mcp-grant-hmac.ts      # MCP HMAC signing
 │   ├── _rss-allowed-domains.js # RSS domain allowlist
@@ -286,7 +286,7 @@ ORION/
 │   │   ├── country-normalize.ts # Country name normalization
 │   │   ├── source-tiers.ts     # Source credibility tiers
 │   │   ├── fetch-json.ts       # Upstream JSON fetch with timeout
-│   │   ├── relay.ts            # Railway relay base URL + auth
+│   │   ├── relay.ts            # Render relay base URL + auth
 │   │   ├── usage.ts            # Axiom-based API usage telemetry
 │   │   ├── response-headers.ts # WeakMap-based response header attachment
 │   │   ├── seed-envelope.ts    # Seed-envelope aware reading
@@ -515,7 +515,7 @@ ORION/
 │   └── orion/*/v1/*.proto      # Domain service definitions
 │
 ├── scripts/                    # Build & seed scripts (100+ files)
-│   ├── seed-*.mjs              # Railway seed scripts (21 cron jobs)
+│   ├── seed-*.mjs              # Render seed scripts (21 cron jobs)
 │   ├── ais-relay.cjs           # AIS vessel WebSocket relay
 │   ├── validate-rss-feeds.mjs  # RSS feed validation
 │   ├── lint-*.mjs              # Custom lint scripts
@@ -551,7 +551,7 @@ ORION/
 ├── playwright.config.ts        # Playwright E2E config
 ├── vitest.config.mts           # Vitest unit test config
 ├── Makefile                    # Proto code generation toolchain
-├── nixpacks.toml               # Railway build config
+├── render.yaml                  # Render blueprint (backend services)
 ├── package.json                # Dependencies & scripts
 ├── .env.example                # 150+ environment variables
 ├── .env.local                  # Local environment overrides
@@ -572,7 +572,7 @@ ORION/
 ```
 External APIs (30+)
     ↓
-Railway Seed Jobs (21 crons, every 5min-6hr)
+Render Seed Jobs (21 crons, every 5min-6hr)
     ↓
 Upstash Redis Cache (38 bootstrap keys + per-domain RPC keys)
     ↓
@@ -731,7 +731,7 @@ class MyPanel {
 
 ```
 ┌──────────────┐    ┌──────────────┐    ┌──────────────┐
-│   Vercel      │    │   Railway    │    │   Convex     │
+│   Vercel      │    │   Render    │    │   Convex     │
 │              │    │              │    │              │
 │ • SPA (CDN)  │    │ • 21 Cron    │    │ • Realtime   │
 │ • Edge Funcs │    │   seed jobs  │    │   Database   │
@@ -1050,7 +1050,7 @@ Slow tier (s-maxage=7200s, 2 hours): bisPolicy, minerals, cyberThreats, climate,
 
 ### WebSocket Connections
 - **AIS vessels**: AISStream.io persistent connection
-- **Railway relay**: AIS + OpenSky + RSS proxy
+- **Render relay**: AIS + OpenSky + RSS proxy
 - **Convex**: Realtime database subscriptions
 
 ---
@@ -1305,7 +1305,7 @@ ORION is delivered as a single platform at **orion.app** with all 34 service dom
 
 ## 17. Data Pipeline & Seed Scripts
 
-### Railway Seed Pipeline (21 Cron Jobs)
+### Render Seed Pipeline (21 Cron Jobs)
 
 | Seed Script | Source | Frequency |
 |---|---|---|
@@ -1412,7 +1412,7 @@ Each seed script:
 ### News & RSS
 - **24+ RSS/Atom feeds** (BBC, Guardian, NPR, CNN, Al Jazeera, Reuters, etc.)
 - **Domain allowlist** (500+ domains) for SSRF protection
-- **Fallback to Railway relay** for blocked domains
+- **Fallback to Render relay** for blocked domains
 
 ---
 
@@ -1562,14 +1562,12 @@ Three regex patterns:
 - Manual chunks: maplibre, deck-stack, protomaps, d3, topojson, i18next, Sentry, Clerk, transformers, onnxruntime
 - Lazy HTML preload filtering for heavy chunks
 
-### Railway Deployment
+### Render Deployment
 
-**Build**: Nixpacks (nixpacks.toml)
-- Installs curl via apt
-- `npm ci` for clean install
-- Installs scripts/ dependencies
+**Build**: `render.yaml` Blueprint (service `orion-relay`, `rootDir: scripts`)
+- `npm ci` for clean install (installs scripts/ dependencies)
 
-**Start**: `node scripts/ais-relay.cjs` (AIS vessel tracking + OpenSky aircraft + RSS proxy relay)
+**Start**: `node ais-relay.cjs` (AIS vessel tracking + OpenSky aircraft + RSS proxy relay)
 
 **Environment**: `NODE_OPTIONS="--dns-result-order=ipv4first"`
 
@@ -1730,7 +1728,7 @@ See `.env.example` (1,024 lines) for complete documentation.
 | `middleware.ts` | 299 | Vercel Edge Middleware |
 | `index.html` | 562 | SPA entry HTML |
 | `Makefile` | 129 | Proto code generation |
-| `nixpacks.toml` | 26 | Railway build config |
+| `render.yaml` | — | Render blueprint (orion-api + orion-relay) |
 | `.env.example` | 1,024 | Environment variable docs |
 | `ARCHITECTURE.md` | 520 | System architecture |
 
@@ -2217,7 +2215,7 @@ service AviationService {
 
 ---
 
-## 48. Railway Relay System
+## 48. Render Relay System
 
 ### AIS Relay (`scripts/ais-relay.cjs`)
 

@@ -1,6 +1,6 @@
 /**
- * RPC: getEnergyPrices -- reads seeded energy price data from Railway seed cache.
- * All external EIA API calls happen in seed-economy.mjs on Railway.
+ * RPC: getEnergyPrices -- reads seeded energy price data from Render seed cache.
+ * All external EIA API calls happen in seed-economy.mjs on Render.
  */
 
 import type {

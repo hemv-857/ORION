@@ -58,7 +58,7 @@ test('validateFuel accepts when only a TOLERATED source (Brazil) failed', () => 
   assert.equal(
     validateFuel({ countries: HEALTHY_COUNTRIES, failedSources: ['Brazil'] }),
     true,
-    'Brazil ANP is structurally unreachable from Railway; must not gate publish or Railway crash-loops',
+    'Brazil ANP is structurally unreachable from Render; must not gate publish or Render crash-loops',
   );
 });
 

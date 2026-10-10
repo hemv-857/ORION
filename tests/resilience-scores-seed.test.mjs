@@ -649,7 +649,7 @@ describe('ensures ranking aggregate is present every cron, with truthful meta', 
 
 describe('seed-bundle-resilience section interval keeps refresh alive', () => {
   // The bundle runner skips a section when its seed-meta is younger than
-  // intervalMs * 0.8. If intervalMs is too long (e.g. 6h), most Railway cron
+  // intervalMs * 0.8. If intervalMs is too long (e.g. 6h), most Render cron
   // fires hit the skip branch → refreshRankingAggregate() never runs →
   // ranking can expire between actual runs and create EMPTY_ON_DEMAND gaps.
   // 2h is the tested trade-off: frequent enough for the 12h ranking TTL to

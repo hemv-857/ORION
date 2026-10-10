@@ -339,7 +339,7 @@ export const PUBLIC_NO_AUTH_RPC_PATHS = new Set<string>([
   '/api/leads/v1/register-interest',
 ]);
 
-// Cacheable, non-premium RPC endpoints the Railway relay periodically warm-pings
+// Cacheable, non-premium RPC endpoints the Render relay periodically warm-pings
 // to keep their compute caches hot (so the first real user request isn't a cold
 // miss). These require a browser session token or an API key in normal traffic;
 // the relay is a trusted internal service with neither, so it authenticates as

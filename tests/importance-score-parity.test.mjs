@@ -143,7 +143,7 @@ const digestDiplomacyPairs = sharedDiplomacyKeywords.diplomacyFlashpointPairs;
 const digestDiplomacyBoost = extractNumericConst(digestSrc, 'DIPLOMACY_FLASHPOINT_BOOST');
 const digestEntityScorePerSource = extractNumericConst(digestSrc, 'ENTITY_CORROBORATION_SCORE_PER_SOURCE');
 
-// Relay still inlines its own copy (Railway deploy isolation). Drift
+// Relay still inlines its own copy (Render deploy isolation). Drift
 // between the relay literal and the canonical JSON would fail the
 // parity assertions further below.
 const relaySeverityScores = extractObjectLiteral(relaySrc, 'RELAY_SEVERITY_SCORES');

@@ -34,7 +34,7 @@
 // publication (public index scores), not the fund-rankings paywall —
 // those citations stay valid.
 //
-// Cadence: quarterly (plan §3.4). Railway cron cadence: weekly refresh
+// Cadence: quarterly (plan §3.4). Render cron cadence: weekly refresh
 // with ~35-day TTL (mirrors other recovery-domain seeders so stale data
 // is caught by the seed-meta gate before it leaks into rankings).
 //
@@ -1044,7 +1044,7 @@ function countManifestFundsForCountry(manifest, iso2) {
 export function validate(data) {
   // Tier 3 (Wikipedia) is now live; expected floor = 1 country once any
   // manifest fund matches. We keep the floor lenient (>=0) during the
-  // first Railway-cron bake-in window so a transient Wikipedia fetch
+  // first Render-cron bake-in window so a transient Wikipedia fetch
   // failure does not poison seed-meta for 30 days (see
   // feedback_strict_floor_validate_fail_poisons_seed_meta.md). Once
   // the seeder has ~7 days of clean runs, tighten to `>= 1`.

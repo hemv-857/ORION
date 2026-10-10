@@ -1,7 +1,7 @@
 // Type declarations for shared/brief-envelope.js.
 //
 // The envelope is the integration boundary between the per-user brief
-// composer (Railway worker, future Phase 3) and every consumer surface:
+// composer (Render worker, future Phase 3) and every consumer surface:
 // the hosted magazine edge route, the dashboard panel preview RPC, the
 // email teaser renderer, the carousel renderer, and the Tauri in-app
 // reader. All consumers read the same brief:{userId}:{issueSlot} Redis

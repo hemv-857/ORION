@@ -71,7 +71,7 @@ The envelope version is **shared across two producers** (`notification-relay`, `
 
 ### `POST /api/notify`
 
-Internal ingestion endpoint called by Railway producers to enqueue a notification. Requires `RELAY_SHARED_SECRET`. Not a public API.
+Internal ingestion endpoint called by Render producers to enqueue a notification. Requires `RELAY_SHARED_SECRET`. Not a public API.
 
 ## Telegram
 
@@ -89,7 +89,7 @@ SSR'd YouTube embed iframe with CSP-compatible wrapping. Used to bypass WKWebVie
 
 Returns live-stream metadata for a YouTube channel (`channel` — handle with or without `@` prefix) or a specific video (`videoId` — 11-char YouTube id). At least one of the two params is required; returns `400 Missing channel or videoId parameter` otherwise. Response cached 10 min for channel lookups, 1 hour for videoId lookups.
 
-Proxies to the Railway relay first (residential proxy for YouTube scraping). On relay failure, falls back to YouTube oEmbed (for `videoId`) or direct channel scraping — both are unreliable from datacenter IPs.
+Proxies to the Render relay first (residential proxy for YouTube scraping). On relay failure, falls back to YouTube oEmbed (for `videoId`) or direct channel scraping — both are unreliable from datacenter IPs.
 
 ## Slack integration
 

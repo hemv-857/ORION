@@ -18,8 +18,8 @@ import { CII_RISK_SCORE_CACHE_KEYS } from './_cii-risk-cache-keys.mjs';
 // 003-feat-simulation-trigger-and-runid-filter-plan.md D4.
 //
 // IMPORT PATH NOTE: the shim lives in scripts/ — NOT server/_shared/ —
-// because the Railway services that run this seeder (seed-forecasts,
-// simulation-worker, deep-forecast-worker) use nixpacks with
+// because the Render services that run this seeder (seed-forecasts,
+// simulation-worker, deep-forecast-worker) run on Render with
 // root_dir=scripts and only package scripts/ contents into /app/.
 // Any `../server/_shared/...` import escapes /app/ at runtime and
 // crashes with ERR_MODULE_NOT_FOUND. See #3811 incident logs.
@@ -608,7 +608,7 @@ function getRedisCredentials() {
 }
 
 function getDeployRevision() {
-  return process.env.RAILWAY_GIT_COMMIT_SHA
+  return process.env.RENDER_GIT_COMMIT
     || process.env.VERCEL_GIT_COMMIT_SHA
     || process.env.GITHUB_SHA
     || '';

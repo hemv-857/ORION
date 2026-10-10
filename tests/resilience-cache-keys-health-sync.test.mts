@@ -318,16 +318,16 @@ describe('resilience cache-key health-registry sync (T1.9)', () => {
     //    STALE_SEED on routine cron jitter (seedAgeMin=367 vs
     //    maxStale=360) despite the bundle running cleanly on schedule.
     //    Root cause: prior fix took the in-bundle 2h section gate as
-    //    the cadence baseline, but the actual Railway cron is
+    //    the cadence baseline, but the actual Render cron is
     //    `0 */6 * * *` (every 6h on the hour, UTC) — the 2h in-bundle
-    //    gate never gets to fire because Railway only invokes the
+    //    gate never gets to fire because Render only invokes the
     //    bundle every 6h.
     //
     // CADENCE BASELINE — empirically verified 2026-04-28 from Railway
     // logs (6h2min between two clean bundle runs, no skips/errors).
     // The in-bundle `intervalMs=2h` claim in
     // scripts/seed-bundle-resilience.mjs is what the section's
-    // skip-gate uses, but the OUTER Railway cron schedule
+    // skip-gate uses, but the OUTER Render cron schedule
     // (`0 */6 * * *`) determines how often the bundle fires at all.
     // Real cadence = 6h. 840 ≈ 14h staleness ≈ 2.33× cadence:
     // tolerates 1 missed tick (12h gap) + ~2h deploy-window jitter;
@@ -366,18 +366,18 @@ describe('resilience cache-key health-registry sync (T1.9)', () => {
       // resilience.mjs source — kept intact because that's what the
       // section's interval-skip logic uses. Whether the bundle's
       // OUTER cron fires often enough to make that gate matter is a
-      // separate question: empirically the Railway cron is `0 */6 * *
+      // separate question: empirically the Render cron is `0 */6 * *
       // *`, so the bundle fires every 6h regardless of the in-bundle
       // 2h gate (the gate never has the chance to skip — the cron
       // doesn't fire mid-window). If the bundle ever moves to a
-      // sub-6h Railway schedule, this assertion stays correct; only
+      // sub-6h Render schedule, this assertion stays correct; only
       // the resilienceIntervals.maxStaleMin contract below would need
       // tightening.
       assert.equal(extractSectionGateHours('Resilience-Scores'), 2);
     });
 
     it('resilienceIntervals.maxStaleMin is 840min (1 missed tick + jitter at real 6h cadence; matches resilienceRanking)', () => {
-      // Real Railway cron is `0 */6 * * *` (every 6h on the hour, UTC),
+      // Real Render cron is `0 */6 * * *` (every 6h on the hour, UTC),
       // verified 2026-04-28 via Railway logs (6h2min between two clean
       // bundle runs, no skips/errors). Both resilienceIntervals AND
       // resilienceRanking are written by the SAME Resilience-Scores

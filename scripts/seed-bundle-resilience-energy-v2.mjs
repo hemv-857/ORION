@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-// PR 1 of the resilience repair plan. Railway cron bundle wrapping
+// PR 1 of the resilience repair plan. Render cron bundle wrapping
 // the three annual source seeders that feed the v2 energy construct:
 //
 //   - seed-low-carbon-generation.mjs   → resilience:low-carbon-generation:v1
@@ -10,7 +10,7 @@
 // Cadence: per-slot interval is 7 days; data is annual at source so polling
 // more frequently just hammers upstream source APIs without gaining fresh
 // data. The per-slot intervalMs gate inside _bundle-runner.mjs enforces the
-// 7-day minimum between actual seeds — the Railway cron only needs to fire
+// 7-day minimum between actual seeds — the Render cron only needs to fire
 // often enough to catch the next-eligible day after the interval expires.
 //
 // Cron schedule: DAILY 06:00 UTC ("0 6 * * *"), not weekly Monday-only.
@@ -27,21 +27,15 @@
 // Friday-seed → 2026-04-27 Monday-skip → 2026-05-04 Monday-fire
 // production incident that triggered this fix.
 //
-// Railway service config (set up manually via Railway dashboard or
-// `railway service`):
-//   - Service name: seed-bundle-resilience-energy-v2
-//   - Builder: NIXPACKS (root Dockerfile not used for this bundle)
-//   - rootDirectory: "" (repo root)
-//   - Watch paths: scripts/seed-low-carbon-generation.mjs,
-//     scripts/seed-fossil-electricity-share.mjs,
-//     scripts/seed-power-reliability.mjs, scripts/_seed-utils.mjs,
-//     scripts/_bundle-runner.mjs, scripts/seed-bundle-resilience-energy-v2.mjs
-//   - Cron schedule: "0 6 * * *" (daily 06:00 UTC; per-slot interval gates real seeds)
+// Render cron job config (set up manually via Render dashboard):
+//   - Job name: seed-bundle-resilience-energy-v2
+//   - Root directory: "" (repo root)
+//   - Schedule: "0 6 * * *" (daily 06:00 UTC; per-slot interval gates real seeds)
 //   - Required env: UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN
 //
-// IMPORTANT: After merging this PR, update the Railway service's cron
+// IMPORTANT: After merging this PR, update the Render service's cron
 // schedule to "0 6 * * *". Code-side change alone is not sufficient —
-// the Railway cron is configured in the dashboard, not in this file.
+// the Render cron is configured in the dashboard, not in this file.
 
 import { runBundle, DAY } from './_bundle-runner.mjs';
 

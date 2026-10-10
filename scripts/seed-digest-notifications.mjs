@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Digest notification cron — Railway scheduled job, runs every 30 minutes.
+ * Digest notification cron — Render scheduled job, runs every 30 minutes.
  *
  * For each enabled alert rule with digestMode != "realtime":
  *   1. Checks isDue() against digest:last-sent:v1:${userId}:${variant}
@@ -106,7 +106,7 @@ const RESEND_API_KEY = process.env.RESEND_API_KEY ?? '';
 // Brief/digest is an editorial daily read, not an incident alarm — route it
 // off the `alerts@` mailbox so recipients don't see a scary "alert" from-name
 // in their inbox. normalizeResendSender coerces a bare email address into a
-// "Name <addr>" wrapper at runtime (with a loud warning), so a Railway env
+// "Name <addr>" wrapper at runtime (with a loud warning), so a Render env
 // like `RESEND_FROM_BRIEF=brief@orion.app` can't re-introduce the bug
 // that `.env.example` documents.
 const RESEND_FROM =
@@ -147,7 +147,7 @@ const AI_DIGEST_ENABLED = process.env.AI_DIGEST_ENABLED !== '0';
 // but lives on the brief/digest side so operators can tune them
 // independently — e.g. let realtime page at score>=63 while the brief
 // digest drops anything <50. Default 0 = no filtering; ship disabled
-// so this PR is a no-op until Railway flips the env. Setting the var
+// so this PR is a no-op until Render flips the env. Setting the var
 // to any positive integer drops every cluster whose representative
 // currentScore is below it.
 function getDigestScoreMin() {
@@ -171,7 +171,7 @@ const BRIEF_TTL_SECONDS = 7 * 24 * 60 * 60; // 7 days
 const INSIGHTS_KEY = 'news:insights:v1';
 
 // Operator kill switch — used to intentionally silence brief compose
-// without surfacing a Railway red flag. Distinguished from "secret
+// without surfacing a Render red flag. Distinguished from "secret
 // missing in a production rollout" which IS worth flagging.
 const BRIEF_COMPOSE_DISABLED_BY_OPERATOR = process.env.BRIEF_COMPOSE_ENABLED === '0';
 const BRIEF_COMPOSE_ENABLED =
@@ -1581,7 +1581,7 @@ async function composeBriefsForRun(rules, nowMs) {
   const briefByUser = new Map();
   // Missing secret without explicit operator-disable = misconfigured
   // rollout. Count it as a compose failure so the end-of-run exit
-  // gate trips and Railway flags the run red. Digest send still
+  // gate trips and Render flags the run red. Digest send still
   // proceeds (compose failures must never block notification
   // delivery to users).
   if (BRIEF_SIGNING_SECRET_MISSING) {
@@ -2162,7 +2162,7 @@ async function main() {
   // Compose per-user brief envelopes once per run (extracted so main's
   // complexity score stays in the biome budget). Failures MUST NOT
   // block digest sends — we carry counters forward and apply the
-  // exit-non-zero gate AFTER the digest dispatch so Railway still
+  // exit-non-zero gate AFTER the digest dispatch so Render still
   // surfaces compose-layer breakage without skipping user-visible
   // digest delivery.
   const { briefByUser, composeSuccess, composeFailed } = await composeBriefsForRun(rules, nowMs);
@@ -2453,7 +2453,7 @@ async function main() {
     // The evaluator is short-circuited by `mode === 'off'` (decision
     // === null). When that happens we skip the per-cluster GET pipeline
     // entirely — no Upstash traffic, no log line. This makes the
-    // operator-side kill switch instant: flip Railway env to 'off',
+    // operator-side kill switch instant: flip Render env to 'off',
     // next tick spends zero on cooldown.
     const cooldownDecisions = [];
     const ruleIdComposite = `${rule.variant ?? 'full'}:${rule.lang ?? 'en'}:${rule.sensitivity ?? 'high'}`;
@@ -2906,7 +2906,7 @@ async function main() {
 
   // Brief-compose failure gate. Runs at the very end so a compose-
   // layer outage (Upstash blip, insights key stale, signing secret
-  // missing) never blocks digest delivery to users — but Railway
+  // missing) never blocks digest delivery to users — but Render
   // still flips the run red so ops see the signal. Denominator is
   // attempted writes (shouldExitNonZero enforces this).
   if (shouldExitOnBriefFailures({ success: composeSuccess, failed: composeFailed })) {

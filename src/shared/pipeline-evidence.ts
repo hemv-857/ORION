@@ -121,7 +121,7 @@ function isStale(iso: string | undefined, nowMs: number): boolean {
 
 /**
  * Picks the newest classifier version across two registries. Gas and oil
- * are now seeded by separate Railway cron processes (seed-pipelines-gas.mjs
+ * are now seeded by separate Render cron processes (seed-pipelines-gas.mjs
  * + seed-pipelines-oil.mjs), so mixed-version rollout windows are a real
  * expected state — saying "v1/v2" or picking the higher version is
  * correct; always preferring gas over oil is wrong. Versions are expected

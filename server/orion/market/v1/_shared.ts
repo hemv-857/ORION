@@ -298,7 +298,7 @@ export async function fetchYahooQuote(
     console.warn(`[Yahoo] ${symbol} direct error:`, (err as Error).message);
   }
 
-  // Fallback: Railway relay (different IP, not rate-limited by Yahoo)
+  // Fallback: Render relay (different IP, not rate-limited by Yahoo)
   const relayBase = getRelayBaseUrl();
   if (!relayBase) {
     console.warn(`[Yahoo] ${symbol} relay skipped: WS_RELAY_URL not set`);

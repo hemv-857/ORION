@@ -1,6 +1,6 @@
 /**
- * RPC: ListCryptoQuotes -- reads seeded crypto data from Railway seed cache.
- * All external CoinGecko calls happen in ais-relay.cjs on Railway.
+ * RPC: ListCryptoQuotes -- reads seeded crypto data from Render seed cache.
+ * All external CoinGecko calls happen in ais-relay.cjs on Render.
  */
 
 import type {

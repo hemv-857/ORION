@@ -280,7 +280,7 @@ export default async function handler(req: Request): Promise<Response> {
   if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors });
 
   try {
-    // Reuse RELAY_SHARED_SECRET — already provisioned for Vercel↔Railway
+    // Reuse RELAY_SHARED_SECRET — already provisioned for Vercel↔Render
     // internal auth, same trust boundary (ops/internal-only callers).
     // Constant-time compare via the shared helper avoids the timing oracle
     // a `!==` comparison would leak (see issue #3803 / PR #3823).

@@ -5,7 +5,7 @@
  * POST /api/internal/brief-why-matters
  *
  * Internal-only. Auth via `Authorization: Bearer $RELAY_SHARED_SECRET`
- * (same secret Railway crons already use). Not Pro-gated, no CORS.
+ * (same secret Render crons already use). Not Pro-gated, no CORS.
  *
  * Body:
  *   {
@@ -55,7 +55,7 @@ import {
   parseWhyMattersV2,
 } from '../../shared/brief-llm-core.js';
 
-// ── Env knobs (read at request entry so Railway/Vercel flips take effect
+// ── Env knobs (read at request entry so Render/Vercel flips take effect
 // on the next invocation without a redeploy) ───────────────────────────
 
 function readConfig(env: Record<string, string | undefined> = process.env as Record<string, string | undefined>): {

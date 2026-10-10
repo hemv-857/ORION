@@ -76,7 +76,7 @@ test('scripts/_clustering.mjs sources keywords from canonical JSON', async () =>
   // Either `./shared/diplomacy-keywords.json` (scripts/shared mirror)
   // or `../shared/diplomacy-keywords.json` (root) is acceptable.
   // _clustering.mjs uses the mirror because seed-insights.mjs deploys
-  // via nixpacks with rootDirectory=scripts. The mirror is enforced
+  // via Render with rootDir: scripts. The mirror is enforced
   // byte-identical by tests/edge-functions.test.mjs.
   assert.match(
     src,
@@ -101,7 +101,7 @@ test('scripts/seed-digest-notifications.mjs sources keywords from canonical JSON
   // (root). seed-digest-notifications runs under Dockerfile.digest-
   // notifications which COPYs root shared/ explicitly, so `../shared/`
   // is fine. Accepting both forms keeps the test robust to a future
-  // Docker-vs-nixpacks repackaging.
+  // Docker-vs-Render-rootDir repackaging.
   assert.match(
     src,
     /require\(\s*['"]\.{1,2}\/shared\/diplomacy-keywords\.json['"]\s*\)/,

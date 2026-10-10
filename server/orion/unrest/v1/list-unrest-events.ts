@@ -1,6 +1,6 @@
 /**
- * ListUnrestEvents RPC -- reads seeded unrest data from Railway seed cache.
- * All external ACLED/GDELT API calls happen in seed-unrest.mjs on Railway.
+ * ListUnrestEvents RPC -- reads seeded unrest data from Render seed cache.
+ * All external ACLED/GDELT API calls happen in seed-unrest.mjs on Render.
  */
 
 import type {

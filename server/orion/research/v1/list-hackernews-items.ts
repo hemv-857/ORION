@@ -1,6 +1,6 @@
 /**
- * RPC: listHackernewsItems -- reads seeded HN data from Railway seed cache.
- * All external Hacker News Firebase API calls happen in seed-research.mjs on Railway.
+ * RPC: listHackernewsItems -- reads seeded HN data from Render seed cache.
+ * All external Hacker News Firebase API calls happen in seed-research.mjs on Render.
  */
 
 import type {

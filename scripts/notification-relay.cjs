@@ -279,7 +279,7 @@ async function sendTelegram(userId, chatId, text, _retryCount = 0) {
     return sendTelegram(userId, chatId, text, _retryCount + 1); // single retry
   }
   if (res.status === 401) {
-    console.error('[relay] Telegram 401 Unauthorized — TELEGRAM_BOT_TOKEN is invalid or belongs to a different bot; correct the Railway env var to restore Telegram delivery');
+    console.error('[relay] Telegram 401 Unauthorized — TELEGRAM_BOT_TOKEN is invalid or belongs to a different bot; correct the Render env var to restore Telegram delivery');
     return false;
   }
   if (!res.ok) {
@@ -481,7 +481,7 @@ async function sendWebhook(userId, webhookEnvelope, event) {
 
 // ── Web Push (Phase 6) ────────────────────────────────────────────────────────
 //
-// Lazy-require web-push so the relay can still start on Railway if the
+// Lazy-require web-push so the relay can still start on Render if the
 // dep isn't pulled in. If VAPID keys are unset the relay logs once and
 // skips web_push deliveries entirely — telegram/slack/email still work.
 

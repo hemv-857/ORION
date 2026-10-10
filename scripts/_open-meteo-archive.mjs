@@ -134,7 +134,7 @@ export async function fetchOpenMeteoArchiveBatch(zones, opts) {
     }
 
     // Direct attempt failed with non-retryable or after-final-retry status.
-    // Open-Meteo's free tier rate-limits per source IP; Railway containers
+    // Open-Meteo's free tier rate-limits per source IP; Render containers
     // share IP pools and hit 429 storms (logs.1776312819911 — every batch
     // 429'd through 4 retries on 2026-04-16). Fall through to proxy fallback
     // below before throwing.
@@ -144,7 +144,7 @@ export async function fetchOpenMeteoArchiveBatch(zones, opts) {
   // Proxy fallback — same pattern as fredFetchJson / imfFetchJson in
   // _seed-utils.mjs. Decodo gateway gets a different egress IP that is not
   // (yet) on Open-Meteo's per-IP throttle. Skip silently if no proxy is
-  // configured (preserves existing behavior in non-Railway envs).
+  // configured (preserves existing behavior in non-Render envs).
   //
   // Two-attempt cascade: CONNECT path first (pure-Node, faster, no curl
   // dependency), curl fallback second. Decodo's CONNECT and curl egress

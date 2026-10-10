@@ -32,7 +32,7 @@
  *     fetchedAt: "<iso>",
  *   }
  *
- * Railway: deploy as cron service running daily (e.g. `30 6 * * *`),
+ * Render: deploy as cron service running daily (e.g. `30 6 * * *`),
  * NIXPACKS builder, startCommand `node scripts/seed-fx-yoy.mjs`.
  */
 

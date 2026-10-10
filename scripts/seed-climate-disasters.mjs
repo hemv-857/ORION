@@ -209,7 +209,7 @@ function resolveCountryInfo({ code = '', iso3 = '', name = '', lat = NaN, lng = 
   };
 }
 
-// Railway must set RELIEFWEB_APPNAME to an approved ReliefWeb appname
+// Render must set RELIEFWEB_APPNAME to an approved ReliefWeb appname
 // before enabling this seed, or ReliefWeb fetches will fail closed.
 function getReliefWebAppname() {
   const appname = String(process.env.RELIEFWEB_APPNAME || process.env.RELIEFWEB_APP_NAME || '').trim();

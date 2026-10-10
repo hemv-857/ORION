@@ -16,7 +16,7 @@ const RPC_URL = 'https://api.orion.app/api/infrastructure/v1/list-service-status
 const CANONICAL_KEY = 'infra:service-statuses:v1';
 
 // Defense-in-depth auth — see seed-infra.mjs for the same pattern + rationale.
-// Set ORION_RELAY_KEY on the Railway service to a value already
+// Set ORION_RELAY_KEY on the Render service to a value already
 // present in Vercel's ORION_VALID_KEYS.
 const RELAY_API_KEY = process.env.ORION_RELAY_KEY || '';
 

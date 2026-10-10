@@ -464,7 +464,7 @@ describe('fetchViaWayback — Cloudflare-bypass via Wayback Machine', () => {
     assert.match(bundleSrc, /label:\s*'FATF-Listing'[^\n]*timeoutMs:\s*300_000/, 'FATF-Listing section must use 300_000 ms timeoutMs (was 120_000 pre-fix)');
   });
 
-  it('falls back to CONNECT proxy when direct CDX query fails (Railway-egress rate-limit defense)', async () => {
+  it('falls back to CONNECT proxy when direct CDX query fails (Render-egress rate-limit defense)', async () => {
     // Production observation 2026-04-25T20:35: Railway egress IPs hit
     // 20s+ timeouts on CDX while local desktop probes complete in <2s.
     // The same pool gets soft-rate-limited or routed slowly to

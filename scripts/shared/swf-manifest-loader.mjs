@@ -1,11 +1,11 @@
 // Loader + validator for the SWF classification manifest at
 // scripts/shared/swf-classification-manifest.yaml.
 //
-// Co-located with the loader so the Railway recovery-bundle container
+// Co-located with the loader so the Render recovery-bundle container
 // (rootDirectory=scripts/) ships the YAML alongside the code. The file
 // used to live under docs/methodology/ but that path isn't copied into
 // NIXPACKS builds with rootDirectory=scripts/, so the seeder crashed
-// with ENOENT on every Railway tick. Authors can still edit the file
+// with ENOENT on every Render tick. Authors can still edit the file
 // directly; docs/methodology/country-resilience-index.mdx links to the
 // new location for external reference.
 //

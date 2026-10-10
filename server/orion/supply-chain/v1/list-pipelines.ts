@@ -143,7 +143,7 @@ export async function listPipelines(
   const pipelines = [...collect(gasRaw), ...collect(oilRaw)];
 
   // Pick the newest classifier version present across the registries. Gas
-  // and oil are now seeded by separate Railway cron processes, so a
+  // and oil are now seeded by separate Render cron processes, so a
   // mixed-version window (gas=v2, oil=v1) during rollouts is a real expected
   // state — must actually compare, not prefer one side. Same logic for
   // fetchedAt: the newer seeder cycle is the accurate "last refresh" signal.

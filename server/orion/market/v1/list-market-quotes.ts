@@ -1,6 +1,6 @@
 /**
- * RPC: ListMarketQuotes -- reads seeded stock/index data from Railway seed cache.
- * All external Finnhub/Yahoo Finance calls happen in ais-relay.cjs on Railway.
+ * RPC: ListMarketQuotes -- reads seeded stock/index data from Render seed cache.
+ * All external Finnhub/Yahoo Finance calls happen in ais-relay.cjs on Render.
  */
 
 import type {

@@ -11,9 +11,9 @@ const STALE_CACHE_KEY = 'theater_posture:sebuf:stale:v1';
 const BACKUP_CACHE_KEY = 'theater-posture:sebuf:backup:v1';
 
 // All theater posture assembly (OpenSky + Wingbits + classification)
-// happens on Railway (ais-relay.cjs seedTheaterPosture loop + seed-military-flights.mjs).
+// happens on Render (ais-relay.cjs seedTheaterPosture loop + seed-military-flights.mjs).
 // This handler reads pre-built data from Redis only.
-// Gold standard: Vercel reads, Railway writes.
+// Gold standard: Vercel reads, Render writes.
 
 export async function getTheaterPosture(
   _ctx: ServerContext,

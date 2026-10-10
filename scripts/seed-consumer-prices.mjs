@@ -7,7 +7,7 @@
  * Run manually: node scripts/seed-consumer-prices.mjs --force
  *
  * IMPORTANT: This is a MANUAL FALLBACK script only.
- * Do NOT configure as a Railway cron. The consumer-prices-core publish.ts
+ * Do NOT configure as a Render cron. The consumer-prices-core publish.ts
  * pipeline (scrape → aggregate → publish) is the authoritative writer.
  * Running both as crons causes TTL conflict (this script: 10-60min TTLs,
  * publish.ts: 26h TTL) — whichever runs last wins.

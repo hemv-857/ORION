@@ -199,7 +199,7 @@ function assertNoExtraKeys(obj, allowed, path) {
  * Throws a descriptive error on the first missing, mis-typed, or
  * unexpected field. Runs before any HTML interpolation so the renderer
  * can assume the typed shape after this returns. The renderer is a
- * shared module with multiple independent producers (Railway composer,
+ * shared module with multiple independent producers (Render composer,
  * tests, future dev-only fixtures) — a strict runtime contract matters
  * more than the declaration-file types alone.
  *

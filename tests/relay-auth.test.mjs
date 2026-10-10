@@ -90,11 +90,11 @@ function spawnRelay(envOverrides = {}) {
       RELAY_SHARED_SECRET: '',
       ALLOW_UNAUTHENTICATED_RELAY: '',
       I_UNDERSTAND_THIS_DISABLES_AUTH: '',
-      // Avoid pulling in Railway-prod detection noise from the parent env.
+      // Strip platform env noise from the parent env.
       NODE_ENV: 'test',
-      RAILWAY_ENVIRONMENT: '',
-      RAILWAY_PROJECT_ID: '',
-      RAILWAY_STATIC_URL: '',
+      RENDER: '',
+      RENDER_SERVICE_ID: '',
+      RENDER_GIT_COMMIT: '',
       ...envOverrides,
     },
     stdio: ['ignore', 'pipe', 'pipe'],

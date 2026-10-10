@@ -1,5 +1,5 @@
 /**
- * RPC: ListAiTokens -- reads seeded AI token data from Railway seed cache.
+ * RPC: ListAiTokens -- reads seeded AI token data from Render seed cache.
  */
 
 import type {

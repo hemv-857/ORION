@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 //
-// Railway entrypoint for the simulation worker.
+// Render entrypoint for the simulation worker.
 //
 // Usage:
 //   node scripts/process-simulation-tasks.mjs            # poll loop (default)

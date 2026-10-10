@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Generate a TELEGRAM_SESSION (GramJS StringSession) for the Railway Telegram OSINT poller.
+ * Generate a TELEGRAM_SESSION (GramJS StringSession) for the Render Telegram OSINT poller.
  *
  * Usage (local only):
  *   cd scripts
@@ -40,7 +40,7 @@ try {
   });
 
   const session = client.session.save();
-  console.log('\n✅ Generated session. Add this as a Railway secret:');
+  console.log('\n✅ Generated session. Add this as a Render secret:');
   console.log(`TELEGRAM_SESSION=${session}`);
 
   await client.disconnect();

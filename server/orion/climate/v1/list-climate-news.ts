@@ -1,5 +1,5 @@
 /**
- * ListClimateNews RPC -- reads seeded climate news data from Railway seed cache.
+ * ListClimateNews RPC -- reads seeded climate news data from Render seed cache.
  */
 
 import type {

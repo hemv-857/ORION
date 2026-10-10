@@ -5,7 +5,7 @@ import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const SOURCE_TIERS = require('./shared/source-tiers.json');
 // scripts/shared/ mirror (NOT ../shared/): seed-insights.mjs deploys via
-// nixpacks with rootDirectory=scripts, so the repo-root shared/ folder
+// Render with rootDir: scripts, so the repo-root shared/ folder
 // is not in the container. Matches the SOURCE_TIERS pattern above.
 const DIPLOMACY_KEYWORDS_DATA = require('./shared/diplomacy-keywords.json');
 

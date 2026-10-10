@@ -8,9 +8,9 @@ import { getCachedJson } from '../../../_shared/redis';
 
 const CACHE_KEY = 'conflict:ucdp-events:v1';
 
-// All UCDP fetching happens on Railway (ais-relay.cjs seedUcdpEvents loop).
+// All UCDP fetching happens on Render (ais-relay.cjs seedUcdpEvents loop).
 // This handler reads pre-seeded data from Redis only.
-// Gold standard: Vercel reads, Railway writes.
+// Gold standard: Vercel reads, Render writes.
 
 export async function listUcdpEvents(
   _ctx: ServerContext,

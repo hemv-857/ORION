@@ -5,7 +5,7 @@
 import type { UnderseaCable, NuclearFacility, EconomicCenter, Spaceport, CriticalMineralProject } from '@/types';
 
 // Static baseline — authoritative live data is in Redis key infrastructure:submarine-cables:v1
-// (seeded weekly by scripts/seed-submarine-cables.mjs on Railway)
+// (seeded weekly by scripts/seed-submarine-cables.mjs on Render)
 export const UNDERSEA_CABLES: UnderseaCable[] = [
   // === TRANS-ATLANTIC ===
   {

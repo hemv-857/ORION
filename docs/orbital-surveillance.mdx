@@ -26,7 +26,7 @@ The Orbital Surveillance layer tracks ~80–120 intelligence-relevant satellites
 ### Data Flow
 
 ```
-CelesTrak (free) ──2h──▶ Railway relay ──Redis──▶ Vercel edge ──CDN 1h──▶ Browser
+CelesTrak (free) ──2h──▶ Render relay ──Redis──▶ Vercel edge ──CDN 1h──▶ Browser
                          (TLE parse,              (read-only,              (SGP4 propagation
                           filter,                  10min cache)             every 3 seconds)
                           classify)
@@ -37,7 +37,7 @@ CelesTrak (free) ──2h──▶ Railway relay ──Redis──▶ Vercel edg
 | Component | Cost | Notes |
 |-----------|------|-------|
 | CelesTrak API | Free | Public NORAD TLE data, 2h update cycle |
-| Railway relay | ~$0 | Seed loop runs inside existing `ais-relay.cjs` process |
+| Render relay | ~$0 | Seed loop runs inside existing `ais-relay.cjs` process |
 | Redis (Upstash) | Negligible | Single key, 4h TTL, ~50KB payload |
 | Vercel edge | ~$0 | CDN caches 1h (`s-maxage=3600`), stale-while-revalidate 30min |
 | Browser CPU | Client-side | SGP4 math runs locally every 3s — zero server cost for real-time movement |
@@ -108,8 +108,8 @@ Client-side fetch uses a circuit breaker: 3 consecutive failures trigger a 10-mi
 
 | Key | TTL | Writer | Shape |
 |-----|-----|--------|-------|
-| `intelligence:satellites:tle:v1` | 4h | Railway relay (2h cycle) | `{ satellites: SatelliteTLE[], fetchedAt: number }` |
-| `seed-meta:intelligence:satellites` | 7d | Railway relay | `{ fetchedAt: number, recordCount: number }` |
+| `intelligence:satellites:tle:v1` | 4h | Render relay (2h cycle) | `{ satellites: SatelliteTLE[], fetchedAt: number }` |
+| `seed-meta:intelligence:satellites` | 7d | Render relay | `{ fetchedAt: number, recordCount: number }` |
 
 ### Health Monitoring
 

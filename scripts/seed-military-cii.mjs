@@ -19,17 +19,16 @@
 // the frontend's synthetic-`{}`-push ×2 hack (see the plan's Phase 2 notes).
 //
 // SCHEDULING: like every other scripts/seed-*.mjs, this is a self-contained job run on a
-// schedule by Railway (the cron/job config lives in the Railway dashboard, not the repo).
-// Run cadence ~10 min; the output key TTL (3600s) tolerates a few skipped runs.
-// Self-contained by necessity — scripts/ cannot import from server/ or src/ under the
-// Railway nixpacks packaging.
+// schedule by Render (the cron config lives in the Render dashboard or render.yaml, not
+// in this script). Run cadence ~10 min; the output key TTL (3600s) tolerates a few skipped
+// runs. Self-contained by necessity — scripts/ cannot import from server/ or src/ under the
+// Render rootDir=scripts packaging.
 //
-// Railway service config (set up manually via Railway dashboard or `railway service`):
-//   - Service name: seed-military-cii
-//   - Builder: NIXPACKS (root Dockerfile not used for this seed)
-//   - rootDirectory: scripts
+// Render cron job config (see render.yaml):
+//   - Service/job name: seed-military-cii
+//   - rootDir: scripts
 //   - startCommand: node seed-military-cii.mjs
-//   - Cron schedule: "*/10 * * * *" (every 10min UTC)
+//   - Schedule: "*/10 * * * *" (every 10min UTC)
 //   - Required env: UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN, WS_RELAY_URL
 //   - Optional env: RELAY_SHARED_SECRET, RELAY_AUTH_HEADER
 

@@ -200,7 +200,7 @@ paths:
             tags:
                 - TradeService
             summary: GetCustomsRevenue
-            description: Get US customs duties revenue (Treasury MTS data, seeded by Railway).
+            description: Get US customs duties revenue (Treasury MTS data, seeded by Render).
             operationId: GetCustomsRevenue
             responses:
                 "200":

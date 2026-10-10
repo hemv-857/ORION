@@ -28,7 +28,7 @@ const HS2_LABELS: Record<string, string> = {
   '71': 'Precious Metals & Gems', '72': 'Iron & Steel', '73': 'Iron & Steel Articles',
   '74': 'Copper', '76': 'Aluminium', '79': 'Zinc', '80': 'Tin',
   '84': 'Machinery & Mechanical Appliances', '85': 'Electrical & Electronic Equipment',
-  '86': 'Railway', '87': 'Vehicles', '88': 'Aircraft', '89': 'Ships & Boats',
+  '86': 'Render', '87': 'Vehicles', '88': 'Aircraft', '89': 'Ships & Boats',
   '90': 'Optical & Medical Instruments', '93': 'Arms & Ammunition',
 };
 

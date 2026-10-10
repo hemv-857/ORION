@@ -422,7 +422,7 @@ async function fetchFredJpyFallback() {
 async function fetchMacroSignals(proxyAuth = null) {
   const yahooBase = 'https://query1.finance.yahoo.com/v8/finance/chart';
 
-  // Sequential Yahoo calls (150ms gaps like yahooGate); route through proxy to bypass Railway IP blocks
+  // Sequential Yahoo calls (150ms gaps like yahooGate); route through proxy to bypass Render IP blocks
   const jpyChart = await fetchJsonSafe(`${yahooBase}/JPY=X?range=1y&interval=1d`, 8000, proxyAuth).catch(() => null);
   await sleep(150);
   const btcChart = await fetchJsonSafe(`${yahooBase}/BTC-USD?range=1y&interval=1d`, 8000, proxyAuth).catch(() => null);

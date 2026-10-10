@@ -1,6 +1,6 @@
 /**
- * RPC: getBlsSeries -- reads seeded BLS time series from Railway seed cache.
- * All external BLS API calls happen in scripts/seed-bls-series.mjs on Railway.
+ * RPC: getBlsSeries -- reads seeded BLS time series from Render seed cache.
+ * All external BLS API calls happen in scripts/seed-bls-series.mjs on Render.
  */
 import type {
   ServerContext,
@@ -12,7 +12,7 @@ import { getCachedJson } from '../../../_shared/redis';
 const BLS_KEY_PREFIX = 'bls:series';
 
 // Only allow series IDs that were seeded. Prevents unbounded Redis key enumeration.
-// National series now fetched via FRED (api.bls.gov is blocked from Railway IPs).
+// National series now fetched via FRED (api.bls.gov is blocked from Render IPs).
 // Metro-area LAUMT* series dropped — no FRED equivalent available.
 const KNOWN_SERIES_IDS = new Set([
   'USPRIV',

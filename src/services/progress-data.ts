@@ -2,7 +2,7 @@
  * Progress data service -- displays World Bank indicator data for the
  * "Human Progress" panel showing long-term positive trends.
  *
- * Data is pre-seeded by seed-wb-indicators.mjs on Railway and read
+ * Data is pre-seeded by seed-wb-indicators.mjs on Render and read
  * from bootstrap/Redis. Never calls WB API from the frontend.
  */
 
@@ -124,7 +124,7 @@ interface SeedProgressIndicator {
   invertTrend: boolean;
 }
 
-// ---- Data Fetching (from Railway seed via bootstrap) ----
+// ---- Data Fetching (from Render seed via bootstrap) ----
 
 function buildDataSet(indicator: ProgressIndicator, data: ProgressDataPoint[]): ProgressDataSet {
   if (data.length === 0) return fallbackDataSet(indicator);

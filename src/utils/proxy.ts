@@ -4,7 +4,7 @@ import { getPersistentCache, setPersistentCache } from '../services/persistent-c
 const isDev = import.meta.env.DEV;
 const RESPONSE_CACHE_PREFIX = 'api-response:';
 
-// RSS proxy: route directly to Railway relay via Cloudflare CDN when enabled.
+// RSS proxy: route directly to Render relay via Cloudflare CDN when enabled.
 // Feature flag controls rollout; default off for safe staged deployment.
 const RSS_DIRECT_TO_RELAY = import.meta.env.VITE_RSS_DIRECT_TO_RELAY === 'true';
 const RSS_PROXY_BASE = isDev

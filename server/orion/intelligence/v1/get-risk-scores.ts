@@ -346,7 +346,7 @@ export function climateCountriesForAnomaly(anomaly: any): string[] {
 
 // Exported so scripts/seed-military-cii.mjs's re-embedded copy can be cross-checked
 // for parity in tests/seed-military-cii-table-drift.test.mts. The seed cannot import
-// from server/ under Railway nixpacks packaging.
+// from server/ under Render rootDir=scripts packaging.
 export function geoToCountry(lat: number, lon: number): string | null {
   if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
   const candidates = BBOX_BY_AREA.filter((b) => isInsideBBox(b, lat, lon));

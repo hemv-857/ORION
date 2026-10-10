@@ -11,8 +11,8 @@ import { markNoCacheResponse } from '../../../_shared/response-headers';
 // definition that could silently drift on a schema-version bump.
 // (Greptile P2 review on PR #3811.)
 //
-// Shim lives in scripts/ (not server/_shared/) so the Railway workers can
-// resolve it under their nixpacks root_dir=scripts packaging. See
+// Shim lives in scripts/ (not server/_shared/) so the Render workers can
+// resolve it under their Render rootDir=scripts packaging. See
 // scripts/_simulation-queue-constants.mjs header. esbuild inlines it here
 // at Vercel build time.
 import {

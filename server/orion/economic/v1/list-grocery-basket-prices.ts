@@ -1,6 +1,6 @@
 /**
- * RPC: listGroceryBasketPrices -- reads seeded grocery basket data from Railway seed cache.
- * All EXA API calls happen in seed-grocery-basket.mjs on Railway.
+ * RPC: listGroceryBasketPrices -- reads seeded grocery basket data from Render seed cache.
+ * All EXA API calls happen in seed-grocery-basket.mjs on Render.
  */
 
 import type {

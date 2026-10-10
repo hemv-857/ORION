@@ -218,7 +218,7 @@ export function parseHtmlSentiment(html) {
 
   if (pcts.length >= 3) {
     // AAII publishes on Thursdays; find the most recent Thursday in UTC
-    // (local-TZ arithmetic can drift by a day on Railway when TZ != UTC)
+    // (local-TZ arithmetic can drift by a day on Render when TZ != UTC)
     const nowUTC = new Date();
     const dayOfWeek = nowUTC.getUTCDay();
     const daysToThursday = (dayOfWeek >= 4) ? dayOfWeek - 4 : dayOfWeek + 3;

@@ -1,7 +1,7 @@
 // @ts-check
 /**
  * Edge-safe pure helpers for the brief LLM enrichment path. Shared by:
- *   - scripts/lib/brief-llm.mjs   (Railway cron, Node)
+ *   - scripts/lib/brief-llm.mjs   (Render cron, Node)
  *   - api/internal/brief-why-matters.ts  (Vercel edge)
  *
  * No `node:*` imports. Hashing via Web Crypto (`crypto.subtle.digest`),

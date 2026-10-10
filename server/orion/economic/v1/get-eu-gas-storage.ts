@@ -1,6 +1,6 @@
 /**
- * RPC: getEuGasStorage -- reads seeded EU aggregate gas storage data from Railway seed cache.
- * All external GIE AGSI+ calls happen in seed-gie-gas-storage.mjs on Railway.
+ * RPC: getEuGasStorage -- reads seeded EU aggregate gas storage data from Render seed cache.
+ * All external GIE AGSI+ calls happen in seed-gie-gas-storage.mjs on Render.
  */
 
 import type {

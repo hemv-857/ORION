@@ -225,9 +225,9 @@ The `SmartPollLoop` is the core refresh orchestration primitive used by all data
 
 **Panel integration** — panels create a `SmartPollLoop` in their constructor with their base interval and callback, call `handle.start()` on mount, and `handle.stop()` on destroy. The loop is paused automatically when the panel is collapsed or scrolled out of view (via Intersection Observer), and resumed when it reappears.
 
-### Railway Seed Data Pipeline
+### Render Seed Data Pipeline
 
-21 Railway cron jobs continuously refresh the Redis cache with pre-computed data from external APIs. Seeds run on configurable schedules from minutes to daily cadence and write both a canonical domain key (for RPC handler lookups) and a bootstrap key (for page-load hydration). This dual-key strategy ensures that bootstrap hydration and RPC handlers always agree on data format and freshness.
+21 Render cron jobs continuously refresh the Redis cache with pre-computed data from external APIs. Seeds run on configurable schedules from minutes to daily cadence and write both a canonical domain key (for RPC handler lookups) and a bootstrap key (for page-load hydration). This dual-key strategy ensures that bootstrap hydration and RPC handlers always agree on data format and freshness.
 
 | Seed Script | Data Source | Update Frequency | Bootstrap Key |
 | --- | --- | --- | --- |
@@ -274,7 +274,7 @@ Seeds use `cachedFetchJson` with in-flight promise coalescing — if a seed run 
 
 ORION uses 60+ Vercel Edge Functions as a lightweight API layer, split into two generations. Legacy endpoints in `api/*.js` each handle a single data source concern — proxying, caching, or transforming external APIs. The newer proto-first endpoints use **per-domain thin entry points** — 34 separate edge functions, each importing only its own handler module. This replaced the original monolithic gateway that loaded all 34 domains on every cold start. Each domain's function tree-shakes to include only its dependencies, reducing cold-start time by ~85% (sub-100ms for most endpoints vs. 500ms+ with the monolithic handler). A shared `server/gateway.ts` provides common routing logic. Both generations coexist, with new features built proto-first. This architecture avoids a monolithic backend while keeping API keys server-side:
 
-- **RSS Proxy** — domain-allowlisted proxy for 500+ feeds, preventing CORS issues and hiding origin servers. Feeds from domains that block Vercel IPs are automatically routed through the Railway relay.
+- **RSS Proxy** — domain-allowlisted proxy for 500+ feeds, preventing CORS issues and hiding origin servers. Feeds from domains that block Vercel IPs are automatically routed through the Render relay.
 - **AI Pipeline** — Groq and OpenRouter edge functions with Redis deduplication, so identical headlines across concurrent users only trigger one LLM call. The classify-event endpoint pauses its queue on 500 errors to avoid wasting API quota.
 - **Data Adapters** — GDELT, ACLED, OpenSky, USGS, NASA FIRMS, FRED, Yahoo Finance, CoinGecko, mempool.space, BIS, WTO, and others each have dedicated edge functions that normalize responses into consistent schemas
 - **Market Intelligence** — macro signals, ETF flows, and stablecoin monitors compute derived analytics server-side (VWAP, SMA, peg deviation, flow estimates) and cache results in Redis
@@ -427,7 +427,7 @@ brotli_static on;
 
 Cloudflare will negotiate Brotli automatically for compatible clients when the origin/edge has Brotli assets available.
 
-### Railway Relay Compression
+### Render Relay Compression
 
 All relay server responses pass through `gzipSync` when the client accepts gzip and the payload exceeds 1KB. Sidecar API responses prefer Brotli and use gzip fallback with proper `Content-Encoding`/`Vary` headers for the same threshold. This applies to OpenSky aircraft JSON, RSS XML feeds, UCDP event data, AIS snapshots, and health checks — reducing wire size by approximately 50–80%.
 
@@ -891,7 +891,7 @@ Different data sources update at different frequencies based on volatility and A
 
 AIS vessel tracking uses WebSocket for true real-time:
 
-- **Connection**: Persistent WebSocket to Railway relay
+- **Connection**: Persistent WebSocket to Render relay
 - **Messages**: Position updates as vessels transmit
 - **Reconnection**: Automatic with exponential backoff (5s → 10s → 20s)
 

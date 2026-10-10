@@ -4,11 +4,11 @@
  * Dedicated FX rates seed — fetches all currencies used across bigmac + grocery-basket
  * and writes them to shared:fx-rates:v1 (25h TTL).
  *
- * Deploy as a Railway cron service (daily, e.g. "0 6 * * *") so downstream
+ * Deploy as a Render cron service (daily, e.g. "0 6 * * *") so downstream
  * weekly seeds always find a warm cache and make zero Yahoo FX calls themselves.
  * Saves ~90 Yahoo Finance calls per weekly seed cycle.
  *
- * Railway setup: rootDirectory=. startCommand="node scripts/seed-fx-rates.mjs"
+ * Render setup: rootDirectory=. startCommand="node scripts/seed-fx-rates.mjs"
  */
 
 import { loadEnvFile, runSeed, fetchYahooFxRates, SHARED_FX_FALLBACKS } from './_seed-utils.mjs';

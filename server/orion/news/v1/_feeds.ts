@@ -289,7 +289,7 @@ export const VARIANT_FEEDS: Record<string, Record<string, ServerFeed[]>> = {
       { name: 'Decrypt', url: 'https://decrypt.co/feed' },
       // Blockworks REMOVED in parity with src/config/feeds.ts (PR #3715
       // review). blockworks.co/feed is Cloudflare-blocked from both Vercel
-      // edge AND Railway egress, AND Google News returns 0 items for
+      // edge AND Render egress, AND Google News returns 0 items for
       // site:blockworks.co. The Block (above) covers the same
       // institutional-crypto territory; no coverage lost.
       { name: 'The Defiant', url: 'https://thedefiant.io/feed' },

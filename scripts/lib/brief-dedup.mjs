@@ -6,7 +6,7 @@
  * the earlier inline Jaccard produced:
  *   [{ ...representativeStoryFields, mentionCount, mergedHashes }, ...]
  *
- * Env knobs (read at call entry — Railway env flips take effect on
+ * Env knobs (read at call entry — Render env flips take effect on
  * the next cron tick without a redeploy):
  *   DIGEST_DEDUP_MODE                 = 'embed' (default) | 'jaccard'
  *                                       (jaccard = instant kill switch)
@@ -121,7 +121,7 @@ export function readOrchestratorConfig(env = process.env) {
   const topicGroupingEnabled = env.DIGEST_DEDUP_TOPIC_GROUPING !== '0';
 
   // Looser cosine for the secondary pass (default 0.45). Invalid/out-of-range
-  // values fall back to the default silently so a Railway typo can't disable
+  // values fall back to the default silently so a Render typo can't disable
   // the feature by accident.
   const topicThresholdRaw = Number.parseFloat(env.DIGEST_DEDUP_TOPIC_THRESHOLD ?? '');
   const topicThreshold =
@@ -187,7 +187,7 @@ export async function deduplicateStories(stories, deps = {}) {
     return { reps: [], embeddingByHash: new Map(), logSummary: '' };
   }
 
-  // Kill switch: Railway operator sets MODE=jaccard to instantly
+  // Kill switch: Render operator sets MODE=jaccard to instantly
   // revert to the legacy deduper without a redeploy.
   if (cfg.mode === 'jaccard') {
     return { reps: jaccard(stories), embeddingByHash: new Map(), logSummary: '' };

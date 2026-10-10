@@ -2,7 +2,7 @@
  * Tunables for brief-dedup (Jaccard legacy + embedding replacement).
  *
  * Env-driven helpers are exported as functions so the orchestrator
- * reads them at call time, not at module load — Railway env-var flips
+ * reads them at call time, not at module load — Render env-var flips
  * must take effect without a redeploy.
  *
  * See docs/plans/2026-04-19-001-feat-embedding-based-story-dedup-plan.md.
@@ -29,7 +29,7 @@ export const CACHE_TTL_SECONDS = 14 * 24 * 60 * 60; // 14 days
 export const OPENROUTER_EMBEDDINGS_URL = 'https://openrouter.ai/api/v1/embeddings';
 
 // Env-driven runtime knobs live in brief-dedup.mjs:readOrchestratorConfig
-// — a single source of truth, read at call entry so Railway env flips
+// — a single source of truth, read at call entry so Render env flips
 // take effect on the next tick. An earlier version exported getter
 // helpers here too; they had zero callers and were deleted.
 

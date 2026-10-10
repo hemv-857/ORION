@@ -1,6 +1,6 @@
 /**
- * RPC: listFuelPrices -- reads seeded retail fuel price data from Railway seed cache.
- * All data fetching happens in seed-fuel-prices.mjs on Railway.
+ * RPC: listFuelPrices -- reads seeded retail fuel price data from Render seed cache.
+ * All data fetching happens in seed-fuel-prices.mjs on Render.
  */
 
 import type {

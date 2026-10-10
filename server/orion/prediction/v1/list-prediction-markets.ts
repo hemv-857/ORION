@@ -1,7 +1,7 @@
 /**
- * ListPredictionMarkets RPC -- reads Railway-seeded prediction market data
+ * ListPredictionMarkets RPC -- reads Render-seeded prediction market data
  * from Redis. All external API calls (Polymarket Gamma, Kalshi) happen on
- * Railway seed scripts, never on Vercel.
+ * Render seed scripts, never on Vercel.
  */
 
 import {

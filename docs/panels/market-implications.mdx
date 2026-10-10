@@ -30,7 +30,7 @@ Panel id is `market-implications`; canonical component is `src/components/Market
 
 ## Data sources
 
-Market Implications cards are produced by the forecast-simulation pipeline in the Railway `seed-forecasts` cron: the LLM consumes the day's intelligence, conflict, and markets signals and emits a structured `MarketImplicationsData` payload. The panel reads this through `@/services/market-implications`; freshness is surfaced via `describeFreshness()` in the panel footer.
+Market Implications cards are produced by the forecast-simulation pipeline in the Render `seed-forecasts` cron: the LLM consumes the day's intelligence, conflict, and markets signals and emits a structured `MarketImplicationsData` payload. The panel reads this through `@/services/market-implications`; freshness is surfaced via `describeFreshness()` in the panel footer.
 
 ## Refresh cadence
 

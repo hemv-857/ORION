@@ -1016,7 +1016,7 @@ async function writeDelaysBootstrap(intlAlertsOverride) {
 //
 // Each side-car: acquires its own Redis lock (distinct from intl's lock),
 // fetches, writes data-key + seed-meta on success, extends TTL on failure,
-// releases the lock in finally. Sequential so concurrent Railway cron fires
+// releases the lock in finally. Sequential so concurrent Render cron fires
 // don't stomp; each source's cost is independent so total wall time ≈ sum.
 
 async function withLock(lockDomain, body) {

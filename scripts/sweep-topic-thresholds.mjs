@@ -11,7 +11,7 @@
 // "Are we getting better" output: a markdown table — one row per
 // candidate threshold — with pair_recall, false_adjacency, topic_count,
 // avg_topic_size, and a composite quality_score. Pick the row with the
-// highest quality_score; flip DIGEST_DEDUP_TOPIC_THRESHOLD on Railway
+// highest quality_score; flip DIGEST_DEDUP_TOPIC_THRESHOLD on Render
 // to that value.
 //
 // Usage:
@@ -423,7 +423,7 @@ function renderMarkdownTable(rows, ctx) {
     lines.push('');
     lines.push(`**Recommended threshold: ${best.threshold.toFixed(2)}** (visible_quality=${best.visible_quality_score.toFixed(3)}, visible_recall=${(best.pair_recall_visible*100).toFixed(1)}%, visible_false_adj=${(best.false_adjacency_visible*100).toFixed(1)}%)`);
     lines.push('');
-    lines.push(`Apply via Railway env on the **scripts-cron-digest-notifications** service:`);
+    lines.push(`Apply via Render env on the **scripts-cron-digest-notifications** service:`);
     lines.push(`  \`DIGEST_DEDUP_TOPIC_THRESHOLD=${best.threshold.toFixed(2)}\``);
     lines.push('');
     lines.push('To compare cap values, re-run with `--cap 12` and `--cap 16`. The `visible_*` columns will diverge if cap-truncation is materially affecting topic adjacency.');
@@ -441,7 +441,7 @@ async function main() {
   const rawList = await redisLrangeAll(url, token, replayKey);
   const records = parseReplayRecords(rawList);
   if (records.length === 0) {
-    console.error(`No replay records at ${replayKey}. Is DIGEST_DEDUP_REPLAY_LOG=1 set on Railway?`);
+    console.error(`No replay records at ${replayKey}. Is DIGEST_DEDUP_REPLAY_LOG=1 set on Render?`);
     process.exit(2);
   }
 

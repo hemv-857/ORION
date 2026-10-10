@@ -105,7 +105,7 @@ export default async function handler(
   // Reuse BRIEF_URL_SIGNING_SECRET as the HMAC secret for referral
   // codes. Same secret, different message namespace (`referral:v1:`
   // vs `brief:...`) so code spaces don't collide. Avoids provisioning
-  // yet another Railway env var — referral codes are low-stakes and
+  // yet another Render env var — referral codes are low-stakes and
   // the consequence of secret rotation is "existing share links stop
   // counting", not "user-visible breakage".
   const secret = process.env.BRIEF_URL_SIGNING_SECRET ?? '';

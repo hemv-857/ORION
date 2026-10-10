@@ -96,6 +96,6 @@ To allow additional headers, update `Access-Control-Allow-Headers` in both files
 
 Browser-visible response headers include `Mcp-Session-Id`, `WWW-Authenticate`, and `Retry-After` via `Access-Control-Expose-Headers` so MCP clients can continue sessions, re-authenticate, and respect backoff hints.
 
-## Railway Relay CORS
+## Render Relay CORS
 
-The Railway relay (`scripts/ais-relay.cjs`) has its own CORS handling with the `ALLOW_VERCEL_PREVIEW_ORIGINS` env var. See [RELAY_PARAMETERS.md](/relay-parameters) for details.
+The Render relay (`scripts/ais-relay.cjs`) has its own CORS handling with the `ALLOW_VERCEL_PREVIEW_ORIGINS` env var. See [RELAY_PARAMETERS.md](/relay-parameters) for details.

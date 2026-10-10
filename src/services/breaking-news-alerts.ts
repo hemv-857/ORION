@@ -36,7 +36,7 @@ export interface AlertSettings {
   sensitivity: 'critical-only' | 'critical-and-high';
 }
 
-// When VITE_RELAY_GATES_READY=1 the Railway relay has taken over external notifications
+// When VITE_RELAY_GATES_READY=1 the Render relay has taken over external notifications
 // (Telegram/Slack/Email). The client /api/notify call is suppressed to prevent duplicates.
 // See Appendix E of docs/internal/news-alerts-enhancements-from-trendradar.md.
 const RELAY_GATES_READY = import.meta.env.VITE_RELAY_GATES_READY === '1';

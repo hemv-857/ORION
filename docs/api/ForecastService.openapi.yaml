@@ -120,7 +120,7 @@ paths:
             description: |-
                 TriggerSimulation enqueues a simulation task for the current
                  SIMULATION_PACKAGE_LATEST_KEY package pointer. PRO-gated. The runId
-                 is server-derived; callers cannot supply one. The Railway worker
+                 is server-derived; callers cannot supply one. The Render worker
                  (scripts/process-simulation-tasks.mjs) polls the queue and writes
                  outcomes; callers poll GetSimulationOutcome with the returned runId
                  to retrieve the result. Mirrors run-scenario.ts pattern. See #3734.

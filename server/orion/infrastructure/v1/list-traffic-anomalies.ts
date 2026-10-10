@@ -1,6 +1,6 @@
 /**
- * ListInternetTrafficAnomalies RPC -- reads seeded traffic anomaly data from Railway seed cache.
- * All external Cloudflare Radar API calls happen in seed-internet-outages.mjs on Railway.
+ * ListInternetTrafficAnomalies RPC -- reads seeded traffic anomaly data from Render seed cache.
+ * All external Cloudflare Radar API calls happen in seed-internet-outages.mjs on Render.
  */
 
 import type {

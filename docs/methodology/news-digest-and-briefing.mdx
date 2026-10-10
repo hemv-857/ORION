@@ -43,7 +43,7 @@ the `intel` category.
 The fetch path tries the publisher URL directly first. Every direct request
 sends `User-Agent`, RSS/XML `Accept`, and English `Accept-Language` headers.
 If the direct response is absent, non-OK, or looks like HTML rather than
-RSS/Atom/RDF, the system tries the Railway relay at `/rss?url=...`. The relay
+RSS/Atom/RDF, the system tries the Render relay at `/rss?url=...`. The relay
 path uses relay auth headers and applies the same RSS-shape sniffing, so a
 Cloudflare page or captcha body does not get cached as an empty feed.
 
