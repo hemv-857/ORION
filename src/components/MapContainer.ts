@@ -1,4 +1,12 @@
-import maplibregl from 'maplibre-gl';
+// maplibre-gl v6 removed the default export. Aliased because this module also uses
+// the built-in Map, so a bare `Map` import would shadow it.
+import {
+  GeoJSONSource,
+  Map as MapLibreMap,
+  NavigationControl,
+  Popup,
+  ScaleControl,
+} from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { getMapProvider, getMapTheme } from '@/config/basemap';
 import { getStyleForProvider } from '@/config/basemap-styles';
@@ -214,9 +222,9 @@ const LAYERS = buildCanonicalLayers();
 export class MapContainer {
   private container: HTMLElement;
   private mode: MapMode = 'flat';
-  private map: maplibregl.Map | null = null;
+  private map: MapLibreMap | null = null;
   private globe: any = null;
-  private popup: maplibregl.Popup | null = null;
+  private popup: Popup | null = null;
   private activeLayers = new Set(LAYERS.map(l => l.id));
   private layerPanelOpen = false;
   private geoData: Record<string, any[]> = {};
@@ -488,7 +496,7 @@ export class MapContainer {
     const el = this.container.querySelector('#map-container-flat') as HTMLElement;
     if (!el) return;
 
-    this.map = new maplibregl.Map({
+    this.map = new MapLibreMap({
       container: el,
       style: style as any,
       center: [0, 20],
@@ -500,10 +508,10 @@ export class MapContainer {
       attributionControl: false,
     });
 
-    this.map.addControl(new maplibregl.NavigationControl({ showCompass: true, showZoom: true, visualizePitch: true }), 'bottom-left');
-    this.map.addControl(new maplibregl.ScaleControl({ maxWidth: 120, unit: 'metric' }), 'bottom-right');
+    this.map.addControl(new NavigationControl({ showCompass: true, showZoom: true, visualizePitch: true }), 'bottom-left');
+    this.map.addControl(new ScaleControl({ maxWidth: 120, unit: 'metric' }), 'bottom-right');
 
-    this.popup = new maplibregl.Popup({ closeButton: false, closeOnClick: true, className: 'map-popup', maxWidth: '280px' });
+    this.popup = new Popup({ closeButton: false, closeOnClick: true, className: 'map-popup', maxWidth: '280px' });
 
     this.map.on('load', () => {
       this.addFlatSources();
@@ -771,7 +779,7 @@ export class MapContainer {
     if (this.cargoAnimationFrame !== null) return;
     const animate = (nowMs: number) => {
       if (nowMs - this.lastCargoUpdateAt >= 120) {
-        const source = this.map?.getSource('cargo-vessels') as maplibregl.GeoJSONSource | undefined;
+        const source = this.map?.getSource('cargo-vessels') as GeoJSONSource | undefined;
         source?.setData(this.getCargoFeatureCollection(nowMs));
         this.lastCargoUpdateAt = nowMs;
       }
