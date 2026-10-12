@@ -92,6 +92,7 @@
     "@types/three": "^0.183.1",
     "@types/topojson-client": "^3.1.5",
     "@types/topojson-specification": "^1.0.5",
+    "@vitest/coverage-v8": "^5.0.4",
     "autoprefixer": "^10.6.1",
     "convex-test": "^0.0.43",
     "cross-env": "^10.1.0",
@@ -105,7 +106,7 @@
     "typescript": "^5.7.2",
     "vite": "^6.0.7",
     "vite-plugin-pwa": "^1.2.0",
-    "vitest": "^4.1.0"
+    "vitest": "^5.0.4"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.91.1",
