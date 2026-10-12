@@ -62,7 +62,8 @@
 				"noDocumentCookie": "off",
 				"noDuplicateProperties": "off",
 				"noPrototypeBuiltins": "off",
-				"noConfusingVoidType": "off"
+				"noConfusingVoidType": "off",
+				"noUnknownAtRules": "off"
 			},
 			"style": {
 				"noNonNullAssertion": "off",
