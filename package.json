@@ -133,7 +133,7 @@
     "i18next-browser-languagedetector": "^8.2.1",
     "jmespath": "^0.16.0",
     "maplibre-gl": "^5.16.0",
-    "marked": "^17.0.3",
+    "marked": "^18.1.0",
     "onnxruntime-web": "^1.26.0",
     "papaparse": "^5.5.3",
     "pmtiles": "^4.4.0",
