@@ -119,7 +119,7 @@ describe('aviation service — Google Flights wrappers', () => {
 // 2. AirlineIntelPanel — no auto-fetch on prices tab switch
 // ---------------------------------------------------------------------------
 describe('AirlineIntelPanel — prices tab never auto-fetches', () => {
-    const panel = src('src/components/AirlineIntelPanel.ts');
+    const panel = src('src/components/panels/AirlineIntelPanel.ts');
 
     it('switchTab auto-load block does not include prices', () => {
         const switchFn = panel.match(/private switchTab[^}]+\}/s);

@@ -96,7 +96,7 @@ describe('Customs revenue seed', () => {
 });
 
 describe('Customs revenue panel (WTO gate fix)', () => {
-  const panelSrc = readFileSync(join(root, 'src/components/TradePolicyPanel.ts'), 'utf-8');
+  const panelSrc = readFileSync(join(root, 'src/components/panels/TradePolicyPanel.ts'), 'utf-8');
 
   it('includes revenue in TabId type', () => {
     assert.match(panelSrc, /type TabId\s*=.*'revenue'/);

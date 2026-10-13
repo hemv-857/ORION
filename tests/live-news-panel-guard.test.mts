@@ -32,7 +32,7 @@ describe('LiveNewsPanel instantiation guard', () => {
   // -------------------------------------------------------------------------
 
   it('DEFAULT_LIVE_CHANNELS is [] on happy variant (crash source)', () => {
-    const liveNews = src('src/components/LiveNewsPanel.ts');
+    const liveNews = src('src/components/panels/LiveNewsPanel.ts');
     const match = liveNews.match(/DEFAULT_LIVE_CHANNELS\s*=\s*SITE_VARIANT\s*===\s*['"]tech['"]\s*\?[^:]+:\s*SITE_VARIANT\s*===\s*['"]happy['"]\s*\?\s*(\[[^\]]*\])/);
     assert.ok(match, 'DEFAULT_LIVE_CHANNELS assignment not found');
     assert.equal(match[1].replace(/\s/g, ''), '[]', 'happy variant DEFAULT_LIVE_CHANNELS must be []');
@@ -44,7 +44,7 @@ describe('LiveNewsPanel instantiation guard', () => {
   // -------------------------------------------------------------------------
 
   it('constructor does not fall back to FULL_LIVE_CHANNELS after getDefaultLiveChannels()', () => {
-    const liveNews = src('src/components/LiveNewsPanel.ts');
+    const liveNews = src('src/components/panels/LiveNewsPanel.ts');
     // Extract the region between the two channel-init lines to check for an
     // unwanted third fallback. We anchor on the lines that must exist.
     const afterDefaults = liveNews.slice(liveNews.indexOf('if (this.channels.length === 0) this.channels = getDefaultLiveChannels();'));
@@ -59,7 +59,7 @@ describe('LiveNewsPanel instantiation guard', () => {
   });
 
   it('refreshChannelsFromStorage does not fall back to FULL_LIVE_CHANNELS', () => {
-    const liveNews = src('src/components/LiveNewsPanel.ts');
+    const liveNews = src('src/components/panels/LiveNewsPanel.ts');
     const refreshBlock = liveNews.match(/refreshChannelsFromStorage[^}]+loadChannelsFromStorage[^}]+getDefaultLiveChannels[^}]+(this\.channels\s*=\s*\[\.\.\.FULL_LIVE_CHANNELS\])?/s);
     assert.ok(refreshBlock, 'refreshChannelsFromStorage block not found');
     assert.ok(

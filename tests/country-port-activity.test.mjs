@@ -13,7 +13,7 @@ const handlerSrc = readFileSync(
 );
 
 const panelSrc = readFileSync(
-  resolve(root, 'src/components/CountryDeepDivePanel.ts'),
+  resolve(root, 'src/components/panels/CountryDeepDivePanel.ts'),
   'utf-8',
 );
 

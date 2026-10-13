@@ -30,7 +30,7 @@ function countMatches(source, pattern) {
 
 describe('forecast integrity and provenance surfaces', () => {
   it('labels simulation path confidence separately from event probability', () => {
-    const src = read('src/components/ForecastPanel.ts');
+    const src = read('src/components/panels/ForecastPanel.ts');
     assert.match(src, /% confidence` : '—'/);
     assert.doesNotMatch(src, /p\.confidence \* 100\)}% probability/);
   });
@@ -48,7 +48,7 @@ describe('forecast integrity and provenance surfaces', () => {
   });
 
   it('does not repeat backend-unavailable detail in degraded forecast notices', () => {
-    const src = read('src/components/ForecastPanel.ts');
+    const src = read('src/components/panels/ForecastPanel.ts');
 
     assert.match(src, /const errorDetail = this\.sourceState\.degraded \? '' : this\.sourceState\.error\.replace/);
     assert.doesNotMatch(src, /this\.sourceState\.error \? this\.sourceState\.error\.replace/);

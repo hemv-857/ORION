@@ -327,7 +327,7 @@ describe('premium-paths: get-multi-sector-cost-shock registration', () => {
 // ========================================================================
 
 describe('CountryDeepDivePanel Cost Shock Calculator', () => {
-  const src = readSrc('src/components/CountryDeepDivePanel.ts');
+  const src = readSrc('src/components/panels/CountryDeepDivePanel.ts');
 
   it('imports fetchMultiSectorCostShock', () => {
     assert.match(src, /import[^;]*fetchMultiSectorCostShock/);

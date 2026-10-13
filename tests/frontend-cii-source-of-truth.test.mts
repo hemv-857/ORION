@@ -199,7 +199,7 @@ describe('frontend CII source of truth', () => {
   });
 
   it('renders Strategic Risk from cached strategic risk/CII instead of only marking the badge cached', () => {
-    const src = readSrc('src/components/StrategicRiskPanel.ts');
+    const src = readSrc('src/components/panels/StrategicRiskPanel.ts');
     const overviewSrc = readSrc('src/services/cross-module-integration.ts');
     const refreshBody = extractMethod(src, 'public async refresh(): Promise<boolean>');
     const cachedTimestampBody = extractMethod(src, 'private cachedTimestamp(cached: CachedRiskScores): Date | null');
@@ -235,7 +235,7 @@ describe('frontend CII source of truth', () => {
 
   it('localizes cached CII degraded/stale state labels', () => {
     const ciiSrc = readSrc('src/components/CIIPanel.ts');
-    const riskSrc = readSrc('src/components/StrategicRiskPanel.ts');
+    const riskSrc = readSrc('src/components/panels/StrategicRiskPanel.ts');
     const enLocaleSrc = readSrc('src/locales/en.json');
     const ciiDetailBody = extractMethod(
       ciiSrc,
@@ -349,7 +349,7 @@ describe('frontend CII source of truth', () => {
     const mapSrc = readSrc('src/components/Map.ts');
     const deckSrc = readSrc('src/components/DeckGLMap.ts');
     const searchSrc = readSrc('src/app/search-manager.ts');
-    const insightsSrc = readSrc('src/components/InsightsPanel.ts');
+    const insightsSrc = readSrc('src/components/panels/InsightsPanel.ts');
 
     assert.doesNotMatch(storySrc, /hasIntelligenceSignalsLoaded/);
     assert.match(storySrc, /const normalizedCountryCode = normalizeCiiCountryCode\(countryCode\);/);
@@ -377,7 +377,7 @@ describe('frontend CII source of truth', () => {
 
   it('aligns CII badge colors and StrategicRiskPanel display bands to source contracts', () => {
     const modalPath = resolve(root, 'src/components/CountryIntelModal.ts');
-    const strategicRiskSrc = readSrc('src/components/StrategicRiskPanel.ts');
+    const strategicRiskSrc = readSrc('src/components/panels/StrategicRiskPanel.ts');
     const serverRiskSrc = readSrc('server/orion/intelligence/v1/get-risk-scores.ts');
     const methodologySrc = readSrc('docs/methodology/cii-risk-scores.mdx');
     const mainCss = readSrc('src/styles/main.css');

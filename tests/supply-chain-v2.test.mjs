@@ -366,7 +366,7 @@ describe('Client-side circuit breaker TTLs', () => {
 // ========================================================================
 
 describe('SupplyChainPanel v2 changes', () => {
-  const src = readSrc('src/components/SupplyChainPanel.ts');
+  const src = readSrc('src/components/panels/SupplyChainPanel.ts');
 
   it('unavailable banner requires !activeHasData guard', () => {
     assert.match(src, /!activeHasData\s*&&\s*activeData\?\.upstreamUnavailable/,

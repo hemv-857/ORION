@@ -126,7 +126,7 @@ describe('FlightDelaySeverity proto enum carries an UNKNOWN variant (#3707)', ()
 
 describe('UI consumers handle the "unknown" severity (#3707)', () => {
   it('AirlineIntelPanel SEVERITY_COLOR has an "unknown" key (neutral, not green)', () => {
-    const panel = readFileSync(resolve(root, 'src/components/AirlineIntelPanel.ts'), 'utf-8');
+    const panel = readFileSync(resolve(root, 'src/components/panels/AirlineIntelPanel.ts'), 'utf-8');
     // The map type is Record<FlightDelaySeverity, string> — TS would reject
     // omission at compile time, but assert the presence explicitly so a
     // future relax of the type doesn't silently drop the entry.

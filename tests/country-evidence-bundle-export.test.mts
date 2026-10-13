@@ -550,7 +550,7 @@ describe('country evidence bundle export', () => {
 
   it('wires country brief export surfaces to the evidence Markdown exporter', () => {
     const legacySource = readFileSync(resolve(process.cwd(), 'src/components/CountryBriefPage.ts'), 'utf8');
-    const dossierSource = readFileSync(resolve(process.cwd(), 'src/components/CountryDeepDivePanel.ts'), 'utf8');
+    const dossierSource = readFileSync(resolve(process.cwd(), 'src/components/panels/CountryDeepDivePanel.ts'), 'utf8');
 
     assert.match(legacySource, /exportCountryEvidenceMarkdown/);
     assert.match(legacySource, /data-format="evidence-md"/);

@@ -71,7 +71,7 @@ describe('country brief i18n keys', () => {
     const files = [
       'src/app/country-intel.ts',
       'src/components/CountryBriefPage.ts',
-      'src/components/CountryDeepDivePanel.ts',
+      'src/components/panels/CountryDeepDivePanel.ts',
     ];
 
     for (const file of files) {

@@ -558,7 +558,7 @@ describe('cached-risk-scores — emptyFallback surfaces null timestamps', () => 
 // ============================================================
 
 describe('CountryDeepDivePanel — handles null lastUpdated without fabricating', () => {
-  const panelSrc = readFileSync(resolve(root, 'src/components/CountryDeepDivePanel.ts'), 'utf-8');
+  const panelSrc = readFileSync(resolve(root, 'src/components/panels/CountryDeepDivePanel.ts'), 'utf-8');
 
   it('no `?? new Date()` fallback on score.lastUpdated render sites', () => {
     assert.doesNotMatch(

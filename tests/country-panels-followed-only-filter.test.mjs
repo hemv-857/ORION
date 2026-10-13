@@ -399,7 +399,7 @@ describe('country-scoped panels — chip placement keeps close button rightmost'
   });
 
   it('DisplacementPanel destroy removes the inserted followed-only host', () => {
-    const src = readFileSync(resolve(ROOT, 'src/components/DisplacementPanel.ts'), 'utf8');
+    const src = readFileSync(resolve(ROOT, 'src/components/panels/DisplacementPanel.ts'), 'utf8');
     assert.match(
       src,
       /private followedOnlyHost: HTMLElement \| null = null;/,

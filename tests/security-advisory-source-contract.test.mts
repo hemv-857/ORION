@@ -129,7 +129,7 @@ describe('security advisory source contract', () => {
 
   it('panel country filters are derived from active travel-advisory feed countries', () => {
     const expectedCountries = travelAdvisorySourceCountries(extractAdvisoryFeeds());
-    const panel = readRepoFile('src/components/SecurityAdvisoriesPanel.ts');
+    const panel = readRepoFile('src/components/panels/SecurityAdvisoriesPanel.ts');
 
     const typeMatch = panel.match(/type AdvisoryFilter = ([^;]+);/);
     assert.ok(typeMatch, 'SecurityAdvisoriesPanel must keep AdvisoryFilter inspectable.');

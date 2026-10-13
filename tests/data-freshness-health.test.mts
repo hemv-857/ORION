@@ -262,7 +262,7 @@ describe('health freshness ingestion', () => {
 
   it('polls health freshness from the app scheduler instead of StrategicRiskPanel', () => {
     const appSrc = readFileSync(resolve(repoRoot, 'src/App.ts'), 'utf8');
-    const panelSrc = readFileSync(resolve(repoRoot, 'src/components/StrategicRiskPanel.ts'), 'utf8');
+    const panelSrc = readFileSync(resolve(repoRoot, 'src/components/panels/StrategicRiskPanel.ts'), 'utf8');
 
     assert.doesNotMatch(
       panelSrc,

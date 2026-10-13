@@ -7,7 +7,7 @@ import { createBrowserEnvironment } from './runtime-config-panel-harness.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, '..', '..');
-const entry = resolve(root, 'src/components/CountryDeepDivePanel.ts');
+const entry = resolve(root, 'src/components/panels/CountryDeepDivePanel.ts');
 
 function snapshotGlobal(name) {
   return {
