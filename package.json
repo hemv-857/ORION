@@ -138,7 +138,7 @@
     "onnxruntime-web": "^1.26.0",
     "papaparse": "^5.5.3",
     "pmtiles": "^4.4.0",
-    "preact": "^10.25.4",
+    "preact": "^11.0.1",
     "satellite.js": "^6.0.2",
     "supercluster": "^8.0.1",
     "telegram": "^2.26.22",
